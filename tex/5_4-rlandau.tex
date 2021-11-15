@@ -1,0 +1,49 @@
+\section{Simboli di Landau in \texorpdfstring{$\R$}{R}}
+I simboli di Landau vengono applicati alle funzioni reali in riferimento all'avvicinamento a un valore $x_0\in\tilde\R$ e hanno le stesse proprietà precedentemente descritte per le successioni. Le definizioni sono infatti analoghe:
+\begin{defin}[Simboli di Landau per le funzioni]
+	% TODO: sostituire il definitivamente in termini di intorno di x_0
+	Per $x\to x_0\in\Rt$
+	\begin{align*}
+		f(x)\sim g(x):     & \qquad \lim_{x\to x_0} \frac{f(x)}{g(x)}=1\quad                            &                        & \\
+		f(x)=o(g(x)):      & \qquad \lim_{x\to x_0} \frac{f(x)}{g(x)}=0\quad                            &                        & \\
+		f(x)=O(g(x)):      & \qquad \exists C<+\infty: \abs{\frac{f(x)}{g(x)}}\leq C\quad               & \text{definitivamente} & \\
+		f(x)=\Omega(g(x)): & \qquad \exists C>0: \abs{\frac{f(x)}{g(x)}}\geq c\quad                     & \text{definitivamente} & \\
+		f(x)=\Theta(g(x)): & \qquad \exists c>0,C<+\infty\mid: c\leq \abs{\frac{f(x)}{g(x)}}\leq C\quad & \text{definitivamente} &
+	\end{align*}
+\end{defin}
+Si noti che se una successione definitivamente limitata ($O(1)$) è anche limitata, lo stesso non vale per le funzioni, che assumono infiniti valori per ogni intervallo scelto tra le $x$.
+
+Nelle funzioni, i simboli di Landau sono utili ad esempio per studiare la presenza di asintoti all'infinito di una funzione (ovvero orizzontali o obliqui, poiché gli asintoti verticali non si trovano all'infinito):
+\subsubsection{Asintoti a $+\infty$}
+Gli asintoti a infinito possono essere definiti tramite i simboli di Landau. In particolare:
+\begin{defin}[Asintoto all'infinito]
+	Si dice asintoto all'infinito di una funzione la retta $y=mx+q$, se esiste, che soddisfa la seguente proprietà:
+	\[
+		\exists m,q\in\R\mid f(x)-(mx+q)=o(1)\quad x\to +\infty
+	\]
+\end{defin}
+Posto che l'asintoto esista, per $x\to+\infty$:
+\begin{itemize}
+	\item Per $m=0$:
+	      \begin{gather*}
+		      f(x)-(mx+q)=o(1)\\
+		      f(x)=q+o(1)\to q
+	      \end{gather*}
+	\item Per $m\neq0$:
+	      \begin{gather*}
+		      f(x)-(mx+q)=o(1)\\
+		      \text{dividendo per $x$:}\\
+		      \frac{f(x)}{x}=\frac{mx+q}{x}+\frac{o(1)}{x}\to m\\
+		      \text{mentre per quanto riguarda $q$:}\\
+		      f(x)-(mx+q)=o(1)\\
+		      f(x)-mx=q+o(1)\to q
+	      \end{gather*}
+\end{itemize}
+Questo procedimento dimostra anche l'unicità dell'asintoto, poiché il limite è unico. La stessa definizione e procedimento vale per $x\to-\infty$. Gli asintoti verticali si trovano invece nei punti $x_i$ in cui i limiti destro e sinistro sono infiniti.
+\begin{examp}
+	Per esempio, la funzione $f(x)=\frac{x^2+x}{x+2}$ ha un asintoto. Svolgendo la divisione:
+	\[
+		\frac{x^2+x}{x+2}=x-1+\frac{2}{x+2}=x-1+o(1)
+	\]
+	La retta $y=x-1$ è quindi un asintoto obliquo di $f(x)$.
+\end{examp}

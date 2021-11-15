@@ -1,0 +1,305 @@
+\section{Serie di potenze}
+\begin{defin}
+	Si definisce serie di potenze di centro zero\footnote{Una serie di potenze può avere centro diverso da zero. Una serie di potenze di centro $x_0$ si presenta nella forma:
+		\[
+			\sum_{k=0}^{+\infty} a_n (x-x_0)^n
+		\]} una serie nella forma:
+	\[
+		A(x)=\sum_{n=0}^{+\infty} a_n x^n
+	\]
+	Con $a_n\in\R\forall n\land x\in\R$
+\end{defin}
+Per studiare il comportamento di una serie di potenze è innanzitutto utile fare un'osservazione:
+\[
+	A(0)=\sum_{n=0}^{+\infty} a_n*0^n=
+	\begin{cases}
+		a_0\quad & n=0    \\
+		0 \quad  & n\neq0
+	\end{cases}\Rightarrow A(0)\to a_0
+\]
+In questo caso si sceglie $0^0=1$ per convenzione.
+
+È notevole altresì sottolineare che la serie geometrica è un caso particolare di serie di potenze, con $a_n=1$ costante.
+
+\subsubsection{Raggio di convergenza}
+Per studiare la convergenza di una serie di potenze, si studia la convergenza assoluta, dal momento che per il teorema \ref{teor:convass} essa implica la convergenza.
+\[
+	\sum_{n=0}^{+\infty}\abs{a_n*x^n}=\sum_{n=0}^{+\infty}\abs{a_n}\abs{x}^n
+\]
+Si applica poi un criterio come quelli del rapporto e della radice:
+\[
+	\begin{array}{cc}
+		\text{Rapporto}                                                                                                 & \text{Radice}                                                            \\[1ex]
+		\dfrac{\abs{a_{n+1}}\abs{x}^{n+1}}{\abs{a_n}\abs{x}^n}=\dfrac{\abs{a_{n+1}}}{\abs{a_n}}\abs{x}\to L\abs{x}\quad & \quad\sqrt[n]{\abs{a_n}\abs{x}^n}=\sqrt[n]{\abs{a_n}}\abs{x}\to L\abs{x}
+	\end{array}
+\]
+Quindi, posto che $L$ esista:
+\begin{itemize}
+	\item Per $L\abs{x}<1\Rightarrow \abs{x}<\frac{1}{L}$ la serie converge assolutamente e quindi converge;
+	\item Per $L\abs{x}>1\Rightarrow \abs{x}>\frac{1}{L}$ la serie diverge assolutamente e quindi quantomeno non converge
+\end{itemize}
+Il numero $\frac{1}{L}=R$ si chiama raggio di convergenza. Si può dimostrare che $A(R)$ non è definita e che, in particolare, $R$ è il minore, in modulo\footnote{Per la precisione, in generale, è il più vicino al centro.}, dei punti in cui $A(x)$ non è definita. Nelle serie geometriche, come è facile verificare, il raggio è $1$.
+
+Quando $L=0$, $R$ non è definito, tuttavia si verifica la prima delle due situazioni sopracitate, quindi la serie converge per ogni $x$. Si dice che $R=+\infty$. Quando $L=+\infty$, $R$ non è definito, tuttavia si verifica la seconda situazione, ad eccezione di $x=0$, nel qual caso la serie converge. Si dice che $R=0$, o che la serie è formale.
+
+\subsubsection{Polinomi tramite serie di potenze}
+Un polinomio può essere scritto tramite una serie di potenze, per esempio:
+\begin{examp}
+	\begin{gather*}
+		\sum_{n=0}^{+\infty} a_n x^n= x-\sqrt2 x^3 + 5x^4\\
+		\text{con }a_n=
+		\begin{cases}
+			1\qquad       & n=1           \\
+			-\sqrt2\qquad & n=3           \\
+			5\qquad       & n=4           \\
+			0\qquad       & 1<n<3\lor n>4
+		\end{cases}
+	\end{gather*}
+	In questo caso si ha $R=+\infty$.
+\end{examp}
+
+
+\subsection{Combinazione lineare}
+\begin{defin}[combinazione lineare di serie di potenze]
+	\label{ser:comblin}
+	\begin{equation}
+		A\sum_{n=0}^{+\infty}a_n x^n+B\sum_{n=0}^{+\infty} b_nx^n=\sum_{n=0}^{+\infty} (Aa_k+Bb_k)x^n
+	\end{equation}
+	Da cui deriva
+	\begin{equation}
+		\label{eq:cperserie}
+		c*\sum_{n=0}^{+\infty} a_nx^n=\sum_{n=0}^{+\infty}ca_nx^n
+	\end{equation}
+\end{defin}
+L'operazione ha come elemento neutro la serie nulla e come inverso la serie opposta. Inoltre, per $A=B=1$, se la prima serie ha raggio di convergenza $R_A$ e la seconda $R_B$, ci si aspetta che il raggio di convergenza della loro combinazione lineare sia non inferiore a $\text{min}\{R_A,R_B\}$, e che in caso di convergenza la somma della combinazione sia uguale alla somma delle somme delle due serie. Entrambi questi risultati vengono chiaramente influenzati (ma in modo coerente) se i coefficienti sono diversi da $1$.
+
+\begin{examp}
+	Calcolare il raggio di convergenza di
+	\[
+		\sum_{n=0}^{+\infty}(2^{n+1}+1)x^n=
+	\]
+	La serie è una combinazione lineare, quindi:
+	\[
+		=2\sum_{n=0}^{+\infty}2^nx^n+\sum_{n=0}^{+\infty}x^n
+	\]
+	È possibile applicare una sostituzione, dal momento che $2^nx^n=(2x)^n$ e $t=2x$ non dipende da $n$:
+	\[
+		=2\sum_{n=0}^{+\infty}t^n+\sum_{n=0}^{+\infty}x^n
+	\]
+	La prima delle due serie converge a $\frac{1}{1-t}=\frac{1}{1-2x}$ con raggio $\frac{1}{2}$, mentre la seconda converge a $\frac{1}{1-x}$ con raggio $1$. La combinazione lineare, nonché serie iniziale, converge quindi a
+	\[
+		\frac{1}{1-2x}+\frac{1}{1-x}
+	\]
+	con raggio $\abs{x}<\frac{1}{2}$.
+\end{examp}
+
+
+\subsection{Derivazione}
+La derivata di una serie di potenze viene così definita:
+\begin{defin}
+	\[
+		D\left(\sum_{n=0}^{+\infty} a_nx^n\right):=\sum_{n=0}^{+\infty}(n+1)a_{n+1}x^n
+	\]
+\end{defin}
+La definizione è coerente con il concetto di derivata, infatti:
+\[
+	D(a_0+a_1x+a_2x^2+a_3x^3+\dots)=0+a_1+a_2x+a_3x^2+\dots
+\]
+Vale inoltre la seguente relazione, che non dimostriamo:
+\[
+	D\left(\sum_{n=0}^{+\infty} a_nx^n\right)=\sum_{n=0}^{+\infty}D(a_nx^n)=\sum_{n=0}^{+\infty}a_nnx^{n-1}
+\]
+di cui l'ultima espressione è equivalente alla definizione, in quanto per $n=0$ il coefficiente di $x^{-1}$ è $0$.
+
+\subsubsection{Somma e raggio della derivata}
+Per quanto riguarda la somma della derivata, si dimostra che:
+\begin{teor}
+	Se una serie di potenze di raggio $R$ converge ad $A(x)$, allora la sua derivata converge ad $A'(x)$:
+	\[
+		\sum_{n=0}^{+\infty} a_n x^3=A(x)\Rightarrow\sum_{n=0}^{+\infty} a_n 2x^2=A'(x)\qquad\forall x\in(-R,R)
+	\]
+	Con $R$ comune.
+\end{teor}
+Benché la dimostrazione vada oltre gli strumenti precedentemente introdotti, si dimostra in seguito l'uguaglianza dei raggi:
+\begin{proof}
+	Applicando il criterio del rapporto all'argomento della derivata:
+	\[
+		\frac{1}{R'}=\lim_{n\to+\infty}\frac{b_{n+1}}{b_n}=\lim_{n\to+\infty}\frac{n+2}{n+1}*\frac{a_{n+2}}{a_{n+1}}=\frac{1}{R}
+	\]
+	Nell'ultimo prodotto, il primo fattore tende a $1$, mentre il secondo è il criterio del rapporto applicato alla serie non derivata e traslato di $+1$: tende pertanto allo stesso limite, cioè $\frac{1}{R}$.
+\end{proof}
+
+\begin{examp}
+	\label{ex:dergeom}
+	Calcolare la somma della seguente serie di potenze:
+	\[
+		\sum_{n=0}^{+\infty}(n+1)x^n=D\left(\sum_{n=0}^{+\infty}x^n\right)=D\left(\frac{1}{1-x}\right)=\frac{1}{(1-x)^2}
+	\]
+\end{examp}
+
+\subsubsection{Derivata $m$-esima}
+Calcolare le derivate successive alla prima significa calcolare la derivata di una derivata. Ad esempio:
+\begin{examp}
+	\[
+		D^2\left(\sum_{n=0}^{+\infty}a_nx^n\right)=D\left(D\left(\sum_{n=0}^{+\infty}a_nx^n\right)\right)=D\left(\sum_{n=0}^{+\infty}(n+1)a_{n+1}x^n\right)
+	\]
+	Chiamando il coefficiente di $x^n$ $b_n$:
+	\[
+		=\sum_{n=0}^{+\infty}(n+1)b_{n+1}x^n=\sum_{n=0}^{+\infty}(n+1)(n+2)a_{n+2}x^n
+	\]
+\end{examp}
+
+La derivata $m$-esima di una serie di potenze è espressa dalla seguente formula generalizzata:
+\begin{equation}
+	D^m\left(\sum_{n=0}^{+\infty}a_nx^n\right)=\sum_{n=0}^{+\infty}(n+1)(n+2)\dots(n+m)a_{n+m}x^n
+\end{equation}
+Questa scrittura viene compattata con il coefficiente binomiale, dividendo entrambi i membri per $m!$:
+\[
+	\frac{1}{m!}D^m\left(\sum_{n=0}^{+\infty}a_nx^n\right)=\sum_{n=0}^{+\infty}\binom{n+m}{m}a_{n+m}x^n
+\]
+
+Applicando la formula alla serie geometrica di potenze vale:
+\[
+	\frac{1}{(1-x)^{m+1}}=\frac{1}{m!}D^m\left(\sum_{n=0}^{+\infty}x^n\right)=\sum_{n=0}^{+\infty}\binom{n+m}{m}x^n
+\]
+Dove il primo membro è la derivata $m$-esima della somma divisa per $m!$.
+
+
+\subsection{Prodotto di Cauchy}
+Il prodotto di Cauchy (o di convoluzione) si pone lo scopo di definire il prodotto di due serie.
+\[
+	\left(\sum_{n=0}^{+\infty} a_nx^n\right)\left(\sum_{n=0}^{+\infty}b_nx^n\right)=\sum_{n=0}^{+\infty}\left(\sum_{k=0}^na_kb_{n-k}\right)x^n
+\]
+Infatti, in modo esplicito:
+\[
+	(a_0+a_1x+a_2x^2+a_3x^3+\dots)(b_0+b_1x+b_2x^2+b_3x^3+\dots)
+\]
+Ai termini di $n$-esimo grado contribuiscono solo i coefficienti la cui somma è $n$:
+\[
+	a_0b_0+(a_0b_1+a_1b_0)x+(a_0b_2+a_1b_1+a_2b_0)x^2+\dots
+\]
+da cui l'espressione di cui sopra.
+
+Vale inoltre il seguente teorema
+\begin{teor}
+	Il prodotto di Cauchy di due serie convergenti converge al prodotto delle somme:
+	\[
+		\begin{cases}
+			\displaystyle\sum_{n=0}^{+\infty}a_nx^n=A(x)\quad\text{per }\abs{x}<R_A \\[2ex]
+			\displaystyle\sum_{n=0}^{+\infty}b_nx^n=B(x)\quad\text{per }\abs{x}<R_B
+		\end{cases}\Rightarrow
+		\sum_{n=0}^{+\infty}\left(\sum_{k=0}^na_kb_{n-k}\right)x^n=A(x)B(x)
+	\]
+	con raggio $\abs{x}<\text{min}\{R_A,R_B\}$
+\end{teor}
+\begin{examp}
+	\[
+		\left(\sum_{n=0}^{+\infty}x^n\right)^2=\sum_{n=0}^{+\infty}\left(\sum_{k=0}^n 1*1\right)x^n=\sum_{n=0}^{+\infty}(n+1)x^n
+	\]
+	Che come già visto all'esempio \ref{ex:dergeom} non è altro che la derivata della serie geometrica ed è quindi uguale a $\frac{1}{(1-x)^2}$.
+\end{examp}
+
+\begin{examp}
+	\begin{equation}
+		\label{ex:prodcauchy}
+		x^p\sum_{n=0}^{+\infty}a_nx^n=\sum_{n=0}^{+\infty}a_nx^{n+p}=\sum_{n=p}^{+\infty}a_{n-p}x^n
+	\end{equation}
+	In questa soluzione il prodotto è stato interpretato come una combinazione lineare di una costante con una successione (\ref{eq:cperserie} alla definizione \ref{ser:comblin}). Il prodotto può essere interpretato anche come il prodotto di Cauchy della serie di potenze di $a_n$ con la serie:
+	\[
+		\sum_{n=0}^{+\infty}\delta_{np}x^n\qquad\text{con }\delta_{np}=
+		\begin{cases}
+			1\quad & n=p     \\
+			0\quad & n\neq p
+		\end{cases}
+	\]
+	In tal caso il prodotto equivale a
+	\[
+		\left(\sum_{n=0}^{+\infty}\delta_{np}x^n\right)\left(\sum_{n=0}^{+\infty}a_nx^n\right)=\sum_{n=0}^{+\infty}\left(\sum_{k=0}^n \delta_{kp}a_{n-k}\right)
+	\]
+	E dal momento che
+	\[
+		\sum_{k=0}^n \delta_{kp}a_{n-k}=
+		\begin{cases}
+			0\quad       & n<p     \\
+			a_{n-p}\quad & n\geq p
+		\end{cases}
+	\]
+	Il risultato equivale a quello ottenuto nella \ref{ex:prodcauchy}.
+\end{examp}
+
+
+\subsection{Serie di Taylor}
+Gli sviluppi di Taylor permettono di approssimare una funzione attorno a un centro, a meno di un errore che dipende dall'ordine $N$:
+\[
+	f(x)=\sum_{n=0}^N\left[\frac{1}{n!}D^nf(0)x^n\right]+o(x^N)\qquad x\to0
+\]
+Dove
+\[
+	P_n=\sum_{n=0}^N\left[\frac{1}{n!}D^nf(0)x^n\right]
+\]
+è detto polinomio di Taylor. Una particolare classe di funzioni, dette analitiche, può essere espressa tramite un polinomio di Taylor di ordine infinito, chiamato serie di Taylor:
+\begin{defin}
+	Si dice serie di Taylor di una funzione $f$ liscia con centro $x_0$ la serie
+	\begin{equation}
+		\sum_{n=0}^{+\infty}\frac{1}{n!}D^nf(x_0)(x-x_0)^n
+	\end{equation}
+\end{defin}
+Una serie di Taylor di centro $0$ si dice anche serie di McLaurin. Le serie di Taylor sono serie di potenze il cui raggio è l'intervallo in cui la funzione è liscia (cioè derivabile infinite volte). Per $x$ interno al raggio di convergenza, la serie è uguale alla funzione, senza bisogno di specificare alcun errore.
+
+\subsubsection{Serie di Taylor notevoli}
+\begin{itemize}
+	\item $f(x)=e^x$. Il limite dello sviluppo di McLaurin per $N\to+\infty$ è per definizione la ridotta della serie di Taylor:
+	      \[
+		      \lim_{N\to+\infty}\sum_{n=0}^N\frac{x^n}{n!}=\sum_{n=0}^{+\infty}\frac{x^n}{n!}
+	      \]
+	      Come è facile dimostrare (criterio del rapporto) il raggio di convergenza della serie è $+\infty$. Il teorema \vref{tay:restolagrange} (resto secondo Lagrange dello sviluppo di Taylor) dimostra che
+	      \[
+		      \exists c_{x,N}\in(-x,x)\setminus\{0\}\mid R_n=\frac{e^{c_{x,N}}}{(N+1)!}x^{N+1}
+	      \]
+	      Essendo $R_n=f(x)-P_n$:
+	      \[
+		      e^x-\sum_{n=0}^N\frac{x^n}{n!}=e^{c_{x,N}}\frac{x^{N+1}}{(N+1)!}
+	      \]
+	      Poiché $c_{x,N}\leq \abs{x}$:
+	      \[
+		      e^x-\sum_{n=0}^N\frac{x^n}{n!}\leq e^{\abs{x}}\frac{x^{N+1}}{(N+1)!}
+	      \]
+	      Per $N\to+\infty$ il secondo membro tende a $0$, quindi:
+	      \[
+		      \sum_{n=0}^N\frac{x^n}{n!}\to e^x
+	      \]
+	      ovvero
+	      \begin{equation}
+		      e^x=\sum_{n=0}^{+\infty}\frac{x^n}{n!}\qquad\forall x\in\R
+	      \end{equation}
+	\item $f(x)=\ln(1+x)$ Con una dimostrazione simile alla precedente, si dimostra che
+	      \begin{equation}
+		      \ln(1+x)=\sum_{n=1}^{+\infty}\frac{(-1)^{n-1}}{n}x^n\qquad\forall \abs{x}<1
+	      \end{equation}
+	\item $f(x)=(1+x)^\alpha$. La serie di Taylor ha coefficiente $\binom{\alpha}{n}$. Applicando il criterio del rapporto si ricava il raggio:
+	      \begin{gather*}
+		      \abs{\frac{a_{n+1}}{a_n}}=\abs{\frac{\binom{\alpha}{n+1}}{\binom{\alpha}{n}}}=\\
+		      =\abs{\frac{\alpha(\alpha-1)\dots(\alpha-(n+1)+1)}{(n+1)!}\cdot\frac{n!}{\alpha(a-1)\dots(\alpha-n+1)}}=\\
+		      =\abs{\frac{\alpha-n}{n+1}}\to1
+	      \end{gather*}
+	      Per quanto riguarda la somma, si dimostra il caso della serie geometrica, cioè di $\alpha=-1$ e $x=-x$:
+	      % TODO: spiegare meglio
+	      \begin{gather*}
+		      \sum_{n=0}^{+\infty}\binom{-1}{n}(-x)^n=\sum_{n=0}^{+\infty}\binom{-1}{n}(-1)^nx^n\\
+		      \text{studiando il coefficiente:}\\
+		      \binom{-1}{n}(-1)^n=\frac{(-1)(-2)\dots(-1-n+1)}{n!}*(-1)^n=\\=\frac{(-1)^n n!}{n!}*(-1)^n=1\quad\forall n
+	      \end{gather*}
+	      Quindi la serie è uguale alla serie geometrica di ragione $x$, quindi, come già visto, vale:
+	      \[
+		      \frac{1}{1-x}=\sum_{n=0}^{+\infty}x^n
+	      \]
+	      e quindi
+	      \[
+		      (1+(-x))^{-1}=\sum_{n=0}^{+\infty}\binom{-1}{n}(-x)^n
+	      \]
+	      Più in generale, vale
+	      \begin{equation}
+		      (1+x)^\alpha=\sum_{n=0}^{+\infty}\binom{\alpha}{n} x^n\qquad\forall \abs{x}<1
+	      \end{equation}
+	% TODO: aggiungere seno e coseno
+\end{itemize}

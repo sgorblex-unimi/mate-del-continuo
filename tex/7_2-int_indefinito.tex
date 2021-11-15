@@ -1,0 +1,153 @@
+\section{L'integrale indefinito}
+Se l'integrale definito si pone il problema del calcolo di aree, l'integrale indefinito si pone quello di ricavare le primitive di una funzione. Le due operazioni sono strettamente legate, come si è già visto.
+\begin{defin}
+	Si definisce integrale indefinito di $f(x)$ e si indica con
+	\[
+		\int f(x)~dx
+	\]
+	l'insieme delle primitive di $f(x)$.
+\end{defin}
+Come sancito dalla proposizione \ref{propo:primitive} appena dimostrata, queste primitive differiscono di una costante $c$, quindi, se $F(x)$ è una primitiva di $f(x)$, allora
+\[
+	\int f(x)~dx=F(x)+c\qquad\forall c\in\R
+\]
+La tabella \ref{tab:int} mostra gli integrali elementari.
+\begin{table}[ht]
+	% TODO: completare tabella
+	\centering
+	\[
+		\begin{array}{lr}
+			\toprule
+			f(x)             & \int f(x)~dx                    \\
+			\midrule
+			\cos x           & \sin x +c                       \\
+			\sin x           & -\cos x +c                      \\
+			e^x              & e^x +c                          \\
+			\dots            & \tan x +c                       \\[2ex]
+			\dfrac{1}{1+x^2} & \arctan x +c                    \\[3ex]
+			\dfrac{1}{x}     & \ln\abs{x} +c                   \\[2ex]
+			x^\alpha         & \dfrac{x^\alpha+1}{\alpha+1} +c \\
+			\bottomrule
+		\end{array}
+	\]
+	\caption{Integrali notevoli elementari}
+	\label{tab:int}
+\end{table}
+
+Un caso particolare è $f(x)=\frac{1}{x}$: essendo questa funzione la derivata per $x>0$ di $\ln x$, verrebbe naturale assegnare questa funzione come primitiva. Tuttavia, la funzione è definita su tutto $\R$, per cui è necessario trovare una primitiva per le $x$ negative. Questa può essere $\ln (-x)$, da cui $\int \frac{1}{x}=\ln\abs{x}+c$.
+
+
+\subsection[Decomposizione e sostituzione]{Integrazioni per decomposizione e sostituzione}
+
+\subsubsection{Integrazione per decomposizione}
+\begin{prop}
+	\[
+		\int[f(x)+g(x)]dx = \int f(x)~dx+\int g(x)~dx
+	\]
+	Di conseguenza:
+	\[
+		\int \lambda f(x)~dx=\lambda\int f(x)~dx
+	\]
+\end{prop}
+\begin{proof}
+	\[
+		(F+G)'(x)=F'(x)+G'(x)=f(x)+g(x)=(f+g)(x)
+	\]
+	Le costanti additive si sommano in un'unica costante additiva.
+\end{proof}
+
+\subsubsection{Integrazione per sostituzione}
+\begin{prop}
+	\label{prop:intsost}
+	\[
+		\int f(x)~dx=\int f(g(t))g'(t)~dt\qquad\text{con }x=g(t)
+	\]
+\end{prop}
+\begin{proof}
+	Scelta una primitiva $F(x)$ di $f(x)$, come detto precedentemente vale:
+	\[
+		\int f(x)~dx=F(x)+c
+	\]
+	Apportata la sostituzione $x=g(x)$ la dimostrazione si riduce a verificare che:
+	\[
+		(F(x)+c)'=(F(g(x))+c)'=f(x)
+	\]
+	Che è ovviamente vera dalla formula \ref{der:comp} di derivazione delle funzioni composte.
+\end{proof}
+Per gli integrali definiti vale:
+\[
+	\int_a^b f(g(t))g'(t)~dt=[F(g(x))]_a^b=\int_{g(a)}^{g(b)} f(x)~dx
+\]
+
+\begin{examp}
+	\[
+		\int \frac{1}{\sqrt{x}-3}~dx=
+	\]
+	Apportando la sostituzione $t=\sqrt{x}$:
+	\[
+		=\int\frac{2t}{t-3}~dt=2\int\left(\frac{3}{t-3}+1\right)dt=6\int\frac{1}{t-3}dt+2\int dt=
+	\]
+	Applicando la sostituzione $s=t-3$:
+	% TODO: ln del modulo?
+	% TODO: sistemare e spiegare meglio esempio
+	\[
+		6\int\frac{ds}{s}+2\int dt=6\ln s+2t=
+	\]
+	Tornando alle variabili iniziali
+	\[
+		=2t+6\ln(t-3)=2\sqrt{x}+6\ln(\sqrt{x}-3)
+	\]
+\end{examp}
+
+Una relazione particolarmente utile per l'applicazione di questa proprietà, nonché proprietà fondamentale del differenziale $d$, è
+\begin{equation}
+	\label{differenziale}
+	f(x)~dx=d(F(x))\qquad\text{con }F'(x)=f(x)
+\end{equation}
+Vera in quanto
+\[
+	\frac{d(F(x))}{dx}=F'(x)=f(x)
+\]
+Infatti, per definizione il differenziale $d$ rappresenta un incremento che tende a zero, per cui questa uguaglianza non è altro che la definizione di derivata.
+
+\begin{examp}
+	In questo esempio si utilizza la proprietà \ref{prop:intsost} letta verso destra, sfruttando la (\ref{differenziale})
+	\[
+		\int \frac{t}{1+t^2}~dt=\frac{1}{2}\int\frac{1}{1+t^2}~d(t^2+1)=\frac{1}{2}\int\frac{dx}{x}=\frac{\ln(t^2+1)}{2}+c
+	\]
+\end{examp}
+
+
+\subsection{Integrazione di rapporti e per parti}
+
+\subsubsection{Integrazione di rapporti}
+Per integrali che hanno come funzione integranda un rapporto di polinomi, un metodo spesso funzionale è quello di ridurre tale funzione in fratti semplici. Questo può essere fatto utilizzando il metodo di cui al paragrafo \vref{frattisemplici}:
+\[
+	f(x)=\frac{P(x)}{S(x)}=\sum_k\sum_{m=1}^n \frac{A_m}{(x-a_k)^m}+\sum_j \frac{B_jx+C_j}{(x-z_j)(x-\bar z_j)}
+\]
+Dove $(x-z_j)(x-\bar z_j)$ è un polinomio $P_{2_j}(x)$ di secondo grado irriducibile in $\R$. Tuttavia, in questo contesto è spesso utile adottare un accorgimento a tale metodo, cioè quello di esprimere i fratti che hanno al denominatore polinomi di secondo grado irriducibili con la formula:
+\[
+	\frac{B_jP'_{2_j}(x)+C_j}{P_{2_j}(x)}=\frac{B_jP'_{2_j}(x)}{P_{2_j}(x)}+\frac{C_j}{P_{2_j}(x)}
+\]
+In questo modo ogni termine di questo tipo sarà costituito da una derivata del logaritmo (primo addendo dell'ultima espressione) più una derivata dell'arcotangente (secondo addendo).
+% TODO: aggiungere esempio
+
+\subsubsection{Integrazione per parti}
+% TODO: dimostrazione
+Dalla formula di derivazione del prodotto deriva che
+\begin{prop}
+	\[
+		\int F(x)dG(x)=F(x)G(x)-\int G(x)dF(x)
+	\]
+\end{prop}
+
+\begin{examp}
+	\[
+		\int x\cos x~dx=\int x~d(\sin x)=x\sin x-\int\sin x=x\sin x+\cos x +c
+	\]
+\end{examp}
+\begin{examp}
+	\[
+		\int\ln x~dx=x\ln x-\int x~d(\ln x)=x\ln x-\int \frac{x}{x}~dx=x\ln x-x+c
+	\]
+\end{examp}

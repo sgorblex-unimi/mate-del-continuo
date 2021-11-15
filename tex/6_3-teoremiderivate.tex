@@ -1,0 +1,263 @@
+\section{Teoremi sulle derivate}
+I seguenti teoremi riguardano il rapporto tra alcuni punti di funzioni che godono di proprietà particolari e le relative derivate. Tra questi punti:
+\begin{defin}
+	Data una funzione $f:D\to\R$, si definisce:
+	\begin{description}
+		\item[Punto di massimo relativo] (o locale) un punto $x_0$ tale che
+			\[
+				\exists U\in I(x_0)\mid\forall x\in U: f(x)\leq f(x_0)
+			\]
+		\item[Punto di minimo relativo] (o locale) un punto $x_0$ tale che
+			\[
+				\exists U\in I(x_0)\mid\forall x\in U: f(x)\geq f(x_0)
+			\]
+		\item[Punto di massimo assoluto] (o globale) un punto $x_0$ tale che
+			\[
+				\forall x\in D: f(x)\leq f(x_0)
+			\]
+		\item[Punto di minimo assoluto] (o globale) un punto $x_0$ tale che
+			\[
+				\forall x\in D: f(x)\geq f(x_0)
+			\]
+	\end{description}
+	Ognuno di questi ha una variante ``stretta'', cioè che non contempla la possibilità che $f(x_0)=f(x)$ (in questo caso $x\neq x_0$). Massimi e minimi sono detti estremi (relativi o assoluti).
+\end{defin}
+
+
+\subsection{Teorema di Fermat}
+Il teorema di Fermat permette di associare in alcuni casi la presenza di un estremo relativo all'azzeramento della derivata. Esso segue (e in un certo senso unisce) due lemmi:
+\begin{lemma}[Minimalità locale destra]
+	\label{fermat:lemma1}
+	\[
+		\begin{cases}
+			\exists\delta>0\mid f(x)\geq f(x_0)~\forall x\in[x_0,x_0+\delta) \\
+			\exists D^+f(x_0)
+		\end{cases}\Rightarrow
+		D^+f(x_0)\geq0
+	\]
+\end{lemma}
+\begin{proof}
+	Per definizione:
+	\[
+		D^+f(x_0)=\lim_{x\to x_0^+}\frac{f(x)-f(x_0)}{x-x_0}
+	\]
+	Studiando il segno di questa frazione, si può dire che il denominatore è sempre positivo (poiché $x\to x_0^+$); inoltre, il numeratore è anch'esso positivo in quanto, per ipotesi, $f(x)\geq f(x_0)$, a patto di prendere un $x$ appartenente a $[x_0,x_0+\delta)$. È immediato concludere che il limite è maggiore o uguale a $0$.
+\end{proof}
+\begin{lemma}[Minimalità locale sinistra]
+	\label{fermat:lemma2}
+	\[
+		\begin{cases}
+			\exists\delta>0\mid f(x)\geq f(x_0)~\forall x\in(x_0-\delta,x_0] \\
+			\exists D^-f(x_0)
+		\end{cases}\Rightarrow
+		D^+f(x_0)\leq0
+	\]
+\end{lemma}
+\begin{proof}
+	Valgono le stesse considerazioni del caso precedente, questa volta per un denominatore minore di $0$ (poiché $x\to x_0^-$) e un numeratore maggiore di $0$, a patto di prendere un $x$ appartenente a $(x_0-\delta,x_0]$.
+\end{proof}
+
+Unendo i due lemmi nel caso di esistenza della derivata bilaterale si ottiene il teorema di Fermat:
+\begin{teor}[di Fermat]
+	La derivata di una funzione in un punto di massimo relativo è $0$, se la funzione è derivabile in quel punto.
+	\[
+		\begin{cases}
+			\exists\delta>0\mid f(x)\geq f(x_0)\forall x\in(x_0-\delta,x_0+\delta) \\
+			\exists Df(x_0)
+		\end{cases}\Rightarrow
+		Df(x_0)=0
+	\]
+\end{teor}
+Analogo vale per i punti di minimo relativo.
+\begin{proof} ~
+	\begin{itemize}
+		\item Tutte le ipotesi del lemma \ref{fermat:lemma1} sono verificate, per cui:
+		      \[
+			      D^+f(x_0)\geq0
+		      \]
+		\item Tutte le ipotesi del lemma \ref{fermat:lemma2} sono verificate, per cui:
+		      \[
+			      D^-f(x_0)\leq0
+		      \]
+	\end{itemize}
+	Poiché la derivata bilaterale esiste, la derivata destra e quella sinistra devono essere uguali. L'unico caso in cui ciò è possibile è quello in cui $Df(x_0)=0$
+\end{proof}
+\begin{defin}[punto stazionario]
+	Un punto è stazionario per una funzione se e solo se la sua derivata in tale punto è $0$.
+\end{defin}
+
+
+\subsection{Teorema di Rolle}
+\begin{teor}[di Rolle]
+	\label{der:rolle}
+	Data una funzione $f:[a,b]\to\R$
+	\[
+		\begin{cases}
+			f\text{ continua in } [a,b]   \\
+			f\text{ derivabile in } (a,b) \\
+			f(a)=f(b)
+		\end{cases}\Rightarrow
+		\exists c\in(a,b)\mid f'(c)=0
+	\]
+\end{teor}
+\begin{proof}
+	% TODO: ref al teorema di Weierstrass una volta aggiunto
+	Per il teorema di Weierstrass, essendo $f$ continua:
+	\[
+		f(x_m)\leq f(x)\leq f(x_M)\qquad\forall x\in[a,b]
+	\]
+	Si possono verificare due casi:
+	\begin{itemize}
+		\item se $x_m\in(a,b)\lor x_M\in(a,b)$, poiché la funzione è derivabile in tale intervallo è possibile applicare il teorema di Fermat al punto interessato, che sarà dunque il $c$ che si cercava;
+		\item se $x_m,x_M\in\{a,b\}$, allora $f(a)\leq f(x)\leq f(b)\qquad\forall x\in[a,b]$. Poiché per ipotesi $f(a)=f(b)$ la funzione è costante e pertanto la derivata è $0$ in qualunque punto $c=x$ interno a $(a,b)$.
+	\end{itemize}
+\end{proof}
+
+
+\subsection{Teorema di Lagrange}
+\begin{teor}[di Lagrange]
+	\label{der:lagrange}
+	Data una funzione $f:[a,b]\to\R$:
+	\[
+		\begin{cases}
+			f\text{ continua in } [a,b] \\
+			f\text{ derivabile in } (a,b)
+		\end{cases}\Rightarrow
+		\exists c\in(a,b)\mid f'(c)=\frac{f(b)-f(a)}{b-a}
+	\]
+\end{teor}
+% TODO: grafico
+\begin{proof}
+	Da un punto di vista geometrico, il rapporto $\frac{f(b)-f(a)}{b-a}$ non è altro che il coefficiente angolare della retta $r$, secante a $f$, passante per $a$ e $b$. Poiché la derivata di una funzione in un punto è uguale al coefficiente angolare della retta tangente in quel punto, la tesi può essere tradotta nell'esistenza di un punto interno all'intervallo in cui la tangente è parallela alla congiungente $ab$.
+
+	Per dimostrare il teorema ci si riconduce ai casi contemplati dal teorema di Rolle, utilizzando una funzione ausiliaria $g$, definita come la differenza, nel punto $x$, tra la funzione $f$ e la retta $r$. Questa funzione, in quanto differenza di una funzione continua e derivabile per ipotesi e una retta (continua e derivabile per ogni $x$), è continua e derivabile nell'intervallo; inoltre per costruzione $g(a)=g(b)=0$. Applicando il teorema \ref{der:rolle} di Rolle si ottiene:
+	\[
+		\exists c\in(a,b)\mid g'(c)=0
+	\]
+	Ma $g'(x)$ non è altro che la derivata di una differenza, quindi:
+	\[
+		g'(x)=f'(x)-r'(x)
+	\]
+	Poiché la derivata di $r$ è nota e $g'(c)=0$:
+	\[
+		f'(c)=r'(c)\Rightarrow f'(c)=\frac{f(b)-f(a)}{b-a}
+	\]
+\end{proof}
+
+\subsection[Funzioni monotone]{Caratterizzazione differenziale di funzioni monotone}
+\label{der:monotone}
+\begin{prop}
+	Date le ipotesi
+	\[
+		\begin{cases}
+			I=(a,b)\subseteq\R                   \\
+			f:I\to\R \text{ continua in $[a,b]$} \\
+			f:I\to\R \text{ derivabile in $(a,b)$}
+		\end{cases}
+	\]
+	Allora
+	\[
+		\begin{cases}
+			\bullet~ f \text{ crescente in senso lato in $I$} & \iff f'(x)\geq0~\forall x\in I                        \\
+			\bullet~ f \text{ strettamente crescente in $I$}  & \iff f'(x)\geq0~\forall x\in I\land                   \\
+			                                                  & \{x\in I\mid f'(x)=0\}\text{ non contiene intervalli}
+		\end{cases}
+	\]
+\end{prop}
+E l'opposto vale per funzioni decrescenti.
+\begin{proof}
+	Dimostriamo la prima relazione verso destra. La derivata in $x_0$ è così definita
+	\[
+		\lim_{x\to x_0}\frac{f(x)-f(x_0)}{x-x_0}
+	\]
+	Per la definizione di funzione crescente in un intervallo, comunque scelto $x\in I$ vale la relazione: $x>x_0\Rightarrow f(x)\geq f(x_0)$. Ciò significa che quando il denominatore è positivo lo è anche il numeratore e viceversa. In conclusione, la derivata è maggiore o uguale a $0$ in ogni punto dell'intervallo.
+
+	L'implicazione inversa richiede l'applicazione del teorema di Lagrange. Dimostrare la tesi significa dimostare che comunque scelti due valori $x_1<x_2$ nell'intervallo vale $f(x_1)<f(x_2)$. Poiché $x_1$ e $x_2$ appartengono all'intervallo, sono verificate tutte le ipotesi del teorema di Lagrange, quindi:
+	\[
+		\exists c\in I\mid f'(c)=\frac{f(x_2)-f(x_1)}{x_2-x_1}
+	\]
+	Manipolando l'espressione:
+	\[
+		(x_2-x_1)f'(c)=f(x_2)-f(x_1)
+	\]
+	Poiché $f'(c)\geq0$ per ipotesi e $x_2-x_1>0$ per costruzione, il primo membro è non negativo, e quindi anche il secondo membro deve esserlo. Questo significa che $f(x_2)\geq f(x_1)$.
+
+	Per quanto riguarda la seconda relazione, essa deve escludere dal caso precedente i casi in cui, scelti $x_1<x_2$ nell'intervallo, vale $f(x_1)=f(x_2)$. Se così fosse infatti, varrebbe:
+	% TODO: spiegare meglio. Occorre dimostrare che l'unico caso in cui una derivata è nulla in un certo intervallo è quello in cui la funzione è costante
+	\[
+		\begin{cases}
+			f(x_1)=f(x_2) \\
+			f(x_1)\leq f(x)\leq f(x_2)~\forall x\in [x_1,x_2]
+		\end{cases}\Rightarrow f(x_1)=f(x)=f(x_2)~\forall x\in [x_1,x_2]
+	\]
+	ovvero, la funzione sarebbe costante nell'intervallo $[x_1,x_2]$. Ergo, deve valere $f'(x)\geq0$ ma non può valere $f'(x)=0$ per alcun intervallo\footnote{La precauzione di non usare $f'(x)>0\forall x\in I$ deriva dal fatto che la derivata di una funzione strettamente crescente può essere nulla in punti isolati, i flessi a tangente orizzontale (si pensi ad esempio a $y=x^3$ in $x=0$).}.
+\end{proof}
+
+\subsection{Teorema di Cauchy}
+Il teorema di Cauchy generalizza ulteriormente quello di Lagrange.
+\begin{teor}[di Cauchy]
+	\label{der:cauchy}
+	Date due funzioni $f,g:[a,b]\to\R$
+	\[
+		\begin{cases}
+			f,g \text{ continue in }[a,b]   \\
+			f,g \text{ derivabili in }(a,b) \\
+			g'(x)\neq0\quad\forall x\in(a,b)
+		\end{cases}\Rightarrow
+		\exists c\in(a,b)\mid\frac{f'(c)}{g'(c)}=\frac{f(b)-f(a)}{g(b)-g(a)}
+	\]
+\end{teor}
+\begin{proof}
+	Come nella dimostrazione del teorema \ref{der:lagrange} di Lagrange, si utilizza una funzione ausiliaria. Questa volta, essa non ha una rappresentazione grafica immediata, ma sono evidenti le somiglianze con la precedente.
+	\[
+		h(x)=f(x)-\left\{f(a)+\frac{f(b)-f(a)}{g(b)-g(a)}(g(x)-g(a))\right\}
+	\]
+	Anche qui si applica il teorema di \ref{der:rolle} Rolle, infatti:
+	\begin{gather*}
+		\begin{cases}
+			h(a)=f(a)-\{f(a)+0\}=0 \\
+			h(b)=f(b)-\left\{f(a)+\dfrac{f(b)-f(a)}{g(b)-g(a)}(g(b)-g(a))\right\}=0
+		\end{cases}\Rightarrow\\
+		\Rightarrow\exists c\in(a,b)\mid h'(c)=0
+	\end{gather*}
+	Eguagliando la derivata in $c$ di $h$ a $0$ (i termini non dipendenti da $c$ contano come costanti):
+	\begin{gather*}
+		0=f'(c)-\left\{0+\frac{f(b)-f(a)}{g(b)-g(a)}(g'(c)-0)\right\}\\
+		0=f'(c)-\frac{f(b)-f(a)}{g(b)-g(a)}g'(c)\\
+		\frac{f'(c)}{g'(c)}=\frac{f(b)-f(a)}{g(b)-g(a)}
+	\end{gather*}
+	Si noti che la condizione $g'(x)\neq0$ non solo certifica l'esistenza di $\frac{f'(x)}{g'(x)}$, ma anche quella di $\frac{f(b)-f(a)}{g(b)-g(a)}$. Infatti, se il denominatore fosse nullo e quindi $g(a)=g(b)$, il teorema di Rolle implicherebbe l'esistenza di un $c$ per cui $g'(c)=0$, cosa impossibile per ipotesi.
+\end{proof}
+
+
+\subsection{Teorema di De L'Hôpital}
+\begin{teor}[di De L'Hôpital]
+	\label{der:hopital}
+	Per $x_0\in\Rt$, se
+	\[
+		\begin{cases}
+			\exists U\in I(x_0)\mid f,g\text{ derivabili in }U                                                                               \\
+			g'(x)\neq0~\forall x\in U                                                                                                        \\
+			\lim_{x\to x_0}\limits f(x)=\lim_{x\to x_0}\limits g(x)=0\lor \lim_{x\to x_0}\limits f(x) =\lim_{x\to x_0}\limits g(x)=\pm\infty \\
+			\exists \lim_{x\to x_0}\limits \frac{f'(x)}{g'(x)}=L
+		\end{cases}
+	\]
+	allora:
+	\[
+		\exists\lim_{x\to x_0} \frac{f(x)}{g(x)}=L
+	\]
+\end{teor}
+\begin{proof}
+	Per semplicità, si dimostra il teorema nel caso di indecisione $0/0$ per $x\to x_0\in\R$. Poiché la funzione $f$ è derivabile e quindi continua in $x_0$, vale $\lim{x\to x_0}f(x)=f(x_0)$. Lo stesso vale per $g$. Poiché questi limiti in questo caso valgono $0$, vale:
+	\[
+		\frac{f(x)}{g(x)}=\frac{f(x)-f(x_0)}{g(x)-g(x_0)}
+	\]
+	Applicando il teorema \ref{der:cauchy} di Cauchy:
+	\[
+		\exists c\mid \frac{f'(c)}{g'(c)}=\frac{f(x)-f(x_0)}{g(x)-g(x_0)}
+	\]
+	Poiché $c$ appartiene all'intervallo $(x_0,x)$, per il teorema del confronto per $x\to x_0$ vale $c\to x_0$, quindi:
+	\begin{equation*}
+		\lim_{x\to x_0} \frac{f'(x)}{g'(x)}=\lim_{c\to x_0} \frac{f'(c)}{g'(c)}=\lim_{x\to x_0} \frac{f(x)-f(x_0)}{g(x)-g(x_0)}=\lim_{x\to x_0} \frac{f(x)}{g(x)}=L
+	\end{equation*}
+\end{proof}

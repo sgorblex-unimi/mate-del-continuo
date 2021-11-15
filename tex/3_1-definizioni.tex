@@ -1,0 +1,93 @@
+\section{Successioni numeriche}
+\begin{defin}
+	Una successione è una funzione che ha come dominio l'insieme $\N$. Una successione nella variabile naturale $n$ viene indicata con $a_n$ (invece che con la notazione $a(n)$, più comune per le funzioni di dominio reale)
+\end{defin}
+
+
+\subsection{Progressioni}
+\label{succ:progr}
+Esempi notevoli di successioni sono le progressioni. Esse si dividono in
+\begin{itemize}
+	\item Progressioni aritmetiche come
+	      \[
+		      b_n=2n+3
+	      \]
+	      Nelle progressioni aritmetiche è costante la differenza tra valori consecutivi assunti dalla successione (cioè, per ogni $n$, $a_{n+1}-a_n$; nell'esempio $b_{n+1}=b_n+2$).
+	\item Progressioni geometriche come
+	      \[
+		      c_n=3\cdot 2^n
+	      \]
+	      Nelle progressioni geometriche è invece costante il rapporto tra valori consecutivi della successione (nell'esempio $\frac{3\cdot2^{n+1}}{3\cdot2^n}=2$)
+\end{itemize}
+Nelle progressioni il valore che rimane costante tra successivi viene detto ragione della progressione.
+
+\begin{prop}
+	Per le progressioni aritmetiche vale:
+	\begin{gather}
+		b_{n+1}-b_n=d \\
+		b_n=b_0+nd
+	\end{gather}
+\end{prop}
+\begin{prop}
+	Per le progressioni geometriche vale:
+	\begin{gather}
+		\frac{c_{n+1}}{c_n}=q \\
+		c_n=c_0*q^n
+	\end{gather}
+
+\end{prop}
+dimostrabili facilmente per induzione.
+
+
+\subsection{Monotonia e limitatezza}
+
+\subsubsection{Monotonia}
+Due proprietà delle successioni sono fondamentali per il calcolo dei relativi limiti:
+\begin{defin}[Monotonia]
+	Una successione si dice monotòna crescente quando
+	\[
+		\forall n\in\N \qquad a_n\leq a_{n+1}
+	\]
+	E decrescente quando
+	\[
+		\forall n\in\N \qquad a_n\geq a_{n+1}
+	\]
+\end{defin}
+\begin{examp}
+	\[
+		a_n=n^2-10n
+	\]
+	Mi chiedo se la successione è monotona crescente, cioè se
+	\begin{align*}
+		n^2-10n & \leq(n+1)^2-10n(n+1) \\
+		n^2-10n & \leq n^2+2n+1-10n-10 \\
+		2n-9    & \geq0
+	\end{align*}
+	La disuguaglianza non è vera per ogni $n$ naturale, ma solo per $n\geq\frac{9}{2}$. Ciò significa che la successione non è monotona crescente ma definitivamente crescente (cioè crescente a partire da un certo valore).
+\end{examp}
+
+\subsubsection{Limitatezza}
+\begin{defin}[Limitatezza]
+	Una successione si dice:
+	\begin{itemize}
+		\item \textbf{limitata superiormente} se esistono maggioranti della sua immagine:
+		      \begin{gather*}
+			      \{a_n\mid n\in\N\}^*\neq\emptyset\\
+			      \text{Ovvero}\\
+			      \exists M\in\R\mid a_n\leq M \qquad\forall n\in\N
+		      \end{gather*}
+		\item \textbf{limitata inferiormente} se esistono minoranti della sua immagine:
+		      \[
+			      \{a_n\mid n\in\N\}_*\neq\emptyset\\
+		      \]
+		\item \textbf{limitata} (o limitata bilateralmente) se esistono sia maggioranti sia minoranti della sua immagine:
+		      \begin{gather*}
+			      \{a_n\mid n\in\N\}^*\neq\emptyset \land \{a_n\mid n\in\N\}_*\neq\emptyset\\
+			      \text{ovvero}\\
+			      \exists R\in\R\mid \abs{a_n}\leq R \qquad\forall n\in\N
+		      \end{gather*}
+		      dove nella seconda espressione si utilizza $-R$ come minorante e $R$ come maggiorante.\footnote{Questa scelta non è limitante in quanto si sta scegliendo semplicemente uno dei minoranti (o maggioranti), e non l'estremo inferiore o superiore (ovvero si sceglie un $R$ che rispetti sia le condizioni per essere maggiorante che quelle cui il suo opposto sia minorante)}.
+	\end{itemize}
+\end{defin}
+Una successione limitata è anche definitivamente limitata: se la condizione di limitatezza è verificata per ogni $n$ lo è anche per $n\geq k$. È vero però anche il contrario: una successione definitivamente limitata per $n\geq k$ con $a_n\leq R_1$ è anche limitata. È infatti sempre possibile determinare un valore $R_2$ che sia maggiore o uguale a $a_n$ per tutti i valori di $n$, in quanto i valori di $n$ minori di $k$ sono finiti (mentre per $n\geq k$ la condizione è verificata per ipotesi, a patto che $R_2\geq R_1$).
+% TODO: aggiungere grafico

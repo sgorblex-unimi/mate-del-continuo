@@ -1,0 +1,114 @@
+\section{\texorpdfstring{$\sim$ (asintotico)}{Asintotico}}
+Il simbolo di asintotico viene così definito:
+\begin{defin}
+	\[
+		a_n\sim b_n:\qquad\frac{a_n}{b_n}\to1
+	\]
+\end{defin}
+
+
+\subsection{Proprietà}
+La relazione gode di proprietà riflessiva (poiché $\frac{a_n}{a_n}=1$), simmetrica (poiché il reciproco di una successione che tende a 1 tende a 1) e transitiva:
+\begin{proof}
+	\begin{gather*}
+		a_n\sim b_n\land b_n\sim c_n\Rightarrow a_n\sim c_n\\
+		\frac{a_n}{c_n}=\frac{a_n}{b_n}*\frac{b_n}{c_n}\to1
+	\end{gather*}
+	In quanto i due fattori tendono a 1 per ipotesi.
+\end{proof}
+L'asintotico è quindi una relazione di equivalenza. Si dimostra che tutti gli elementi di una classe di equivalenza hanno lo stesso limite:
+\begin{teor}
+	\[
+		\begin{cases}
+			a_n\sim b_n \\
+			b_n\to l
+		\end{cases}\Rightarrow a_n\to l
+	\]
+\end{teor}
+\begin{proof}
+	\[
+		a_n=\frac{a_n}{b_n}
+	\]
+	Che tende a $l$ in quanto il primo fattore tende a $1$ per definizione di asintotico e il secondo tende a $l$ per ipotesi.
+\end{proof}
+
+
+\subsection{Operazioni}
+\begin{prop}
+	\[
+		\begin{cases}
+			a_n\sim b_n \\
+			A_n\sim B_n
+		\end{cases}
+		\begin{aligned}
+			 & \Rightarrow\frac{a_n}{A_n}\sim\frac{b_n}{B_n}             \\
+			 & \Rightarrow a_n\cdot A_n\sim b_n\cdot B_n                 \\
+			 & \Rightarrow a_n^\alpha\sim b_n^\alpha\quad\forall\alpha>0
+		\end{aligned}
+	\]
+\end{prop}
+\begin{proof}
+	Si dimostra la prima implicazione, in quanto le altre ne seguono direttamente. Traducendo la tesi in simboli:
+	\[
+		\frac{a_n/A_n}{b_n/B_n}\to1
+	\]
+	Semplificando l'espressione:
+	\[
+		\frac{a_n}{b_n}\cdot \frac{B_n}{A_n}
+	\]
+	Che tende a $1$ in quanto prodotto di due successioni tendenti a $1$ per ipotesi.
+\end{proof}
+Somme ed esponenziali non godono delle stesse proprietà, mentre per i logaritmi si pone un'ulteriore condizione:
+% TODO: aggiungere controesempio per necessaria seconda condizione: n/(n+1) e (n+1)/n
+\begin{prop}
+	\[
+		\begin{cases}
+			a_n\sim b_n   \\
+			b_n\to+\infty \\
+			0<q\neq1
+		\end{cases}\Rightarrow\log_qa_n\sim\log_qb_n
+	\]
+\end{prop}
+\begin{proof}
+	\[
+		\frac{\log_qa_n}{\log_qb_n}=\frac{\log_q\left(\dfrac{a_n}{b_n}\cdot b_n\right)}{\log_qb_n}=\frac{\log_q(a_n/b_n)+\log_qb_n}{\log_qb_n}=\frac{\log_q(a_n/b_n)}{\log_qb_n}+1
+	\]
+	L'ultima espressione è la somma di un addendo che tende a $0$ e $1$, quindi il limite è $1$.
+\end{proof}
+
+La seguente è una proprietà dell'asintotico, utile in particolare in alcune dimostrazioni, che gli permette di essere scambiato con l'$o$ piccolo:
+\begin{prop}
+	\[
+		a_n\sim b_n\iff a_n=b_n+o(b_n)
+	\]
+\end{prop}
+\begin{proof}
+	\begin{gather*}
+		\frac{a_n}{b_n}\to1\\
+		\text{quindi}\\
+		\frac{a_n}{b_n}-1\to0\\
+		\frac{a_n-b_n}{b_n}\to0\\
+		\text{ergo}\\
+		a_n-b_n=o(b_n)\\
+		a_n=b_n+o(b_n)
+	\end{gather*}
+\end{proof}
+\begin{examp}
+	\begin{gather*}
+		n^2+n\log n+\frac{n^6}{2^n}=\\
+		n^2+o(n^2)+o(1)=n^2+o(n^2)+o(n^2)=n^2+o(n^2)\sim n^2\to+\infty
+	\end{gather*}
+\end{examp}
+
+\begin{teor}
+	\[
+		a_n\sim b_n\Rightarrow o(a_n)\equiv o(b_n)
+	\]
+\end{teor}
+\begin{proof}
+	Si dimostra solo l'implicazione $o(a_n)=o(b_n)$. Poiché l'ipotesi è simmetrica, anche la tesi lo sarà. Traducendo la tesi secondo la definizione:
+	\[
+		\frac{o(a_n)}{b_n}=\frac{a_n\cdot o(1)}{b_n}=\frac{a_n}{b_n}\cdot o(1)
+	\]
+	Che tende a $0$ in quanto prodotto di un fattore che tende a $1$ (per ipotesi) e uno che tende a $0$ (per definizione).
+\end{proof}

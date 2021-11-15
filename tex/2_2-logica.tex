@@ -1,0 +1,146 @@
+\section{Fondamenti di logica}
+Per implicazione si intende una proposizione, cioè un'affermazione di cui è possibile determinare il valore di verità, del tipo
+\[
+	A\Rightarrow B
+\]
+Dove $A$ e $B$ sono a loro volta proposizioni.
+Per determinare il valore di verità dell'implicazione è necessario conoscere quello delle proposizioni che la compongono. Nella fattispecie:
+\[
+	\begin{array}{ccc}
+		\toprule
+		A & B & A\Rightarrow B \\
+		\midrule
+		V & V & V              \\
+		V & F & F              \\
+		F & V & V              \\
+		F & F & V              \\
+		\bottomrule
+	\end{array}
+\]
+\subsubsection{Dimostrazione diretta}
+Nella dimostrazione diretta, per dimostrare che la tesi $B$ è vera, si dimostra tramite un'implicazione logica $A\Rightarrow B$ valida (composta eventualmente da più passi) che l'ipotesi $A$ genera $B$ (eliminazione di implicazione). Ciò è possibile in quanto l'unico caso in cui l'ipotesi e l'implicazione sono vere è quello in cui la tesi è anch'essa vera.
+
+\subsubsection{Dimostrazione contronominale}
+Nella dimostrazione contronominale, vicina a quella per assurdo, si ottiene una tesi falsa tramite un'implicazione vera, il che significa come sancisce la tabella all'ultima riga che l'ipotesi è falsa.
+
+
+\subsection{Il principio di induzione}
+Il principio di induzione punta a dimostrare che una proposizione $P(n)$ sia vera per ogni $n$ maggiore o uguale a $k$. Esso si articola in due fasi:
+\begin{description}
+	\item[Base] dimostrare che $P(k)$ è verificata;
+	\item[Passo] dimostrare a partire dall'ipotesi che $P(n)$ (dove $n$ è generico) sia verificata che lo sia anche $P(n+1)$ (implicazione $P(n)\Rightarrow P(n+1)$). Ogni passaggio deve valere per qualunque valore di $n\geq k$.
+\end{description}
+Questo come sancisce la tabella dimostra che anche $P(k+1)$ è verificata (tesi) e che quindi ripetendo il processo prendendo la tesi come ipotesi la proposizione è vera per ogni $n$ maggiore o uguale a $k$.
+
+\begin{examp}
+	Si intende dimostrare che la proposizione
+	\[
+		P(n): 0+1+\dots+n=\frac{n(n+1)}{2}
+	\]
+	è vera per ogni $n$ in $\N$.
+	\begin{description}
+		\item[Base] si dimostra che $P(0)$ è vera:
+			\[
+				0={0(0+1)}{2}
+			\]
+		\item[Passo] si dimostra che sapendo che $P(n)$ è vera anche $P(n+1)$ lo è:
+			\begin{align*}
+				0+1+\dots+n+n+1                 & =\frac{(n+1)[(n+1)+1]}{2}        \\
+				\text{Poiché so che } 0+1       & +\dots+n=\frac{n(n+1)}{2}        \\
+				\frac{n(n+1)}{2}+n+1            & =(n+1)\left(\frac{n+2}{2}\right) \\
+				(n+1)\left(\frac{n}{2}+1\right) & =(n+1)\left(\frac{n}{2}+1\right)
+			\end{align*}
+	\end{description}
+	La proposizione per il principio di induzione è quindi vera per ogni $n\in\N$.
+\end{examp}
+È fondamentale che nell'applicazione del secondo passo del principio di induzione non vengano applicate restrizioni all'insieme, come si può vedere dal seguente esempio:
+\begin{examp}
+	Si dimostra che se almeno una donna in un gruppo di $n$ donne è bionda, allora tutte le donne del gruppo sono bionde.
+	\begin{description}
+		\item[Base] in un gruppo di una donna c'è almeno una donna bionda, e tutte e $n=1$ le donne sono bionde ($(P(1)$ vera)
+		\item[Passo] posto che la proposizione sia vera per $n$, è facile prendere da un gruppo di $n+1$ donne due gruppi distinti di $n$ donne che contengano la stessa donna bionda in modo che l'unione dei due contenga tutte le donne, e poiché la proposizione è vera per ipotesi per i gruppi di $n$ donne lo è anche per l'intero gruppo di $n+1$.
+	\end{description}
+	Questa dimostrazione concluderebbe che la proposizione è vera per ogni $n$, e che quindi le donne bionde sarebbero o tutte o nessuna. Chiaramente la proposizione non è vera: ci si pone dunque il problema di identificare l'errore.
+
+	Esso avviene nel secondo passaggio. Il ragionamento applicato infatti si può utilizzare in tutti i casi tranne uno: quello di $n=1$. In questo caso, nell'insieme di $n+1=2$ donne è impossibile prendere due insiemi di una donna che abbiano tale donna in comune e la cui unione sia l'intero insieme. Poiché sono state applicate restrizioni al ragionamento, tutto il principio cade e la dimostrazione non è valida.
+\end{examp}
+
+
+\subsubsection{La disuguaglianza di Bernoulli}
+\begin{teor}[Disuguaglianza di Bernoulli]
+	\label{dis_berno}
+	\[
+		(1+x)^n\geq1+nx \qquad\forall x>-1,n\in\N
+	\]
+\end{teor}
+\begin{proof}
+	Per induzione su $n$:
+	\begin{description}
+		\item[Base]
+			\[
+				P(0): (1+x)^0\geq1+0x
+			\]
+			Ottengo $1\geq1$ che è vera.
+		\item[Passo]
+			\begin{gather}
+				\label{eq:bernoB}
+				P(n)\Rightarrow P(n+1): (1+x)^{n+1}\geq1+(n+1)x\\
+				\text{riscrivo il primo membro}\notag\\
+				(1+x)^{n+1}=(1+x)(1+x)^n\notag
+			\end{gather}
+			Ma $(1+x)^n>1+nx$ per ipotesi. Moltiplicando questa disuguaglianza per $(1+x)$ (cosa che posso fare in quanto la proposizione stessa impone la condizione $x>-1$) ottengo:
+			\[
+				(1+x)(1+x)^n\geq(1+x)(1+nx)
+			\]
+			Se quindi si dimostra che $(1+x)(1+nx)$, minore del primo membro della \ref{eq:bernoB}, è maggiore del suo secondo membro $1+(n+1)x$ (per ogni $n\in\N$), allora si dimostra l'implicazione:
+			\[
+				(1+x)(1+x)^n\geq(1+x)(1+nx)\geq1+(n+1)x
+			\]
+			Dimostrando:
+			\begin{align*}
+				(1+x)(1+nx) & \geq1+(n+1)x \\
+				1+x+nx+nx^2 & \geq1+nx+x   \\
+				nx^2        & \geq0
+			\end{align*}
+			L'ultima disequazione è sempre verificata per $n\in\N$, quindi l'implicazione è dimostrata.
+	\end{description}
+	L'ipotesi e l'implicazione sono vere per ogni $n\in\N$, quindi anche la tesi è dimostrata.
+\end{proof}
+
+
+
+
+\subsection{Proposizioni definitivamente vere}
+\begin{defin}
+	Si dice che una proposizione $P(n)$ con $n\in\N$ è definitivamente vera quando
+	\[
+		\exists\nu\in\N\mid P(n) \text{ è verificata }\forall n\geq\nu
+	\]
+	Mentre si dice che è definitivamente falsa quando è falsa per ogni $n$ maggiore o uguale a $\nu$
+\end{defin}
+
+Posta una proposizione definitivamente vera, è possibile fare alcune osservazioni:
+\begin{lemma} \label{lem:defveresoglia}
+	Se $P(n)$ è definitivamente vera per una soglia $\nu$ e $Q(n)=P(n+k)$, con $k\in\Z$, allora anche $Q(n)$ è definitivamente vera per $n>\nu-k$.
+\end{lemma}
+\begin{lemma}
+	Poste due proposizioni definitivamente vere $P(n)$ per soglia $\nu_1$ e $Q(n)$ per $\nu_2$, la proposizione $P(n)\land Q(n)$ è definitamente vera per il maggiore dei $\nu$, il cui verifica contemporaneamente entrambe le proposizioni.
+\end{lemma}
+
+
+\subsubsection{La negazione}
+È utile analizzare il significato della negazione di definitivamente vera:
+\[
+	\neg(\exists\nu\in\N\mid P(n) \text{ è verificata }\forall n\geq\nu)
+\]
+ossia
+\[
+	\forall\nu\in\N \quad\exists n\geq\nu\mid P(n) \text{ è falsa}
+\]
+Ciò significa che i valori di $n$ per cui $P(n)$ è falsa sono infiniti e arbitrariamente grandi.
+\begin{examp}
+	\[
+		(-1)^n>0
+	\]
+	La proposizione non è né definitivamente vera né definitivamente falsa in quanto esistono valori di $n$ arbitrariamente grandi per cui essa è falsa, esattamente come valori arbitrariamente grandi per cui è vera. Comunque scelto un $\nu$, quindi, la proposizione sarà vera per alcuni valori di $n\geq\nu$ e falsa per altri.
+\end{examp}

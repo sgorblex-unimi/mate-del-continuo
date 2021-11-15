@@ -1,0 +1,65 @@
+\documentclass[a4paper,twoside]{report}
+% \documentclass[a4paper,oneside]{report}
+\usepackage{mdc-impostazioni}
+
+% TODO: sistemare numero di righe bianche prima di chapter/section/sub
+% TODO: sistemare virgolette
+% TODO: (ri)fare i grafici con tikz
+% TODO: sostituire \[\] con ambiente equation*
+\begin{document}
+
+\title{Matematica del Continuo\\
+	\normalsize v. $0.1.0$ }
+\author{Alessandro Clerici Lorenzini}
+\date{Anno accademico 2019/2020}
+\maketitle
+\tableofcontents
+
+
+\chapter{Algebra e Complessi}
+\input{tex/1_1-depresse.tex}
+\input{tex/1_2-complessi.tex}
+\input{tex/1_3-scomposizioni.tex}
+
+\chapter{Reali, razionali e interi}
+\input{tex/2_1-insiemistica.tex}
+\input{tex/2_2-logica.tex}
+
+\chapter{Limiti di successioni}
+\input{tex/3_1-definizioni}
+\input{tex/3_2-limiti}
+
+\chapter{Simboli di Landau}
+\input{tex/4_1-opiccolo}
+\input{tex/4_2-asintotico}
+\input{tex/4_3-grandi}
+
+\chapter{Continuità e limiti di funzioni}
+\input{tex/5_1-limite}
+\input{tex/5_2-continuita}
+\input{tex/5_3-operazioni}
+\input{tex/5_4-rlandau}
+\input{tex/5_5-teoremi}
+
+\chapter{Calcolo differenziale}
+\input{tex/6_1-laderivata}
+\input{tex/6_2-calcolodiderivate}
+\input{tex/6_3-teoremiderivate}
+\input{tex/6_4-sviluppitaylor}
+
+\chapter{Calcolo integrale}
+\input{tex/7_1-int_definito}
+\input{tex/7_2-int_indefinito}
+\input{tex/7_3-int_improprio}
+
+\chapter{Somme e serie}
+\input{tex/8_1-sommefinite}
+\input{tex/8_2-serie}
+\input{tex/8_3-potenze}
+
+\chapter{Ricorsione}
+\input{tex/9_1-ricorsione}
+% TODO: da completare
+
+
+\end{document}

@@ -1,0 +1,518 @@
+\section{Sviluppi di Taylor}
+
+\subsection{Teorema di Taylor}
+Lo scopo del teorema di Taylor è quello di approssimare una funzione $f$ in un centro $x_0$ (cioè per $x\to x_0$) tramite un polinomio. Lo sviluppo più semplice è dato da una costante più una quantità che tende a $0$:
+\begin{equation}
+	\label{taylor0}
+	f(x)=a_0+o(1)\qquad x\to x_0
+\end{equation}
+Per aumentare la precisione si esplicita una quantità che dipende da $x$ e tende a $0$:
+\begin{equation}
+	\label{taylor1}
+	f(x)=a_0+a_1(x-x_0)+o(x-x_0)
+\end{equation}
+Il procedimento viene ripetuto un numero arbitrario di volte, ottenendo un'approssimazione sempre migliore della funzione:
+\begin{gather}
+	\label{taylor2}
+	f(x)=a_0+a_1(x-x_0)+a_2(x-x_0)^2+o((x-x_0)^2)\\
+	\label{taylor3}
+	f(x)=a_0+a_1(x-x_0)+a_2(x-x_0)^2+a_3(x-x_0)^3+o((x-x_0)^3)\\
+	\dots\notag
+\end{gather}
+A ogni passaggio si aggiunge un coefficiente. Questi coefficienti, come si vedrà, sono unici e quindi uguali tra passaggi.
+
+Per esprimere la funzione nella forma (\ref{taylor0}) è necessario partire dall'ipotesi che $f$ sia continua in $x_0$. Infatti, in tal caso:
+\[
+	f(x)=f(x_0)+o(1)
+\]
+Ovvero $a_0=f(x_0)$. A partire dalla (\ref{taylor1}) è necessario che $f$ sia derivabile. Infatti, al fine di calcolare $a_1$:
+\begin{gather*}
+	f(x)=f(x_0)+a_1(x-x_0)+o(x-x_0)\\
+	f(x)-f(x_0)=a_1(x-x_0)+o(x-x_0)\\
+	\frac{f(x)-f(x_0)}{(x-x_0)}=a_1+\frac{o(x-x_0)}{(x-x_0)}
+\end{gather*}
+Calcolando il limite per $x\to x_0$ (e usando le definizioni di $o$ e di derivata):
+\[
+	f'(x_0)=a_1+0
+\]
+Quindi $a_1=f'(x_0)$. Si procede per la (\ref{taylor2}), supponendo questa volta che $f$ sia derivabile due volte in $x_0$:
+\begin{gather*}
+	f(x)=f(x_0)+f'(x_0)(x-x_0)+a_2(x-x_0)^2+o((x-x_0)^2)\\
+	f(x)-[f(x_0)+f'(x_0)(x-x_0)]=a_2(x-x_0)^2+o((x-x_0)^2)\\
+	\frac{f(x)-[f(x_0)+f'(x_0)(x-x_0)]}{(x-x_0)^2}=a_2+\frac{o((x-x_0)^2)}{(x-x_0)^2}\\
+	\lim_{x\to x_0}\frac{f(x)-[f(x_0)+f'(x_0)(x-x_0)]}{(x-x_0)^2}=a_2+\lim_{x\to x_0}\frac{o((x-x_0)^2)}{(x-x_0)^2}
+\end{gather*}
+Mentre il limite al secondo membro vale $0$ per definizione, al primo limite si può applicare il teorema \ref{der:hopital} di De l'Hôpital, infatti sia il numeratore che il denominatore tendono a $0$:
+\begin{gather*}
+	a_2=\lim_{x\to x_0}\frac{f(x)-[f(x_0)+f'(x_0)(x-x_0)]}{(x-x_0)^2}=\\
+	=\lim_{x\to x_0}\frac{f'(x)-[0+f'(x_0)]}{2(x-x_0)}=\frac{f''(x_0)}{2}
+\end{gather*}
+Quindi $a_2 = \frac{f''(x_0)}{2}$. Per quanto riguarda lo sviluppo \ref{taylor3}, supponendo che $f$ sia derivabile tre volte in $x-0$:
+\begin{dmath*}
+	f(x) = f(x_0)+f'(x_0)(x-x_0)+\frac{f''(x_0)}{2}(x-x_0)^2+a_3(x-x_0)^3+o((x-x_0)^3)
+\end{dmath*}
+\begin{dmath*}
+	f(x)-\left[f(x_0)+f'(x_0)(x-x_0) + \frac{f''(x_0)}{2}(x-x_0)^2\right] = a_3(x-x_0)^3+o((x-x_0)^3)
+\end{dmath*}
+\begin{equation*}
+	\lim_{x\to x_0}\frac{f(x)-\left[f(x_0)+f'(x_0)(x-x_0)+\frac{f''(x_0)}{2}(x-x_0)^2\right]}{(x-x_0)^3}=a_3+0
+\end{equation*}
+Applicando De L'Hôpital:
+\begin{gather*}
+	\lim_{x\to x_0}\frac{f(x)-\left[f(x_0)+f'(x_0)(x-x_0)+\frac{f''(x_0)}{2}(x-x_0)^2\right]}{(x-x_0)^3}=\\
+	=\lim_{x\to x_0}\frac{f'(x)-\left[0+f'(x_0)+f''(x_0)(x-x_0)\right]}{3(x-x_0)^2}=
+\end{gather*}
+Applicando nuovamente De L'Hôpital:
+\[
+	=\lim_{x\to x_0}\frac{f''(x)-[0+f''(x_0)]}{3*2(x-x_0)}=\frac{f'''(x_0)}{3*2}
+\]
+Da cui $a_3=\frac{f'''(x_0)}{3*2}$. Come si può notare il denominatore cresce fattorialmente.
+
+\begin{teor}[di Taylor]
+	\label{der:taylor}
+	Data una funzione $f$ derivabile $n$ volte in $x_0$, per $x\to x_0$:
+	\[
+		\exists! P_n(x-x_0), \text{grado}(P_n)\leq n\mid f(x)=P_n(x-x_0)+o((x-x_0)^n)
+	\]
+	Dove $P_n$ è un polinomio così costruito:
+	\[
+		P_n(x-x_0)=f(x_0)+\sum_{k=1}^n \frac{D^kf(x_0)}{k!}(x-x_0)^k
+	\]
+	e $R_n(x)=o((x-x_0)^n)$ è detto resto di Teano.
+\end{teor}
+
+
+\subsection{Resto secondo Lagrange}
+\begin{teor}
+	\label{tay:restolagrange}
+	Data una funzione $f:U\in I(x_0)\to\R$, derivabile in tutto l'intervallo, eccetto al più $x_0$, $n+1$ volte:
+	\[
+		\forall x\in I\exists c\in I\setminus\{x_0\}\mid R_n(x)=\frac{D^{n+1}f(c)}{(n+1)!}(x-x_0)^{n+1}
+	\]
+	Dove $R_n(x)$ è il resto dello sviluppo di Taylor centrato in $x_0$ della funzione $f$.
+\end{teor}
+\begin{proof}
+	Si dimostra il caso in cui $x>x_0$. Il caso complementare è del tutto analogo.
+
+	Per definizione il resto $R_n(x)$ è
+	\[
+		R_n(x)=f(x)-P_n(x-x_0)
+	\]
+	Inoltre definiamo
+	\[
+		G_n(x)=(x-x_0)^{n+1}
+	\]
+	Si noti che queste due funzioni sono derivabili $n+1$ volte nell'intervallo: $R_n(x)$ poiché è la differenza di una funzione derivabile per ipotesi e un polinomio di grado $n$ e $G_n(x)$ perché è un polinomio di grado $n+1$. Inoltre in $x_0$ la funzione $G_n(x)$ è $0$, poiché ogni termine contenente $(x-x_0)$ del polinomio di Taylor si annulla:
+	\[
+		R_n(x_0)=f(x_0)-f(x_0)-\frac{f'(x_0)}{1}(x_0-x_0)-\dots-\frac{D^n(x_0)}{n!}(x_0-x_0)^n=0
+	\]
+	Lo stesso vale per ogni sua derivata fino all'$n$-esima, poiché $f(x)$ viene derivata, il polinomio scende a ogni passaggio di un grado, elidendo la costante iniziale e fornendone una nuova (ed elidendo il coefficiente fattoriale con quello ottenuto dalla derivazione). Come si può più facilmente verificare, il resto nella forma di Teano è $o((x-x_0)^n)$, il cui unico sviluppo di Taylor di ordine $n$ in $x_0$ è
+	\[
+		0+o((x-x_0)^n)
+	\]
+	Dove ogni derivata è nulla. Lo stesso non vale per la derivata $n+1$-esima, poiché il polinomio di Taylor è di grado $n$, e viene quindi annullato alla $n+1$-esima derivazione:
+	\begin{equation}
+		\label{relag:R}
+		D^{n+1}R_n(x)=D^{n+1}f(x)-0\qquad\forall x\in I
+	\end{equation}
+	La funzione $G_n(x)$ invece derivata $n+1$ volte in $x_0$ vale
+	\begin{gather}
+		G_n(x)=(x-x_0)^{n+1}\notag\\
+		G'_n(x)=(n+1)(x-x_0)^n\notag\\
+		G''_n(x)=n(n+1)(x-x_0)^{n-1}\notag\\
+		\dots\notag\\
+		\label{relag:G}
+		D^{n+1}G_n(x)=(n+1)!\qquad\forall x\in I
+	\end{gather}
+	Per $x=x_0$ ogni derivata fino all'$n+1$-esima esclusa è quindi nulla.
+
+	Le funzioni $R_n(x)$ e $G_n(x)$ soddisfano le ipotesi del teorema di Cauchy (\ref{der:cauchy}) nell'intervallo $[x_0,x]$ (per ovvi motivi), quindi:
+	\[
+		\exists c_1\in(x_0,x)\mid\frac{R_n(x)-R_n(x_0)}{G_n(x)-G_n(x_0)}=\frac{DR_n(c_1)}{DG_n(c_1)}
+	\]
+	E poiché $R_n(x_0)=G_n(x_0)=0$:
+	\[
+		\frac{R_n(x)}{G_n(x)}=\frac{R_n(c_1)}{G_n(c_1)}
+	\]
+	Ma ora $DR_n$ e $DG_n$ soddisfano le ipotesi del teorema di Cauchy nell'intervallo $[x_0,c_1]$, quindi:
+	\[
+		\exists c_2\in(x_0,c_1)\mid\frac{DR_n(c_1)-DR_n(x_0)}{DG_n(c_1)-DR_n(c_1)}=\frac{D^2R_n(c_2)}{D^2G_n(c_2)}
+	\]
+	E poiché $DR_n(x_0)=DG_n(x_0)=0$:
+	\[
+		\frac{R_n(x)}{G_n(x)}=\frac{DR_n(c_1)}{DG_n(c_1)}=\frac{D^2R_n(c_2)}{D^2G_n(c_2)}
+	\]
+	Così procedendo $n$ volte si giunge a:
+	\[
+		\frac{R_n(x)}{G_n(x)}=\frac{D^nR(c_n)}{D^nG(c_n)}
+	\]
+	Applicando un'ultima volta Cauchy all'intervallo $(x_0,c_n)$:
+	\[
+		\exists c\in(x_0,c_n)\mid\frac{R_n(x)}{G_n(x)}=\frac{D^{n+1}R(c)}{D^{n+1}G(c)}
+	\]
+	Queste derivate, come dimostrato precedentemente (equazioni \ref{relag:R} e \ref{relag:G}), valgono:
+	\begin{gather*}
+		D^{n+1}R(c)=D^{n+1}f(c)\\
+		D^{n+1}G(c)=(n+1)!
+	\end{gather*}
+	Quindi, ricordando che $G_n(x)=(x-x_0)^{n+1}$:
+	\[
+		\frac{R_n(x)}{(x-x_0)^{n+1}}=\frac{D^{n+1}f(c)}{(n+1)!}
+	\]
+	Ovvero:
+	\[
+		R_n(x)=\frac{D^{n+1}f(c)}{(n+1)!}(x-x_0)^{n+1}
+	\]
+
+	Raramente questa forma viene usata in modo quantitativo, poiché sarebbe necessario determinare un $c$. Tuttavia, essa può essere scritta nella ben più utilizzata forma qualitativa (la cui dimostrazione è immediata):
+	\[
+		R_n(x)=O((x-x_0)^{n+1})
+	\]
+\end{proof}
+
+
+\subsection{Taylor per i punti stazionari}
+Il teorema di Taylor può essere applicato nella determinazione dei punti stazionari e della loro qualità.
+\begin{teor}
+	Se una funzione $f$, derivabile $k$ volte, è scrivibile per $x\to x_0$ nella forma:
+	\[
+		f(x)=f(x_0)+\frac{D^k(x_0)}{k!}(x-x_0)^k+o((x-x_0)^k)\qquad k\geq2
+	\]
+	Allora $x_0$ è un punto stazionario e in particolare, se $k$ è pari sarà un punto di estremo, se $k$ è dispari sarà un flesso a tangente orizzontale.
+\end{teor}
+\begin{proof}
+	Si noti che l'ipotesi corrisponde a uno sviluppo di Taylor per $x\to x_0$ in cui ogni derivata dalla prima alla $k-1$-esima sono nulle, mentre la $k$-esima è diversa da zero. Poiché la derivata prima è nulla (infatti $k\geq2$ per ipotesi), il punto è stazionario. La vera utilità del teorema sta però nel ricavare la natura di questi punti. Portando a sinistra $f(x_0)$:
+	\begin{gather*}
+		f(x)-f(x_0)=\frac{D^k(x_0)}{k!}(x-x_0)^k+o((x-x_0)^k)\\
+		f(x)-f(x_0)=\frac{D^k(x_0)}{k!}(x-x_0)^k[1+o(1)]
+	\end{gather*}
+	Studiare il segno di $f(x)-f(x_0)$ significa studiare la quota relativa di $f(x)$ rispetto a $f(x_0)$ in un intorno di $x_0$. Poiché è verificata l'uguaglianza, questa operazione è equivalente a determinare il segno del secondo membro. Poiché $1+o(1)$ è definitivamente positivo per $x\to x_0$ e $k!$ è sempre positivo, il segno dipende solamente da
+	\[
+		D^k(x_0)(x-x_0)^k
+	\]
+	\begin{itemize}
+		\item Se $k$ è pari, il secondo fattore è positivo, per cui il segno globale sarà uguale in un intorno destro e sinistro di $x_0$, concorde con $D^k(x_0)$ (che chiaramente rimane invariato essendo una costante). In particolare, se $D^k(x_0)>0$ il segno sarà positivo per l'intorno di $x_0$ (nullo in $x_0$ stesso), quindi la quota relativa sarà positiva e il punto sarà di minimo; se $D^k(x_0)<0$ allora il segno della quota relativa sarà negativo sia a destra sia a sinistra di $x_0$, facendo del punto un punto di massimo;
+		\item Nel caso di $k$ dispari invece, il segno della quota relativa sarà asimmetrico, ovvero $x_0$ sarà un flesso a tangente orizzontale, crescente se $D^k(x_0)>0$ e decrescente se $D^k(x_0)<0$.
+	\end{itemize}
+	Quindi, se la prima derivata non nulla rispetto a $x_0$ è di indice pari, allora il punto è di massimo o di minimo in corrispondenza con il segno rispettivamente negativo o positivo della stessa; se la prima derivata non nulla rispetto a $x_0$ è di indice dispari, allora il punto è di flesso a tangente orizzontale, crescente o decrescente in corrispondenza con il segno rispettivamente positivo o negativo della stessa.
+\end{proof}
+
+
+\subsection{Sviluppi notevoli}
+Vediamo ora alcuni sviluppi di funzioni notevoli, tutti per $x\to0$ (anche noti come sviluppi di Mc Laurin):
+\begin{itemize}
+	\item $f(x)=e^x$. Poiché ogni derivata in $0$ è uguale a $e^0=1$:
+	      \[
+		      P_n(x)=1+\frac{x}{1}+\frac{x^2}{2}+\frac{x^3}{6}+\dots+\frac{x^n}{n!}=\sum_{k=0}^n\frac{x^k}{k!}\\
+	      \]
+	      Quindi, per quanto riguarda lo sviluppo:
+	      \begin{equation}
+		      \label{tay:exp}
+		      e^x=\left[\sum_{k=1}^n\frac{x^k}{k!}\right]+\begin{cases}o(x^n)\\O(x^{n+1})\end{cases}
+	      \end{equation}
+	\item $f(x)=\ln(1+x)$. La derivata $n$-esima di $f(x)$ è uguale a
+	      \[
+		      D^n(\ln(1+x))=(-1)^{n-1}\frac{(n-1)!}{(1+x)^n}\qquad\forall n\geq1
+	      \]
+	      \begin{proof}
+		      Per induzione:
+		      \begin{description}
+			      \item[Base] la derivata prima di $f(x)$ è uguale a:
+				      \[
+					      1\cdot \frac{1}{1+x}=\frac{1}{1+x}
+				      \]
+			      \item[Passo] bisogna dimostrare che la derivata $n+1$-esima di $f(x)$ è uguale a
+				      \[
+					      (-1)^n\frac{n!}{(1+x)^{n+1}}
+				      \]
+				      sapendo che la derivata $n$-esima è uguale a
+				      \[
+					      (-1)^{n-1}\frac{(n-1)!}{(1+x)^n}
+				      \]
+				      Calcolando la derivata di quest'ultima espressione (utilizzando la derivata di $x^\alpha$):
+				      \[
+					      (-1)^{n-1}\frac{(n-1)!(-n)}{(1+x)^{n+1}}=
+				      \]
+				      Considerato che $-n=-1\cdot n$, si scompone usando il $-1$ per $(-1)^{n-1}\cdot (-1)=(-1)^n$ e l'$n$ per $(n-1)!n=n!$. Quindi:
+				      \[
+					      =(-1)^n\frac{n!}{(1+x)^{n+1}}
+				      \]
+		      \end{description}
+	      \end{proof}
+	      Quindi la derivata $k$-esima in $0$ è $(-1)^{k-1}(k-1)!$. Ergo, per $x\to0$ ($f(0)=0$):
+	      \[
+		      P_n(x)=\sum_{k=1}^n \frac{(-1)^{k-1}(k-1)!}{k!}x^k=\sum_{k=1}^n \frac{(-1)^{k-1}}{k}x^k
+	      \]
+	      Quindi:
+	      \begin{equation}
+		      \label{tay:ln}
+		      \ln(1+x)=\sum_{k=1}^n\frac{(-1)^{k-1}}{k}x^k+\begin{cases}o(x^n)\\O(x^{n+1})\end{cases}
+	      \end{equation}
+	\item $f(x)=\sin x$. Le derivate di seno e coseno hanno periodo $4$, cioè la derivata $n+4$-esima è uguale alla derivata $n$-esima (come è facile verificare). Inoltre, ogni derivata che contenga il seno si azzera in $0$, quindi:
+	      \begin{gather*}
+		      P_n(x)=\sin 0+(\cos 0)x-\frac{\sin 0}{2}x^2-\frac{\cos 0}{6}x^3+\dots=\\
+		      =0+1*x-\frac{0*x^2}{2}-\frac{1*x^3}{6}+\dots=\\
+		      =\sum_{k=0}^n \frac{(-1)^k x^{2k+1}}{(2k+1)!}
+	      \end{gather*}
+	      Dal momento che la derivata $2n+2$-esima è nulla, posso inserire un resto di ordine superiore. In conclusione, lo sviluppo di ordine $2n+1$ è uguale allo sviluppo di ordine $2n+2$ che è uguale a:
+	      \begin{equation}
+		      \label{tay:sin}
+		      \sin x=\left[\sum_{k=0}^{2n+1} \frac{(-1)^k x^{2k+1}}{(2k+1)!}\right]+\begin{cases}o(x^{2n+2})\\O(x^{2n+3})\end{cases}
+	      \end{equation}
+	\item $f(x)=\cos x$. Vale un ragionamento analogo a quello del seno, con la differenza che questa volta rimangono i termini di numero pari. Lo sviluppo di ordine $2n$ è uguale allo sviluppo di ordine $2n+1$ che è uguale a:
+	      \begin{equation}
+		      \label{tay:cos}
+		      \cos x=1+\left[\sum_{k=1}^{2n} \frac{(-1)^k x^{2k}}{(2k)!}\right]+\begin{cases}o(x^{2n+1})\\O(x^{2n+2})\end{cases}
+	      \end{equation}
+	\item $f(x)=(1+x)^\alpha$. Le derivate seguono un pattern riconoscibile:
+	      \begin{gather*}
+		      Df(x)=\alpha(1+x)^{\alpha-1}\\
+		      D^2f(x)=\alpha(\alpha-1)(1+x)^{\alpha-2}\\
+		      D^3f(x)=\alpha(\alpha-1)(\alpha-2)(1+x)^{\alpha-3}\\
+		      \dots\\
+		      D^kf(x)=\alpha(\alpha-1)(\alpha-2)\dots(\alpha-k+1)(1+x)^{\alpha-k}
+	      \end{gather*}
+	      Il $k$-esimo termine dello sviluppo in $0$ sarà quindi
+	      \begin{equation}
+		      \label{eq:binom2}
+		      \frac{1}{k!}D^kf(0)=\frac{\alpha(\alpha-1)(\alpha-2)\dots(\alpha-k+1)}{k!}:=\binom{\alpha}{k}
+	      \end{equation}
+	      Questa espressione è un coefficiente binomiale generalizzato ad $\alpha\in\R$, infatti il coefficiente binomiale "classico", per $\N\ni\alpha\geq n$:
+	      \[
+		      \binom{\alpha}{n}=\frac{\alpha!}{n!(\alpha-n)!}=\frac{\alpha(\alpha-1)(\alpha-2)\dots(\alpha-n+1)(\alpha-n)!}{n!(\alpha-n)!}
+	      \]
+	      Ossia la \ref{eq:binom2}. Quindi lo sviluppo sarà:
+	      \begin{equation}
+		      \label{tay:pow}
+		      (1+x)^\alpha=\left[\sum_{k=0}^n \binom{\alpha}{k}x^k\right]+\begin{cases}o(x^n)\\O(x^{n+1})\end{cases}
+	      \end{equation}
+
+	      Si noti che se $\alpha\in\N$ sviluppi sempre più precisi si avvicinano sempre più al binomio di Newton di addendi $1$ e $x$ ed esponente $\alpha$, ovvero:
+	      \begin{equation}
+		      \label{tay:newton}
+		      (1+x)^\alpha=\sum_{k=0}^\alpha\binom{\alpha}{k}x^k*1^{\alpha-k}=\sum_{k=0}^\alpha\binom{\alpha}{k}x^k
+	      \end{equation}
+	      Per un ordine $n$ abbastanza grande, i coefficienti binomiali di indice maggiore di $\alpha$, e quindi i relativi termini nello sviluppo, si annullano:
+	      \begin{gather*}
+		      \text{per $\alpha<k$:}\qquad\binom{\alpha}{k}=\frac{\alpha(\alpha-1)\dots(\alpha-(\alpha-1)+1)\dots(\alpha-k+1)}{k!}\\
+		      \text{ma }(\alpha-(\alpha+1)+1)=0\text{, quindi:}\\
+		      \binom{\alpha}{k}=0
+	      \end{gather*}
+	      Lo sviluppo sarà quindi:
+	      \[
+		      (1+x)^\alpha=\left[\sum_{k=0}^\alpha \binom{\alpha}{k}x^k\right]+\left[\sum_{k=\alpha+1}^n \binom{\alpha}{k}x^k\right]+\begin{cases}o(x^n)\\O(x^{n+1})\end{cases}
+	      \]
+	      Essendo costituita da addendi nulli, la seconda sommatoria è nulla, per cui qualunque sviluppo di ordine $n>\alpha$ sarà nella forma:
+	      \begin{equation}
+		      \label{tay:nonnewton}
+		      (1+x)^\alpha=\left[\sum_{k=0}^\alpha \binom{\alpha}{k}x^k\right]+\begin{cases}o(x^n)\\O(x^{n+1})\end{cases}
+	      \end{equation}
+	      Poiché scegliere $n$ sempre più grande non porta più alcuna differenza, l'errore diventa sempre più trascurabile, finché le due forme (\ref{tay:newton} e \ref{tay:nonnewton}) non coincidono.
+\end{itemize}
+
+
+\subsection{Operazioni tra sviluppi}
+Quando una funzione può essere scritta tramite funzioni di sviluppi notevoli, il calcolo del suo sviluppo può essere semplificato. Vediamo alcuni esempi:
+
+\subsubsection{Somma}
+\begin{examp}
+	Ricavare il comportamento asintotico in $x_0=0$ di
+	\[
+		f(x)=\sin x+\ln(1+x)
+	\]
+	Dal momento che la funzione è la somma di due funzioni facilmente scrivibili in $0$ tramite sviluppi, anche il suo sviluppo è facilmente scrivibile:
+	\[
+		f(x)=\left(x-\frac{x^3}{6}+o(x^4)\right)-\left(x-\frac{x^2}{2}+\frac{x^3}{3}+o(x^3)\right)=\frac{x^2}{2}-\frac{x^3}{2}+o(x^3)
+	\]
+	Dal momento che $-\frac{x^3}{2}+o(x^3)=o(x^2)$, vale $f(x)\sim \frac{x^2}{2}$. Questo significa che se il problema è limitato al determinare il comportamento asintotico, sarebbe stato sufficiente calcolare lo sviluppo della prima funzione al primo ordine e della seconda al secondo ordine:
+	\[
+		f(x)=x+o(x^2)-x+\frac{x^2}{2}+o(x^2)=\frac{x^2}{2}+o(x^2)
+	\]
+\end{examp}
+
+\subsubsection{Prodotto}
+Anche per funzioni prodotto è utile costruire gli sviluppi dei fattori:
+\begin{examp}
+	\[
+		f(x)=e^x\cos x\qquad\text{per $x\to0$}
+	\]
+	Calcolando gli sviluppi dei due fattori in ordini $2$ e $3$:
+	\[
+		f(x)=\left(1+x+\frac{x^2}{2}+O(x^3)\right)\left(1-\frac{x^2}{2}+\frac{x^4}{24}+O(x^6)\right)=
+	\]
+	L'errore meno preciso del prodotto, cioè quello dominante, sarà $O(x^3)$. Questo significa che i termini di ordini superiori a $3$ saranno già contenuti nell'$O$ e non sarà quindi necessario calcolarli:
+	\[
+		=O(x^3)+1-\frac{x^2}{2}+x+\frac{x^2}{2}=1+x+O(x^3)
+	\]
+	Guardando lo sviluppo finale si può dedurre che era sufficiente sviluppare il secondo fattore al secondo ordine.
+\end{examp}
+
+\subsubsection{Composizione}
+Per le funzioni composte:
+\begin{examp}
+	\[
+		f(x)=\sin(x+x^2)\qquad\text{per $x\to0$}
+	\]
+	La funzione non è altro che la composizione di $\sin \varepsilon$ e una polinomiale. Poiché $\varepsilon\to0$ è possibile applicare lo sviluppo notevole del seno:
+	\[
+		\sin(\varepsilon)=\varepsilon-\frac{\varepsilon^3}{6}+o(\varepsilon^4)=
+	\]
+	Riconducendosi alla variabile $x$:
+	\[
+		=(x+x^2)-\frac{1}{6}(x+x^2)^3+o((x+x^2)^4)=
+	\]
+	Come nell'esempio precedente, deduciamo l'errore dominante: $o(x^4)$. Ogni termine di grado superiore viene eliso.
+	\[
+		=x+x^2-\frac{1}{6}(x^3+3x^4)+o(x^4)=x+x^2-\frac{x^3}{6}-\frac{x^4}{2}+o(x^4)
+	\]
+\end{examp}
+
+\subsubsection{Reciproco}
+\begin{examp}
+	\[
+		f(x)=\frac{1}{\cos x}\qquad\text{per $x\to0$}
+	\]
+	Sviluppando $\cos x$:
+	\[
+		f(x)=\left(1-\frac{x^2}{2}+\frac{x^4}{24}-\frac{x^6}{720}+o(x^7)\right)^{-1}=
+	\]
+	Si nota che questa forma può essere sviluppata con lo sviluppo notevole \ref{tay:pow}, con $\varepsilon=-\frac{x^2}{2}+\dots+o(x^7)=\Theta(x^7)\to0$ (dove il $\Theta$ serve a riconoscere l'ordine di grandezza):
+	\[
+		=1-\varepsilon+\varepsilon^2+o(\varepsilon^2)=
+	\]
+	Prima di ricondursi a $x$ è opportuno ricavare l'errore dominante dei termini contenenti $\varepsilon$ (che questa volta contiene un errore): $\varepsilon$ contiene $o(x^7)$ al primo grado, $o(x^9)$ al secondo grado e $o(\varepsilon)$ si traduce in $o(x^4)$ (potenza minima del quadrato), errore dominante. Evitando quindi calcoli inutili:
+	\[
+		=1+\frac{x^2}{2}-\frac{x^4}{24}+\frac{x^4}{4}+o(x^4)=1+\frac{x^2}{2}+\frac{5}{24}x^4+o(x^4)
+	\]
+\end{examp}
+
+\subsubsection{Cambio di variabili}
+\begin{examp}
+	\[
+		f(x)=\sin^2 x\qquad\text{per $x\to\frac{\pi}{4}$}=
+	\]
+	Poniamo $\varepsilon=x-\frac{\pi}{4}\to0$.
+	\[
+		\left(\sin\left(\frac{\pi}{4}+\varepsilon\right)\right)^2=\left(\sin\frac{\pi}{4}\cos\varepsilon+\cos\frac{\pi}{4}\sin\varepsilon\right)^2=\frac{1}{2}(\cos\varepsilon+\sin\varepsilon)^2=
+	\]
+	Sviluppando $\sin\varepsilon$ e $\cos\varepsilon$:
+	\[
+		=\frac{1}{2}\left(1-\frac{\varepsilon^2}{2}+O(\varepsilon^4)+\varepsilon-\frac{\varepsilon^3}{6}+O(\varepsilon^5)\right)=\frac{1}{2}+\varepsilon-\varepsilon^3+O(\varepsilon^4)=
+	\]
+	Riportandosi alla variabile $x$:
+	\[
+		=\frac{1}{2}+\left(x-\frac{\pi}{4}\right)-\frac{1}{2}\left(x-\frac{\pi}{4}\right)^3+O(\left(x-\frac{\pi}{4}\right)^4)
+	\]
+\end{examp}
+
+
+\subsection{Sviluppi asintotici}
+Ci si ponga il problema di analizzare il comportamento per $x\to+\infty$ di
+\[
+	f(x)=\sqrt{x+x^2}
+\]
+Come si può facilmente dedurre, poiché il termine dominante al radicando è $x^2$, la funzione è asintotica\footnote{$\abs{x}$ assume valore positivo poiché $x\to+\infty$} a $x$:
+\[
+	\sqrt{x+x^2}\sim\sqrt{x^2}=x
+\]
+Questa è un'approssimazione a cui è associato un errore, infatti:
+\[
+	\sqrt{x+x^2}\sim x\Rightarrow \sqrt{x+x^2}=x+o(x)
+\]
+Ci si pone allora il problema di aumentare la precisione, studiando la distanza tra la funzione e la sua asintotica:
+\[
+	\sqrt{x^2+x}-x\sim?
+\]
+Razionalizzando:
+\[
+	\frac{(\sqrt{x^2+x}-x)(\sqrt{x^2+x}+x)}{\sqrt{x^2+x}+x}=\frac{x+x^2-x^2}{\sqrt{x^2+x}+x}
+\]
+Il denominatore è asintotico a $2x$, infatti riconducendosi agli $o$ piccoli è uguale a $x+o(x)+x=2x+o(x)$, quindi
+\[
+	\frac{x}{\sqrt{x^2+x}+x}\sim\frac{x}{2x}=\frac{1}{2}
+\]
+Quindi:
+\[
+	\sqrt{x^2+x}-x\sim\frac{1}{2}\Rightarrow\sqrt{x^2+x}-x=\frac{1}{2}+o(1)
+\]
+Che riconducendosi a $f(x)$ significa
+\[
+	\sqrt{x^2+x}=x+\frac{1}{2}+o(1)
+\]
+Analizzando l'errore precedente si ottiene una migliore approssimazione. Ripetendo lo stesso procedimento con il risultato appena ottenuto si ottiene:
+\begin{gather*}
+	\sqrt{x^2+x}-\left(x+\frac{1}{2}\right)\sim-\frac{1}{8x}\\
+	\sqrt{x^2+x}\sim x+\frac{1}{2}-\frac{1}{8x}+o\left(\frac{1}{x}\right)
+\end{gather*}
+L'errore è sempre più trascurabile.
+
+L'operazione di approssimare in termini più semplici una funzione che tende a un centro (finito o infinito) è detta sviluppo asintotico. Nel calcolare uno sviluppo asintotico polinomiale solitamente si raccoglie il termine dominante, e si sfruttano le proprietà algebriche della funzione per poi, tramite una sostituzione, ricondursi a un caso conosciuto di sviluppo di Taylor. In questo caso:
+\begin{examp}
+	% TODO: completare esempio
+	Calcolare lo sviluppo asintotico al secondo ordine di
+	\[
+		f(x)=\sqrt{x^2+x}
+	\]
+	Sfruttando le proprietà algebriche della radice:
+	\[
+		\sqrt{x^2+x}=\sqrt{x^2\left(1+\frac{1}{x}\right)}=x\left(1+\frac{1}{x}\right)^{\frac{1}{2}}
+	\]
+	Poiché $\varepsilon=\frac{1}{x}\to0$ è possibile applicare lo sviluppo notevole (\ref{tay:pow}):
+	\begin{gather*}
+		x\left(1+\frac{\varepsilon}{2}-\frac{\varepsilon^2}{8}+o(\varepsilon^2)\right)=\\
+		x\left(1+\frac{1}{2x}-\frac{1}{8x^2}+o\left(\frac{1}{x^2}\right)\right)=\\
+		x+\frac{1}{2}-\frac{1}{8x}+o\left(\frac{1}{x}\right)
+	\end{gather*}
+
+	Questo sviluppo asintotico può essere utile per avere informazioni sull'eventuale asintoto all'infinito della funzione, infatti
+	\[
+		f(x)=\sqrt{x^2+x}=x+\frac{1}{2}-\frac{1}{8x}+o\left(\frac{1}{x}\right)
+	\]
+	fornisce sia l'equazione dell'asintoto obliquo ($y=x+\frac{1}{2}$) sia un'informazione sull'andamento della funzione all'asintoto, cioè il termine $-\frac{1}{8x}$. Poiché il termine è negativo per $x\to+\infty$, la funzione si avvicinerà all'asintoto dalle $y$ sottostanti (cioè ``dal basso'').
+\end{examp}
+
+Negli sviluppi asintotici non sempre $x\to\pm\infty$. Ecco un esempio caratteristico:
+\begin{examp}
+	\[
+		f(x)=\ln(x^2-x^3)\qquad\text{per $x\to0^+$}
+	\]
+	Raccogliendo il termine dominante e sfruttando le proprietà del logaritmo ci si riconduce a un caso conosciuto:
+	\[
+		\ln(x^2-x^3)=\ln(x^2(1-x))=2\ln x+\ln(1-x)=
+	\]
+	È possibile applicare lo sviluppo notevole (\ref{tay:ln}) con $\varepsilon=-x=\Theta(x)\to0$
+	\[
+		=2\ln x+\left(\varepsilon-\frac{\varepsilon^2}{2}+\frac{\varepsilon^3}{3}+O(\varepsilon^4)\right)=2\ln x-x-\frac{x^2}{2}-\frac{x^3}{3}+O(x^4)
+	\]
+\end{examp}
+
+Vediamo un caso più complesso dove è fondamentale la gestione degli errori.
+\begin{examp}
+	\[
+		f(x)=\frac{1-2x+o(x^2)}{x+x^2+x^3+O(x^4)}\qquad{x\to0}
+	\]
+	La funzione è composta da un numeratore e un denominatore, entrambi aventi un'imprecisione. Il numeratore non è altro che uno sviluppo già calcolato, mentre il denominatore, in quanto tale, non è polinomiale. Tuttavia, è possibile convertirlo algebricamente in un caso conosciuto:
+	\begin{gather*}
+		f(x)=(1-2x+o(x^2))*\frac{1}{x+x^2+x^3+O(x^4)}\\
+		\text{analizzando il secondo fattore:}\\
+		\frac{1}{x+x^2+x^3+O(x^4)}=\frac{1}{x}(1+x+x^2+O(x^3))^{-1}=
+	\end{gather*}
+	Al denominatore così come scritto nell'ultimo passaggio appare la forma di cui allo sviluppo notevole (\ref{tay:pow}), con $\varepsilon=x+x^2+O(x^3)=\Theta(x)\to0$. Sviluppando questo termine:
+	\[
+		=\frac{1}{x}(1-\varepsilon+\varepsilon^2-\varepsilon^3+O(\varepsilon^4))=
+	\]
+	Poiché in $\varepsilon$ è insito un errore, è necessario e utile prima di ricondursi a $x$ determinare l'errore dominante. Per $\varepsilon$ l'errore è $O(x^3)$, per $\varepsilon^2$ è $O(x^4)$, per $\varepsilon^3$ è $O(x^5)$ e infine si ha $O(\varepsilon^4)$ da cui essendo $\varepsilon=\Theta(x)$ si ricava l'errore $O(x^4)$. L'errore dominante per $x\to0$ è $O(x^3)$, quindi tutti i termini di grado maggiore o uguale vengono elisi. Rimane:
+	\[
+		=\frac{1}{x}(1-x+O(x^3))
+	\]
+	Tornando alla funzione iniziale, si ha:
+	\[
+		f(x)=(1-2x+o(x^2))\frac{1}{x}(1-x+O(x^3))=
+	\]
+	L'errore dominante è $o(x^2)$, quindi
+	\[
+		=\frac{1}{x}-3+2x+o(x)
+	\]
+
+	In conclusione, è evidente che in casi come questo, quando un errore è già presente fin dall'inizio, è inutile sviluppare esageratamente le componenti della funzione, dal momento che sarà proprio tale errore a limitare la precisione finale.
+\end{examp}

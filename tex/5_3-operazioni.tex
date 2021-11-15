@@ -1,0 +1,22 @@
+\section{Operazioni tra funzioni continue}
+Operazioni tra funzioni continue sono continue, in quanto per $x_0$ finiti le funzioni assumono valori finiti, che non si possono quindi tradurre in casi di indecisione. Ad esempio:
+\[
+	\lim_{x\to x_0} (f(x)+g(x))=\lim_{x\to x_0} f(x)+\lim_{x\to x_0} g(x)=f(x_0)+g(x_0)
+\]
+che è un numero finito. Questo vale solo parzialmente per i rapporti, in quanto non si può dividere per una funzione che assuma il valore $0$ in $x_0$:
+\[
+	f(x_0)=\lim_{x \to x_0} f(x_0) \land x_0 \neq 0\Rightarrow \frac{1}{f(x)}=\lim_{x\to x_0} \frac{1}{f(x)}
+\]
+Per quanto riguarda la composizione:
+\[
+	\begin{cases}
+		\lim_{x\to x_0} g(x)=g(x_0) \\
+		\lim_{x\to g(x_0)} f(x)=f(g(x_0))
+	\end{cases}\Rightarrow
+	\lim_{x\to x_0} (f\circ g)(x)=(f\circ g)(x_0)
+\]
+che si dimostra utilizzando il teorema \ref{lim:var} per cambiare la variabile del limite della funzione composta:
+\[
+	\lim_{x\to x_0} (f\circ g)(x)=\lim_{x\to x_0} f(g(x))=\lim_{y\to g(x_0)} f(y)
+\]
+che per la seconda ipotesi è uguale a $f(g(x_0))$.

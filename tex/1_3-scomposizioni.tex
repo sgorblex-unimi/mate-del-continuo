@@ -1,0 +1,82 @@
+\section{Scomposizioni di polinomi a coefficienti reali}
+Il teorema fondamentale dell'algebra, la quale dimostrazione non trattiamo, cita:
+\begin{teor}[fondamentale dell'algebra]
+	Ogni polinomio complesso (a coefficienti complessi) $P_n(z)$ di grado $n\geq1$ ammette radici complesse. In simboli:
+	\begin{gather*}
+		\forall P(z) \mid \text{\emph{grado}}(P(z))\geq1 \qquad \exists z_1\in\C \mid P(z)=(z-z_1)(P'(z))\\
+		\text{con \emph{grado}} (P'(z))= \text{\emph{grado}} (P(z))-1
+	\end{gather*}
+\end{teor}
+Poiché ogni $P'(z)$ ha anch'esso radici complesse, ogni polinomio ha $n$ radici e può essere espresso tramite prodotto di $n$ fattori di primo grado $(z-z_n)$
+
+Per i polinomi a coefficienti reali vale inoltre un'altra proprietà:
+\begin{teor}
+	Se $P(z)$ è un polinomio a coefficienti reali, allora:
+	\[
+		\overline{P(z)}=P(\bar z)
+	\]
+\end{teor}
+\begin{proof}
+	\begin{gather*}
+		\overline{P(z)}=\overline{a_0z^n+a_1z^{n-1}+\dots+a_{n-1}z+a_n}=\\
+		=\overline{a_0z^n}+\overline{a_1z^{n-1}}+\dots+\overline{a_{n-1}z}+\bar a_n=\\
+		=\bar a_0(\bar z)^n+\bar a_1(\bar z)^{n-1}+\dots+\bar a_{n-1}\bar z+\bar a_n=\\
+		\text{essendo i coefficienti reali:}\\
+		=a_0(\bar z)^n+a_1(\bar z)^{n-1}+\dots+a_{n-1}(\bar z)+a_n=P(\bar z)
+	\end{gather*}
+\end{proof}
+\begin{corol}
+	Le radici complesse di un polinomio a coefficienti reali vengono a coppie coniugate
+\end{corol}
+\begin{proof}
+	\[
+		P(z) = 0 \Rightarrow \overline{P(z)} = 0 \Rightarrow P(\bar z) = 0
+	\]
+	Per il teorema di Ruffini $z$ e $\bar z$ sono radici del polinomio.
+\end{proof}
+Si osserva che il prodotto di due fattori di primo grado derivanti da radici complesse coniugate è un polinomio di secondo grado a coefficienti reali:
+\[
+	(z-z_1)(z- \bar z_1)=z^2-(z_1+\bar z_1)z+\abs{z_1}^2
+\]
+Facendo dunque la scomposizione di un polinomio a coefficienti reali secondo il teorema fondamentale dell'algebra e moltiplicando a due a due i fattori a radici complesse coniugate, si ottiene una scomposizione in fattori di primo e secondo grado a coefficienti unicamente reali.
+
+Inoltre osservando che la somma dei gradi dei fattori è uguale al grado del polinomio iniziale, si possono individuare due corollari relativi ai polinomi a coefficienti reali di grado pari e dispari:
+\begin{corol}
+	Ogni polinomio di grado dispari ha almeno una radice reale\footnote{È questa radice quella trovata per le cubiche depresse al paragrafo \ref{compl:cubidepresse}}
+\end{corol}
+\begin{corol}
+	Ogni polinomio di grado pari ha radici reali in numero pari (zero incluso)
+\end{corol}
+Quanto al problema di determinare tali radici:
+\begin{itemize}
+	\item un'equazione di primo grado $ax+b=0$ ha un'unica soluzione: $z=-\dfrac{b}{a}$
+	\item un'equazione di secondo grado $ax^2+bx+c=0$ ha due soluzioni:
+	      \[
+		      z_i=\frac{-b+d_i}{2a}
+	      \]
+	      dove $d_1$ e $d_2$ sono le due radici complesse di $\Delta=b^2-4ac$. Le soluzioni sono quindi reali se e solo se $\Delta\geq0$, altrimenti sono complesse coniugate.
+\end{itemize}
+
+\subsection{Scomposizioni in fratti semplici}
+\label{frattisemplici}
+Un'applicazione pratica della scomposizione dei polinomi a coefficienti reali è la scomposizione di un rapporto di polinomi in una somma di fratti semplici, cioè di rapporti del tipo $\frac{P(x)}{S(x)}$ in cui il grado del numeratore è minore del grado del denominatore e il denominatore è irriducibile in $\R$.
+
+Dato un rapporto di polinomi $\frac{P(x)}{S(x)}$:
+\begin{itemize}
+	\item Se il grado di $P(x)$ è maggiore di quello di $S(x)$ si esegue la divisione, il quale risultato è in forma $Q(x)+R(x)$ (con $Q$ quoziente e $R$ resto) e si riscrive il rapporto iniziale nella forma
+	      \[
+		      \dfrac{P(x)}{S(x)}=\dfrac{Q(x)S(x)+R(x)}{S(x)}=Q(x)+\dfrac{R(x)}{S(x)}
+	      \]
+	      per poi ragionare su $\frac{R(x)}{S(x)}$ secondo il metodo seguente;
+	\item Se il grado di $P(x)$ è minore di quello di $S(x)$ si riscrive il polinomio su un modello del tipo:
+	      \begin{equation}
+		      \label{compl:scomp}
+		      \frac{P(x)}{S(x)}=\sum_k\sum_{m=1}^n \frac{A_m}{(x-a_k)^m}+\sum_j \frac{B_jx+C_j}{(x-z_j)(x-\bar z_j)}
+	      \end{equation}
+	      Dove $k$, e $j$ sono indici per le diverse radici e $n$ è la molteplicità di una radice di primo grado. Il prodotto dei due binomi con le radici complesse coniugate nella seconda sommatoria viene espresso in forma reale (cioè sviluppando il prodotto).
+\end{itemize}
+Per trovare A, B, C si applica poi il principio di identità dei polinomi:
+\begin{enunc}[Principio di identità dei polinomi]
+	Due polinomi sono identici se e solo se i coefficienti dei termini dello stesso grado sono uguali.
+\end{enunc}
+Quindi, si riduce l'intero polinomio sotto un unico minimo comune denominatore e ne si uguaglia la somma dei coefficienti delle $x$ all'n-esimo grado con il coefficiente dell'n-esimo grado di $x$ del polinomio originale. Mettendo a sistema le uguaglianze si ricavano i vari $A$, $B$ e $C$ e si riscrive il polinomio sostituendoli nella forma \ref{compl:scomp}.

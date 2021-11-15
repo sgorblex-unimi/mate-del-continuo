@@ -1,0 +1,197 @@
+\section{\texorpdfstring{$O$, $\Omega$ e $\Theta$}{O, Omega e Theta} grandi}
+I cosiddetti simboli grandi di Landau vengono definiti non più con un limite, ma con un intervallo limitante, nei modi che seguono:
+\begin{defin}
+	\begin{align*}
+		\bullet~ & a_n=O(b_n):\quad\exists:                &       & \abs{\frac{a_n}{b_n}}\leq C\quad & \text{definitivamente} \\
+		\bullet~ & a_n=\Omega(b_n):\quad\exists c>0:       &       & \abs{\frac{a_n}{b_n}}\geq c\quad & \text{definitivamente} \\
+		\bullet~ & a_n=\Theta(b_n):\quad\exists 0<c\leq C: & c\leq & \abs{\frac{a_n}{b_n}}\leq C\quad & \text{definitivamente}
+	\end{align*}
+\end{defin}
+
+\subsection{Proprietà}
+Come è immediato dimostrare, poiché una successione è asintotica a se stessa, tutte le precedenti relazioni godono della proprietà riflessiva. Diverso è per la proprietà simmetrica:
+\begin{gather*}
+	a_n=O(b_n)\overset{?}{\Rightarrow} b_n=O(a_n)\\
+	\exists C<+\infty: \abs{\frac{a_n}{b_n}}\leq C\quad\text{definitivamente}\\
+	\text{ovvero}\\
+	\exists C<+\infty: \abs{\frac{b_n}{a_n}}\geq \frac{1}{C}\quad\text{definitivamente}
+\end{gather*}
+L'ultima proposizione corrisponde con la definizione di $b_n=\Omega(a_n)$ (dove $1/C>0$ poiché $C\in\R$), infatti:
+\[
+	a_n=O(a_n)\iff b_n=\Omega(a_n)
+\]
+Lo stesso vale per $\Omega$, mentre per $\Theta$:
+\begin{gather*}
+	a_n=\Theta(a_n)\iff b_n=\Theta(a_n)\\
+	\exists 0<c\leq C<+\infty: c\leq\abs{\frac{a_n}{b_n}}\leq C\quad\text{definitivamente}\\
+	\text{ovvero}
+	\exists 0<c\leq C<+\infty: \frac{1}{c}\geq\abs{\frac{b_n}{a_n}}\geq\frac{1}{C}\quad\text{definitivamente}
+\end{gather*}
+Che rispetta ancora la definizione di $a_n=\Theta(b_n)$.
+
+La proprietà transitiva è invece propria di tutti i simboli grandi di Landau:
+\begin{prop}
+	\[
+		\begin{cases}
+			a_n=\Omega(b_n) \\
+			b_n=\Omega(c_n)
+		\end{cases}\Rightarrow a_n=\Omega(c_n)
+	\]
+\end{prop}
+\begin{proof}
+	\begin{gather*}
+		\exists c>0: \abs{\frac{a_n}{b_n}}\geq c\quad\text{definitivamente}\\
+		\abs{\frac{a_n}{b_n}}=\abs{\frac{a_n}{b_n}}\abs{\frac{b_n}{c_n}}
+	\end{gather*}
+	Il primo fattore è maggiore definitivamente di un valore $c_1$ per ipotesi, e il secondo di un valore $c_2$. Il loro prodotto sarà quindi maggiore del valore $c_1*c_2$ definitivamente, il che significa che $a_n=\Omega(c_n)$.
+\end{proof}
+\begin{examp}
+	\[
+		n^2+n\overset{?}{=}O(n^2)
+	\]
+	Per dimostrare la relazione, bisogna trovare un $C<+\infty$ per cui la seguente disuguaglianza è verificata definitivamente:
+	\begin{align*}
+		\abs{\frac{n^2+n}{n^2}} & \leq C   \\
+		\frac{n^2+n}{n^2}       & \leq C   \\
+		1+\frac{1}{n}           & \leq C   \\
+		\frac{1}{n}             & \leq C-1
+	\end{align*}
+	Poiché $1/n$ è sempre minore o uguale a $1$, è sufficiente l'esempio $C=2$ per dimostrare che esiste un $C$ consono alla definizione:
+	\[
+		\frac{1}{n}\leq 2-1
+	\]
+	Quanto al problema di determinare tutte le possibili $C$, si riscrive la disequazione nel seguente modo:
+	\[
+		1\leq(C-1)n
+	\]
+	La quale si comporta diversamente a seconda del valore di $C$:
+	\begin{align*}
+		\bullet~ & C>1:\quad & n & \geq\frac{1}{C-1}\quad & \text{definitivamente vera}  \\
+		\bullet~ & C=1:\quad & 1 & \leq0\quad             & \text{falsa}                 \\
+		\bullet~ & C<1:\quad & n & \leq\frac{1}{C-1}\quad & \text{definitivamente falsa}
+	\end{align*}
+	Quindi il primo caso è l'unico in cui la condizione è verificata.
+\end{examp}
+
+Un teorema molto utile nel caso in cui il rapporto di due successioni tenda a un limite (ma che non dice niente in caso contrario) è il seguente:
+\begin{teor}
+	Posto:
+	\[
+		\abs{\frac{a_n}{b_n}}\to L
+	\]
+	Allora:
+	\begin{align*}
+		\bullet~ a_n=O(b_n)      & \iff L<+\infty   & \text{con }C\geq L \\
+		\bullet~ a_n=\Omega(b_n) & \iff L>0         & \text{con }c\leq L \\
+		\bullet~ a_n=\Theta(b_n) & \iff 0<L<+\infty &
+	\end{align*}
+\end{teor}
+\begin{proof}
+	Si dimostra il teorema per $\Omega$. Le dimostrazioni per gli altri simboli sono analoghe.
+	\begin{itemize}
+		\item $L>0 \Rightarrow a_n=\Omega(b_n)$: poiché $\abs{\frac{a_n}{b_n}}$ ammette limite e questo è maggiore di $0$, è sufficiente prendere la parte sinistra di un intorno di $L$ che non includa $0$ e scegliervi un $c$ per dimostrare che $0<c\leq\abs{\frac{a_n}{b_n}}$ definitivamente (per definizione di limite la successione appartiene definitivamente all'intorno - esattamente come nel teorema di permanenza del segno).
+		\item $a_n=\Omega(b_n)\Rightarrow L>0$: poiché $\abs{\frac{a_n}{b_n}}\geq c>0$ definitivamente e poiché per ipotesi $\abs{\frac{a_n}{b_n}}$ ammette limite, questo limite dev'essere maggiore di $c$ e di conseguenza anche maggiore di $0$.
+	\end{itemize}
+	Le due proposizioni si implicano dunque a vicenda.
+\end{proof}
+
+
+\subsubsection{$O$ grande}
+Si noti che $O(1)$ non è altro che l'insieme delle successioni limitate (definitivamente, e quindi essendo discrete anche totalmente), in quanto è l'insieme delle successioni comprese definitivamente tra $-C$ e $C$ (ovvero, il cui modulo è minore o uguale a $C$). Per $O$ valgono molte delle proprietà che valgono per $o$. Eccone alcune:
+\begin{prop}
+	\[
+		a_n\cdot O(b_n)=O(a_n\cdot b_n)
+	\]
+\end{prop}
+\begin{proof}
+	\begin{gather*}
+		\abs{\frac{a_n\cdot O(b_n)}{a_n\cdot b_n}}\leq C\\
+		\abs{\frac{O(b_n)}{b_n}}\leq C
+	\end{gather*}
+	Che è vera per definizione.
+\end{proof}
+Analogamente valgono:
+\begin{itemize}
+	\item $O(a_n\cdot b_n)=a_n\cdot O(b_n)$
+	\item $\frac{1}{a_n}\cdot O(b_n)=O(b_n)$
+	\item $O(a_n)\cdot O(b_n)\equiv O(a_n\cdot b_n)$
+	\item $O(a_n)\equiv a_n\cdot O(1)$
+\end{itemize}
+E, per quanto riguarda la somma:
+\begin{prop}
+	\[
+		O(a_n)+O(a_n)=O(a_n)
+	\]
+\end{prop}
+\begin{proof}
+	\begin{gather*}
+		\abs{\frac{O(a_n)+O(a_n)}{a_n}}\leq C\quad\text{definitivamente}\\
+		\text{per disuguaglianza triangolare:}\\
+		\abs{\frac{O(a_n)}{a_n}+\frac{O(a_n)}{a_n}}\leq \abs{\frac{O(a_n)}{a_n}}+\abs{\frac{O(a_n)}{a_n}}
+	\end{gather*}
+	Se ogni addendo è minore o uguale a un certo $c$, la somma sarà minore o uguale a $2c$.
+\end{proof}
+
+
+\subsubsection{$\Omega$ e $\Theta$}
+Omega grande si comporta similmente rispetto alla moltiplicazione ma diversamente per la somma. Infatti, la disuaguaglianza triangolare utilizzata nell'ultima dimostrazione non può avere luogo per $\Omega$, visto l'opposto verso della disequazione. Ecco un semplice controesempio che dimostra la falsità di $\Omega(a_n)+\Omega(a_n)=\Omega(a_n)$:
+\begin{gather*}
+	\begin{cases}
+		n=\Omega(n) \\
+		-n+1=\Omega(n)
+	\end{cases}\\
+	n+(-n+1)=\Omega(n)+\Omega(n)\overset{?}{=}\Omega(n)\\
+	1\neq\Omega(n)\quad\text{in quanto tende a $0$}
+\end{gather*}
+
+Proprietà del tutto analoghe valgono per $\Theta$. Per fare un analogia con la limitatezza in $O$, che evita un intorno di $+\infty$, si può dire che $\Omega$ evita invece un intorno di $0$.
+
+Riguardo i simboli grandi di Landau vale per le successioni la seguente proprietà:
+\begin{prop}
+	\label{suc:glelandau}
+	Siano $a_n$ e $b_n$ due successioni.
+	\begin{itemize}
+		% TODO: in modulo? Controesempio: x >= -x^2
+		\item $a_n\geq b_n \text{ definitivamente}\quad\Rightarrow\quad a_n=\Omega(b_n)\land b_n=O(a_n)$
+		\item $a_n\leq b_n \text{ definitivamente}\quad\Rightarrow\quad a_n=O(b_n)\land b_n=\Omega(a_n)$
+		\item $a_n=b_n \text{ definitivamente}\quad\Rightarrow\quad a_n\sim b_n$
+	\end{itemize}
+\end{prop}
+\begin{proof}
+	Per $a_n\geq b_n$ vale, definitivamente:
+	\[
+		\abs{\frac{a_n}{b_n}}\geq 1
+	\]
+	Poiché $1>0$ la condizione soddisfa la definizione di $\Omega$ (e inversamente di $O$). La seconda proprietà non è altro l'inversa della prima. Per quanto riguarda la terza, vale, definitivamente:
+	\[
+		\frac{a_n}{b_n}=1
+	\]
+	Quindi il limite dell'espressione è $1$, da cui l'asintoticità.
+\end{proof}
+
+
+\subsection{Confronto di simboli grandi e piccoli}
+Valgono le seguenti proprietà
+\begin{prop} \label{prop:landaugp} ~
+	\begin{enumerate}
+		\item $o(a_n)=O(a_n)$ in quanto se una successione tende a $0$ è limitata. Non vale chiaramente l'inverso, in quanto una successione limitata può, ad esempio, tendere a un numero diverso da $0$.
+		\item Per quanto riguarda le potenze di $a_n$:
+		      \begin{gather*}
+			      O(a_n^\alpha)\overset{?}{=}o(a_n^\beta)\\
+			      \frac{O(a_n^\alpha)}{a_n^\beta}=\frac{a_n^\alpha}{a_n^\beta}O(1)=\frac{O(1)}{a_n^{\beta-\alpha}}
+		      \end{gather*}
+		      La relazione è verificata solo per $\beta>\alpha$.
+		\item $O(o(a_n))=o(a_n)$ in quanto
+		      \[
+			      \frac{o(a_n)\cdot O(1)}{a_n}
+		      \]
+		      è il prodotto di una successione limitata e zero, e tende quindi a $0$. È sicuramente vero che $O(o(a_n))=O(a_n)$ (per ragioni appena dimostrate), ma in questo caso si va a perdere precisione.
+		\item Una somma del tipo $o(a_n)+O(a_n)$ è uguale a $O(a_n)$, con perdita di informazione. Ci si può chiedere se $o(a_n)+O(a_n)=o(a_n)$:
+		      \[
+			      \frac{o(a_n)+O(a_n)}{a_n}=\frac{o(a_n)}{a_n}+\frac{O(a_n)}{a_n}
+		      \]
+		      La relazione è vera solo se il secondo addendo tende a $0$. Questa condizione dipende dalla successione $a_n$ e va quindi discussa per caso.
+		\item $a_n\sim b_n\Rightarrow a_n=\Theta(b_n)$ in quanto se $\frac{a_n}{b_n}\to1$ la successione rapporto è distante sia da $0$ che da $+\infty$;
+		\item $a_n\sim b_n\Rightarrow O(a_n)\equiv O(b_n)$ e $a_n\sim b_n\Rightarrow \Omega(a_n)\equiv \Omega(b_n)$
+	\end{enumerate}
+\end{prop}

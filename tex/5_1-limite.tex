@@ -1,0 +1,56 @@
+\section{Limite di una funzione}
+È naturale chiedersi come si estenda il concetto di limite nel contesto delle funzioni, ovvero in $\R$.
+\begin{defin}[Limite di funzione]
+	Si dice limite di una funzione $f(x)$ per $x$ che tende a $x_0\in\Rt$ (dove $\Rt$ è l'insieme dei reali più $\pm\infty$, detto anche $\R$ esteso e talvolta indicato anche con $\R^*$) e si indica con
+	\[
+		\lim_{x\to x_0} f(x)=L
+	\]
+	il numero $L$ per cui
+	\[
+		\forall U\in I(L): \exists V\in I(x_0)\mid f(x)\in U \quad\forall x\in V\setminus\{x_0\}
+	\]
+\end{defin}
+In questa definizione, in analogia con quella di limite di successione, si può individuare una "soglia" ($\nu$ nelle successioni) nell'intorno $V$ di $x_0$, e un errore ($\varepsilon$ nelle successioni) nell'intorno $U$ di $L$. Affinché il limite sia $L$ è necessario che presone un qualunque intorno (ovvero scelto un errore che si è disposti a commettere) esiste un intorno di $x_0$ (sufficientemente piccolo) di cui ogni elemento, eccetto al più $x_0$, ha immagine secondo la funzione $f$ nell'intorno scelto di $L$. Il vero cambiamento rispetto ai limiti di successioni è proprio nell'intorno di $x_0$, che prende il posto del definitivamente (il cui si poteva tradurre in un intorno di $+\infty$, cioè $(\nu, +\infty)$) e che può qui essere collocato ovunque in $\Rt$, a seconda di $x_0$. La definizione potrebbe quindi essere letta come "scelto un intervallo di errore $U$ intorno al limite $L$, la funzione vi cade definitivamente, cioè per $x$ abbastanza vicine a $x_0$ (eccetto al più $x_0$ stesso)".
+
+Il ruolo dell'omissione di $x_0$ è quello di distinguere il comportamento della funzione in $x_0$ (dove ad esempio può non essere definita) dal suo comportamento nei pressi di $x_0$. La differenza tra questi due concetti tornerà utile nello studio della continuità di una funzione.
+
+\paragraph{Metodo risolutivo}
+\label{lim:metodo}
+Per verificare un limite è consentito fare assunzioni che riducano l'ampiezza degli intorni: per esempio, per $x$ che tende a $0$ si possono prendere $x$ arbitrariamente piccoli per semplificare i calcoli.
+
+Nella maggior parte delle verifiche e in altre dimostrazioni è estremamente utile una forma equivalente della definizione. Posto che il raggio dell'intorno del limite $l$ sia $\varepsilon$, l'intorno consiste nell'intervallo $(l-\varepsilon,l+\varepsilon)$. Questo significa che la funzione $f(x)$ deve ricadere (per un certo intorno) in questo intervallo:
+\begin{gather*}
+	l-\varepsilon<f(x)<l+\varepsilon\\
+	-\varepsilon<f(x)-l<\varepsilon\\
+	\text{che equivale a}\\
+	\abs{f(x)-l}<\varepsilon
+\end{gather*}
+Se il limite è $l$ la soluzione di questa disequazione conterrà un intorno di $x$. Il raggio di questo intorno viene invece tipicamente indicato con $\delta$.
+% TODO: intorni di -+infinito
+
+
+\subsection{Limite destro e sinistro}
+% TODO: definizioni di intorno destro e sinistro
+Vengono inoltre definiti i limiti destro e sinistro, rispettivamente relativi a un intorno destro e sinistro di $x_0$:
+\begin{defin}[Limite destro e sinistro]
+	~
+	\begin{itemize}
+		\item Si dice limite destro di una funzione $f(x)$ per $x$ che tende a $x_0\in\R$ e si indica con
+		      \[
+			      \lim_{x\to x_0^+} f(x)=L
+		      \]
+		      il numero $L$ per cui
+		      \[
+			      \forall U\in I(L): \exists V\in I^+(x_0)\mid f(x)\in U \quad\forall x\in V\setminus\{x_0\}
+		      \]
+		\item Si dice limite sinistro di una funzione $f(x)$ per $x$ che tende a $x_0\in\R$ e si indica con
+		      \[
+			      \lim_{x\to x_0^-} f(x)=L
+		      \]
+		      il numero $L$ per cui
+		      \[
+			      \forall U\in I(L): \exists V\in I^-(x_0)\mid f(x)\in U \quad\forall x\in V\setminus\{x_0\}
+		      \]
+	\end{itemize}
+	Il limite per $x$ che tende a $x_0$ di $f(x)$ esiste se e solo se il limite destro e il limite sinistro di $f(x)$ in $x_0$ esistono e sono uguali.
+\end{defin}

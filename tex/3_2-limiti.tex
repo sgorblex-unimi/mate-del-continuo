@@ -1,0 +1,496 @@
+\section{Limiti}
+Ci si potrebbe chiedere se al crescere di $n$ la successione si avvicini a un certo valore, finito o infinito. Lo studio di questo avvicinamento è lo studio del \textbf{limite} della successione.
+
+
+\subsection{Limiti finiti}
+Se una successione $a_n$, al crescere di $n$, si avvicina a un valore reale e finito $a$, si studia la distanza di $a_n$ da $a$, ovvero $\abs{a_n-a}$, in modo che sia minore di un errore arbitrario $\varepsilon>0$. Questa relazione deve valere definitivamente.
+% TODO: limiti a valori $a^-$ e $a^+$
+\begin{defin}[Limite finito di una successione]
+	Il limite della successione $a_n$ è $a\in\R$ se e solo se
+	\label{limsuc:defin}
+	\[
+		\forall\varepsilon>0\quad\exists\nu_\varepsilon\mid\abs{a_n-a}<\varepsilon\quad\forall n>\nu_\varepsilon
+	\]
+	In tal caso si scrive $a_n\to a$ (letto: $a_n$ tende ad $a$)
+\end{defin}
+% TODO: aggiungere grafico
+
+\begin{examp}
+	Dimostriamo che $\frac{1}{n}\to 0$:
+	\begin{align*}
+		(\frac{1}{n}-0) & <\varepsilon           \\
+		n               & >\frac{1}{\varepsilon}
+	\end{align*}
+	Dove $\frac{1}{\varepsilon}$ è la soglia $\nu$ di cui alla definizione \ref{limsuc:defin}, che esiste per ogni valore scelto arbitrariamente di $\varepsilon$.
+\end{examp}
+
+\subsubsection{Restrizioni del dominio di $\varepsilon$}
+Ci si può chiedere se l'arbitrarietà di $\varepsilon$ si può restringere a un sottoinsieme di $\R^+$.
+\begin{itemize}
+	\item dimostrando un limite per $\varepsilon>k$ (con $k\in\R^+$) si otterrebbe:
+	      \[
+		      \begin{cases}
+			      \abs{a_n-a}<\varepsilon \\
+			      \varepsilon>k
+		      \end{cases}
+	      \]
+	      e non si avrebbe alcuna informazione per valori sufficientemente grandi di $n$ per cui $\abs{a_n-a}\leq k$.
+	\item dimostrando un limite per $0<\varepsilon<k$ (con $k\in\R^+$), si dimostra che la disuguaglianza
+	      \[
+		      \abs{a_n-a}<\varepsilon<k
+	      \]
+	      è vera definitivamente. Ciò implica che $\abs{a_n-a}$ sia automaticamente minore definitivamente di ogni valore maggiore di k, per cui la dimostrazione è del tutto equivalente.
+\end{itemize}
+
+\subsubsection{Restrizioni del dominio di $n$}
+Inoltre vale la seguente proprietà:
+\begin{prop}
+	\label{suc:trasl}
+	\begin{equation}
+		a_n\to a \quad\Rightarrow\quad a_{n+k}\to a
+	\end{equation}
+	Ossia
+	\begin{equation*}
+		\forall\varepsilon>0~\exists\nu_\varepsilon\mid\abs{a_n-a}<\varepsilon\quad\forall n>\nu_\varepsilon \Rightarrow \exists\nu'_\varepsilon\mid\abs{a_{n+k}-a}<\varepsilon\quad\forall n>\nu'_\varepsilon,\forall k\in\Z
+	\end{equation*}
+\end{prop}
+% TODO dimostrazione
+Ovvero: se $a_n$ tende ad $a$, significa che la distanza $\abs{a_n-a}$ è minore di un $\varepsilon>0$ arbitrario definitivamente, ciò significa che, a costo di una variazione della soglia, anche $a_{n+k}$ tende ad $a$, dal momento che si sta semplicemente ponendo un punto di partenza diverso per la successione (si veda anche il lemma \ref{lem:defveresoglia}).
+
+In conclusione:
+\begin{prop}
+	\label{prop:epsn}
+	Durante la dimostrazione di un limite si possono aggiungere condizioni, scegliendo di considerare $\varepsilon$ sufficientemente piccoli o $n$ sufficientemente grandi.
+\end{prop}
+
+\begin{examp}
+	Cerco, se esiste, la soglia per cui $\frac{n+3}{2n-9}$ tende a $\frac{1}{2}$ definitivamente. In questo esempio viene sfruttata la proprietà \ref{prop:epsn} applicata a $n$:
+	\begin{align*}
+		\abs{\frac{n+3}{2n-9}-\frac{1}{2}} & <\varepsilon                         \\
+		\abs{\frac{2n+6-2n+9}{2(2n-9)}}    & <\varepsilon                         \\
+		\frac{15}{2\abs{2n-9}}             & <\varepsilon                         \\
+		\abs{2n-9}                         & >\frac{15}{2\varepsilon}             \\
+		\text{noto che } \abs{2n-9}        & = 2n-9 \text{ definitivamente}       \\
+		2n-9                               & >\frac{15}{2\varepsilon}             \\
+		n                                  & >\frac{15}{4\varepsilon}+\frac{9}{2}
+	\end{align*}
+\end{examp}
+\begin{examp}
+	Cerco, se esiste, la soglia per cui $\dfrac{1}{n-2\pi}\to 1$:
+	\begin{align*}
+		\abs{\frac{1}{n-2\pi}-1} & <\varepsilon                \\
+		\frac{1}{n-2\pi}-1       & < 0\text{ definitivamente:} \\
+		\frac{n-1-2\pi}{n-2\pi}  & <\varepsilon                \\
+		n-1-2\pi                 & <\varepsilon(n-2\pi)        \\
+		2\pi\varepsilon-1-2\pi   & <(\varepsilon-1)n
+	\end{align*}
+	Arrivati a questo punto, in cui il processo logico successivo sarebbe di dividere per $(\varepsilon-1)$ entrambi i membri, non si può porre $\varepsilon>1$, ma solo $\varepsilon<1$. Questo però ci porta a:
+	\[
+		n <\frac{2\pi\varepsilon-1-2\pi}{\varepsilon-1}
+	\]
+	Ovvero la disuguaglianza è definitivamente falsa, e in particolare non definitivamente vera. In questo caso il limite non è dimostrato.
+\end{examp}
+
+
+\subsection{Definizione generale}
+Per il calcolo di limiti infiniti è necessario introdurre la definizione generale di limite di una successione, che certamente include anche il caso in cui il limite sia finito. È necessaria una definizione propedeutica:
+\begin{defin}
+	Viene definito intorno di un numero $a\in\R$ un insieme definito da un intervallo del tipo $(a-\varepsilon,a+\varepsilon)$ con $\varepsilon\in\R^+$. Si definisce intorno di $+\infty$ o $-\infty$ un intervallo del tipo $(M,+\infty)$ o $(-\infty,M)$ rispettivamente. L'insieme degli intorni di $a$ si indica generalmente con $I(a)$.
+\end{defin}
+\begin{defin}[Limite di una successione]
+	Si definisce limite $l$ di una successione $a_n$, con $l\in\R^*$, un numero che gode della seguente proprietà:
+	\[
+		\forall U\in I(l)\quad a_n\in U\quad\text{definitivamente}
+	\]
+	Se il limite di una successione è finito si dice che essa converge, se esso è infinito si dice che essa diverge.
+\end{defin}
+\begin{examp}
+	Dimostriamo che la successione $n^2-2n+5$ tende a $+\infty$:
+	\begin{align*}
+		n^2-2n+5         & >M     \\
+		n^2-2n+5-M       & >0     \\
+		\frac{\Delta}{4} & =1-5+M
+	\end{align*}
+	Per $M$ sufficientemente grandi, $\Delta>0$. Questo tipo di supposizioni su $M$ si possono fare perché si parla di intorni di $+\infty$, per cui diminuisce l'"ampiezza" dell'intorno. È un ragionamento analogo a quello espresso per $\varepsilon$ nella proprietà \ref{prop:epsn}, con la differenza che qui si possono scegliere solo $M$ più grandi. Ovviamente tutto il contrario vale per gli intorni di $-\infty$. La soluzione è quindi:
+	\[
+		n>1+\sqrt{M-4}\lor n<1-\sqrt{M-4}
+	\]
+	Mentre la seconda non è utile ai fini della dimostrazione, la prima fornisce una soglia per $n$ oltre la quale la successione appartiene all'intorno.
+\end{examp}
+
+
+\subsection{Proprietà}
+
+\subsubsection{Unicità del limite}
+\begin{prop}[Unicità del limite]
+	Il limite di una successione, se esiste, è unico.
+\end{prop}
+\begin{proof}
+	Si procede per assurdo, supponendo:
+	\[
+		a_n\to a\land a_n\to b \land a\neq b
+	\]
+	Se i numeri sono diversi, è possibile individuare due intorni degli stessi che non si intersechino:
+	\begin{gather*}
+		U\in I(a),V\in I(b)\\
+		U\cap V=\emptyset
+	\end{gather*}
+	Per la definizione di limite, $a\in U$ definitivamente, e allo stesso tempo $a\in V$ definitivamente. Poiché la congiunzione di due proposizioni vere definitivamente è vera definitivamente, vale $a\in U\cap V$ definitivamente. Si è giunti a una contraddizione, per cui la tesi dev'essere vera. La dimostrazione si può estendere analogamente ai casi di limiti infiniti.
+\end{proof}
+
+\begin{prop}
+	\[
+		\begin{cases}
+			a_n\to a \\
+			a<b
+		\end{cases}\Rightarrow a_n<b \text{ definitivamente}
+	\]
+\end{prop}
+\begin{proof}
+	Se per la definizione di limite comunque preso un intorno di $a$, $a_n$ appartiene all'intorno definitivamente, è sufficiente scegliere un intorno di $a$ che non includa $b$ per dimostrare che $b>a_n$ per ogni valore maggiore della soglia relativa a tale intorno.
+\end{proof}
+
+\begin{prop} \label{prop:permsegn}
+	\[
+		\begin{cases}
+			a_n\to a \\
+			a_n<b \text{ definitivamente}
+		\end{cases}\Rightarrow a\leq b
+	\]
+\end{prop}
+\begin{proof}
+	Per assurdo, se $a$ fosse maggiore di $b$ si potrebbe scegliere un intorno di $a$ che non contiene $a_n$ definitivamente, in quanto $a_n<b$ definitivamente. Ciò ovviamente è in contraddizione con l'ipotesi che $a$ sia il limite della successione.
+\end{proof}
+Si noti che per $b=0$ la proprietà \ref{prop:permsegn} dimostra che una successione definitivamente negativa che ammette limite ha limite negativo, così come analogamente una successione definitivamente positiva che ammette limite ha limite positivo. Questo risultato è noto come \textbf{teorema di permanenza del segno}.
+
+\begin{prop}
+	\[
+		\begin{cases}
+			a_n\to a \\
+			a\in\R
+		\end{cases}\Rightarrow a_n \text{ è limitata}
+	\]
+\end{prop}
+\begin{proof}
+	Comunque scelto un intorno del limite, ognuno degli infiniti valori che $a_n$ assume oltre la soglia $\nu_\varepsilon$ è minore dell'estremo maggiore dell'intorno, mentre i valori esterni all'intorno sono finiti (essendo la successione definitivamente appartenente all'intorno) e si può quindi trovare un valore $M$ che sia maggiore di tutti.
+\end{proof}
+\begin{teor}[Piccolo teorema del confronto]
+	\label{suc:confr1}
+	\[
+		\begin{cases}
+			b_n\geq a_n \text{ definitivamente} \\
+			a_n\to+\infty
+		\end{cases}\Rightarrow b_n\to+\infty
+	\]
+\end{teor}
+\begin{proof}
+	Scelto arbitrariamente un $M$, vale per la definizione di limite la relazione $a_n>M$ definitivamente. Poiché $b_n>a_n$ definitivamente, oltre una certa soglia vale anche $b_n>M$, ovvero $b_n\to+\infty$. Lo stesso vale per relazioni d'ordine opposte che tendono a $-\infty$.
+\end{proof}
+\begin{teor}[Teorema del confronto]
+	\label{teor:confronto}
+	\[
+		\begin{cases}
+			a_n\leq b_n \leq c_n \text{ definitivamente} \\
+			a_n\to l                                     \\
+			c_n\to l
+		\end{cases}\Rightarrow b_n\to l
+	\]
+\end{teor}
+\begin{proof}
+	Scelto un qualunque intorno di $l$, $a_n$ e $c_n$ vi appartengono definitivamente. Poiché $a_n\leq b_n \leq c_n$ definitivamente, esiste sicuramente una soglia oltre la quale $b_n$ appartiene all'intorno.
+\end{proof}
+
+
+\subsection{Casi notevoli}
+Casi notevoli di limiti di successioni sono
+\begin{itemize}
+	\item
+	      \begin{equation}
+		      \frac{1}{n}\to 0^+
+	      \end{equation}
+	      La successione tende a $0^+$, cioè si avvicina a $0$ all'aumentare di $n$ mantenendo sempre valori positivi, ovvero $0\leq\frac{1}{n}<\varepsilon$. Se una successione si avvicina a $0$ dai valori negativi (per esempio $-\frac{1}{n}$) si dice che tende a $0^-$.
+	\item
+	      \begin{equation}
+		      \frac{(-1)^n}{n}\to 0
+	      \end{equation}
+	      In questo caso la successione non tende né a $0^+$ né a $0^-$ in quanto l'avvicinamento della successione a $0$ assume sia valori positivi sia negativi qualunque sia l'ampiezza scelta dell'intorno.
+	\item Il limite per la successione $(-1)^n$ non esiste, in quanto essa assume solo i valori $-1$ e $1$. Scegliendo un intorno di uno di questi due numeri in modo che escluda l'altro (così come un qualunque altro numero) è facile notare che il numero non può essere il limite.
+	\item $n^\alpha$:
+	      \begin{align}
+		       & \to +\infty & \text{per }\alpha>0 \\
+		       & \to 1       & \text{per }\alpha=0 \\
+		       & \to 0^+     & \text{per }\alpha<0
+	      \end{align}
+	      \begin{itemize}
+		      \item Nel primo caso $n^\alpha$ è crescente, per cui $n^\alpha>M$ con $M$ arbitrario, da cui la soglia $n>\sqrt[\alpha]{M}$;
+		      \item nel secondo caso la successione è costante e uguale a $1$;
+		      \item nel terzo caso $n^\alpha<\varepsilon$, cioè $n^{-\alpha} > \dfrac{1}{\varepsilon}$, da cui $n>\sqrt[-\alpha]{\dfrac{1}{\varepsilon}}$.
+	      \end{itemize}
+	\item $q^n$:
+	      \begin{align}
+		       & \to +\infty & \text{per }q>1       \label{eq:limnot3a} \\
+		       & \to 1       & \text{per }q=1                           \\
+		       & \to 0^+     & \text{per }0\leq q<1 \label{eq:limnot3c} \\
+		       & \dots       & \text{per }q<0
+	      \end{align}
+	      \begin{itemize}
+		      \item Nel primo caso $q^n>M$ si risolve in $n>\log_q M$;
+		      \item nel secondo caso la successione è costante e uguale a $1$;
+		      \item nel terzo caso $q^n<\varepsilon$ si risolve in $n>\log_q \varepsilon$;
+		      \item per $q<0$, $q=-\abs{q}$, quindi $q^n=(-1)^n\abs{q}^n$. Il secondo fattore si riconduce al caso precedente, mentre il primo cambia costantemente valore tra $-1$ e $1$. Si deve dunque nuovamente distinguere tre casi:
+		            \begin{itemize}
+			            \item Per $\abs{q}>1$ il limite non esiste, in quanto per esponenti pari la successione si avvicina a $+\infty$, e per esponenti dispari a $-\infty$, per cui preso qualunque intorno di ciascuno dei due esso non conterrebbe i valori dell'altra parità di $n$;
+			            \item per $\abs{q}=1$ il limite non esiste, in quanto la successione varia tra i valori $-1$ e $+1$ (vedi terzo caso notevole);
+			            \item per $0<\abs{q}<1$ il limite è $0$, in quanto assume valori che cambiano costantemente segno e si avvicinano a $0$ analogamente caso (\ref{eq:limnot3c}), per la soglia $n>\log_{\abs{q}} \varepsilon$.
+		            \end{itemize}
+	      \end{itemize}
+	\item $\log_\alpha n$:
+	      \begin{align*}
+		       & \to +\infty & \text{per }\alpha>1   \\
+		       & \to -\infty & \text{per }0<\alpha<1
+	      \end{align*}
+	      \begin{itemize}
+		      \item Nel primo caso la successione è monotona crescente e si trova la soglia $n>\alpha^M$;
+		      \item nel secondo caso la successione è monotona decrescente e si trova la soglia $n>\alpha^M$.
+	      \end{itemize}
+	\item $n!$ e $n^n$ sono maggiori definitivamente di $n$, che tende a $+\infty$. Per il teorema \ref{suc:confr1} tendono quindi a $+\infty$.
+\end{itemize}
+
+\subsection{Algebra dei limiti}
+\label{alglim}
+Date due successioni $a_n\to a$ e $b_n\to b$, con $a,b\in\R$, si verificano le seguenti proprietà:
+\begin{itemize}
+	\item $a_n+b_n\to a+b$
+	\item $a_n-b_n\to a-b$
+	\item $a_n^{b_n}\to a^b$
+	\item $\frac{a_n}{b_n}\to \frac{a}{b}$
+\end{itemize}
+Si dimostra la prima proprietà. Le dimostrazioni delle successive si basano su logica analoga.
+\begin{proof}
+	La tesi si traduce in:
+	\begin{align*}
+		\abs{(a_n+b_n)-(a+b)}                  & <\varepsilon \quad \forall\varepsilon>0 \\
+		\text{ovvero}                                                                    \\
+		\abs{(a_n-a)+(b_n-b)}                  & <\varepsilon                            \\
+		\text{per disuguaglianza triangolare } & \text{sul primo membro:}                \\
+		\abs{(a_n-a)+(b_n-b)}                  & < \abs{a_n-a}+\abs{b_n-b}
+	\end{align*}
+	I due addendi del secondo membro sono per ipotesi minori di qualunque errore positivo definitivamente, per esempio di $\frac{\varepsilon}{2}$. La loro somma è quindi minore di $\varepsilon$, comunque esso sia stato scelto:
+	\[
+		\abs{(a_n+b_n)-(a+b)}<\abs{a_n-a}+\abs{b_n-b}<\varepsilon
+	\]
+	Questo dimostra la tesi.
+\end{proof}
+Estendiamo la dimostrazione al caso in cui una delle due successioni, $b_n$, tende a $+\infty$. In questo caso la somma delle due tenderà anch'essa a $+\infty$.
+\begin{proof}
+	La disuguaglianza che bisogna provare è
+	\[
+		a_n+b_n>M
+	\]
+	Se $a_n$ converge, significa che è limitata, ovvero che $\abs{a_n}\leq R\quad\forall n$. Se $a_n>-R$, la disuguaglianza iniziale si riduce a:
+	\begin{align*}
+		-R+b_n & >M   \\
+		b_n    & >M+R
+	\end{align*}
+	La disuguaglianza è verificata definitivamente in quanto $b_n\to+\infty$.
+\end{proof}
+Estendendo il problema a più di una successione divergente, si ottiene:
+\begin{itemize}
+	\item $+\infty+\infty=+\infty$
+	\item $-\infty-\infty=-\infty$
+\end{itemize}
+Rimangono però operazioni che sembrano non poter essere svolte tra infiniti:
+\begin{itemize}
+	\item $+\infty-\infty$
+	\item $\pm\infty*0$
+	\item $\dfrac{0}{0}$
+	\item $\dfrac{\infty}{\infty}$
+	\item $\pm\infty^0$
+	\item $0^0$
+	\item $1^{\pm\infty}$
+\end{itemize}
+Questi sono detti casi di indecisione. I limiti di una successione composta da successioni che tendono ai valori di cui sopra non possono essere calcolati a prescindere, ma si ha bisogno di ulteriori informazioni sulla natura delle successioni.
+
+
+\subsection{Numero di Nepero}
+Si dimostra che l'interesse del $100\%$ di un capitale diviso in $n$ capitalizzazioni è uguale a
+\[
+	a_n=\left(n+\frac{1}{n}\right)^n
+\]
+Grazie alla disuguaglianza di Bernoulli (di cui al paragrafo \vref{dis_berno}) si dimostra che la successione è monotona crescente:
+\begin{proof}
+	Dire che la successione è crescente equivale a dire che, per $n\geq2$:
+	\[
+		\frac{a_n}{a_{n-1}}\geq1
+	\]
+	\begin{gather*}
+		\frac{a_n}{a_{n-1}}=\frac{\left(n+\dfrac{1}{n}\right)^n}{\left(n+\dfrac{1}{n-1}\right)^{n-1}}=\frac{\left(\dfrac{n+1}{n}\right)^n}{\left(\dfrac{n}{n-1}\right)^{n-1}}=\\
+		\left(\frac{n-1}{n}\right)^{n-1}\left(\frac{n+1}{n}\right)^n=\left(\frac{n}{n-1}\right)\left(\frac{n-1}{n}\right)^n\left(\frac{n+1}{n}\right)^n=\\
+		\left(\frac{n}{n-1}\right)\left(\frac{n^2-1}{n^2}\right)^n=\left(\frac{n}{n-1}\right)\left(1-\frac{1}{n^2}\right)^n
+	\end{gather*}
+	Si nota che l'ultimo fattore rispetta i requisiti per applicare la disuguaglianza di Bernoulli:
+	\begin{gather*}
+		(1+x)^n\geq1+nx\qquad\forall n\geq0,x>-1\\
+		-\frac{1}{n^2}>-1\qquad\forall n\geq2\\
+	\end{gather*}
+	Si può dunque applicare la disuguaglianza e moltiplicarla per il primo fattore, $\left(\dfrac{n}{n-1}\right)$, in quanto se ne conosce il segno, che è positivo:
+	\[
+		\left(\frac{n}{n-1}\right)\left(1-\frac{1}{n^2}\right)^n\geq\left(\frac{n}{n-1}\right)\left(1+n\left(-\frac{1}{n^2}\right)\right)
+	\]
+	Semplificando il secondo membro:
+	\begin{gather*}
+		\left(\frac{n}{n-1}\right)\left(1+n\left(-\frac{1}{n^2}\right)\right)=\frac{n}{n-1}-\left(\frac{n}{n-1}*\frac{n}{n^2}\right)=\\
+		\frac{n}{n-1}-\frac{1}{n-1}=\frac{n-1}{n-1}=1
+	\end{gather*}
+	Quindi, in conclusione:
+	\[
+		\frac{a_n}{a_{n-1}}=\left(\frac{n}{n-1}\right)\left(1-\frac{1}{n^2}\right)^n\geq1
+	\]
+	La successione è monotona crescente.
+\end{proof}
+Tuttavia, calcolarne il limite non è immediato, in quanto si presenta nella forma di indecisione $1^{+\infty}$. Si introduce allora una seconda successione, questa volta strettamente decrescente:
+\[
+	b_n=\left(n+\frac{1}{n}\right)^{n+1}=\left(n+\frac{1}{n}\right)^n\cdot\left(n+\frac{1}{n}\right)
+\]
+Il primo fattore è uguale ad $a_n$, mentre il secondo è sempre maggiore di $1$. Si verifica quindi che $b_n>a_n$. Se le due successioni sono monotone in verso opposto e la seconda maggiore della prima, si deduce che non possono divergere. In particolare, è facile dimostrare l'esistenza di un maggiorante di $a_n$ (e analogamente di un minorante di $b_n$): $\forall n\in\N^+\exists b_1\in\R\mid a_n<b_n<b_1$, dove la prima disuguaglianza è vera per dimostrazione precedente e la seconda perché $b_n$ è strettamente decrescente. Viene naturale dedurre che $a_n$ tenda al minimo dei maggioranti, ovvero $a_n\to \sup\{a_n\}$.
+\begin{teor}[Teorema di regolarità delle successioni monotone]
+	\label{suc:rego}
+	Se una successione $a_n$ è monotona crescente, ovvero $a_{n+1}\geq a_n \quad\forall n\in\N$, e $A=\{a_n\mid n\in\N\}$, allora $a_n\to \sup A$. Analogamente il limite di una successione monotona decrescente è uguale all'estremo inferiore dell'insieme delle sue immagini.
+\end{teor}
+\begin{proof} ~
+	\begin{itemize}
+		\item Se $A^*\neq\emptyset$ allora $l=\sup A\in\R$. Dimostrare che $l$ è il limite di $a_n$ significa dimostrare che la disuguaglianza
+		      \[
+			      \abs{a_n-l}<\varepsilon \qquad\forall\varepsilon>0
+		      \]
+		      è vera definitivamente. Dividendo la disequazione nelle due possibilità portate dal modulo:
+		      \begin{itemize}
+			      \item La disequazione
+			            \begin{align*}
+				            a_n-l & < \varepsilon   \\
+				            a_n   & < l+\varepsilon
+			            \end{align*}
+			            è vera per ogni $n$ in quanto un numero maggiore di $l$ è senz'altro maggiorante di $A$;
+			      \item quanto alla disequazione
+			            \begin{equation*}
+				            a_n-l>-\varepsilon
+			            \end{equation*}
+			            poiché $l$ è l'estremo superiore di $A$, esiste sicuramente un numero $l-\varepsilon$ che non sia un maggiorante, di cui quindi esiste almeno un valore di $a_n$ che sia maggiore:
+			            \[
+				            \exists\nu_\varepsilon\in\N\mid l-\varepsilon<a_{\nu_\varepsilon}
+			            \]
+			            Questo non dimostra il valore definitivo della verità della tesi, ma solo che esiste un valore $a_{\nu_\varepsilon}$ per cui la disuguaglianza è verificata. Introducendo l'ipotesi che $a_n$ sia monotona, tuttavia, vale
+			            \[
+				            n\geq\nu_\varepsilon\Rightarrow a_n>a_{\nu_\varepsilon}\qquad\forall n\in\N
+			            \]
+			            E poiché $a_{\nu_\varepsilon}>l-\varepsilon$, si verifica che $a_n>l-\varepsilon\quad\forall\varepsilon\in\R,\forall n\in\N$, ovvero che la tesi è vera definitivamente.
+		      \end{itemize}
+		\item Se $A^*=\emptyset$ bisogna dimostrare che $a_n\to\infty$, ovvero che la disuguaglianza
+		      \[
+			      a_n>M \qquad\forall M\in\R
+		      \]
+		      è vera definitivamente. poiché l'insieme dei maggioranti di $A$ è vuoto, $M$ non è un maggiorante. Procedendo come nella dimostrazione precedente per $l-\varepsilon$, si giunge alla conclusione che $a_n>M$ definitivamente.
+	\end{itemize}
+\end{proof}
+Applicando il teorema alla successione di cui sopra si definisce il numero di Nepero $e$:
+\[
+	\left(1+\frac{1}{n}\right)^n\to e = 2.7182818\dots
+\]
+Siccome $a_n$ è strettamente crescente e $b_n$ strettamente decrescente, le due successioni consistono in approssimazioni rispettivamente per difetto e per eccesso di $e$ ($b_n$ tende a $e$ essendo equivalente al prodotto di $a_n$ per un fattore che tende a $1$). Per un'approssimazione più precisa, è utile stimare anche la distanza tra le due, che ovviamente tende a $0$:
+\[
+	b_n-a_n=\left(1+\frac{1}{n}\right)^n\left(\left(1+\frac{1}{n}\right)-1\right)
+\]
+
+
+\subsection{Soluzione dei casi di indecisione}
+Ci si pone il problema di svolgere limiti di successioni composte da successioni che tendono a infinito nei modi dei casi di indecisione descritti al paragrafo \ref{alglim}. In alcuni casi avviene un'eliminazione puramente algebrica:
+\[
+	\frac{n^2}{n^3}=\frac{1}{n}\to0^+
+\]
+In altri casi è necessario individuare quale infinito ha un maggiore "impatto" sull'andamento della successione. I criteri della radice e del rapporto permettono, calcolando un limite ausiliario, di dedurre il limite della successione.
+\begin{teor}[criteri della radice e del rapporto]
+	\label{teor:sucradice}
+	Data una successione $c_n$
+	\[
+		\begin{cases}
+			c_n\geq0\quad\text{definitivamente} \\[1ex]
+			\dfrac{c_{n+1}}{c_n}\to l\quad\lor\quad\sqrt[n]{c_n}\to l
+		\end{cases}\Rightarrow
+		\begin{cases}
+			c_n\to0^+\quad     & \text{se }l<1 \\
+			c_n\to+\infty\quad & \text{se }l>1
+		\end{cases}
+	\]
+\end{teor}
+\begin{proof}
+	Si dimostra il teorema nel caso della radice $\sqrt[n]{c_n}$. Si noti che $l$ non può essere negativo in quanto la successione $c_n$ è positiva definitivamente (teorema di permanenza del segno).
+	\begin{itemize}
+		\item Se $0\leq l<+\infty$ allora per ogni intorno da $l-\varepsilon=p$ a $l+\varepsilon=q$ la successione $\sqrt[n]{c_n}$ vi cade definitivamente:
+		      \[
+			      p<\sqrt[n]{c_n}<q
+		      \]
+		      E quindi, definitivamente:
+		      \[
+			      p^n<c_n<q^n
+		      \]
+		\item Se $l=+\infty$ comunque scelto un valore $p$ positivo la successione ne è maggiore definitivamente:
+		      \[
+			      p<\sqrt[n]{c_n}
+		      \]
+		      Ovvero, definitivamente:
+		      \[
+			      p^n<c_n
+		      \]
+	\end{itemize}
+	Si studia ora l'andamento delle successioni $p^n$ e $q^n$ al variare di $p$ e $q$.
+	\begin{itemize}
+		\item Se $q<1$ allora $q^n\to0^+$ (per la (\ref{eq:limnot3c})). Poiché per ipotesi $c_n\geq0$ si hanno tutte le ipotesi per applicare il teorema del confronto (\vref{teor:confronto}), considerando lo $0$ come una successione costante e tendente a $0$:
+		      \[
+			      \begin{cases}
+				      0\leq c_n<q^n \\
+				      q^n\to0^+
+			      \end{cases}\Rightarrow c_n\to0^+
+		      \]
+		\item Se $p>1$ allora $p^n\to+\infty$ (per la (\ref{eq:limnot3a})). Si hanno tutte le ipotesi per applicare il teorema \vref{suc:confr1}:
+		      \[
+			      \begin{cases}
+				      c_n>p^n \\
+				      p^n\to+\infty
+			      \end{cases}\Rightarrow c_n\to+\infty
+		      \]
+	\end{itemize}
+	In tutti gli altri casi non si può concludere niente di utile alla dimostrazione. È sufficiente dunque scegliere $p$ e $q$ sufficientemente vicini al limite di $\sqrt[n]{c_n}$ (in particolare, $q<1$ se $l<1$ e $p>1$ se $l>1$) per dimostrare che a $l>1$ corrisponde $c_n\to+\infty$ e che a $l<1$ corrisponde $c_n\to0^+$. Si dimostra che lo stesso vale per il limite del rapporto; si può inoltre dimostrare che i due limiti $l$ sono uguali.
+\end{proof}
+
+
+\subsection{Limiti di successioni tipo}
+Applichiamo ora il teorema per trovare i limiti di alcuni casi caratteristici:
+\begin{itemize}
+	\item
+	      \[
+		      c_n=\frac{n^\alpha}{q^n}\qquad\text{con }\alpha>0,q>1
+	      \]
+	      Sfruttando il criterio del rapporto:
+	      \[
+		      \frac{c_{n+1}}{c_n}=\frac{(n+1)^\alpha}{q^{n+1}}\cdot \frac{q^n}{n^\alpha}=\frac{q^n}{q\cdot q^n}\cdot \left(\frac{n+1}{n}\right)^\alpha=\frac{1}{q}\left(1+\frac{1}{n}\right)^\alpha
+	      \]
+	      Il secondo fattore tende a $1$, quindi il rapporto tende a $\frac{1}{q}$. Per ipotesi $q>1$, quindi il limite è minore di $1$. Per criterio del rapporto $c_n$ tende a $0^+$. Si noti che per $0<q\leq1$ il limite iniziale sarebbe stato immediato, da cui l'introduzione dell'ipotesi $q>1$.
+	\item
+	      \begin{gather*}
+		      c_n=\frac{q^n}{n!}\qquad\text{con }q>1\\
+		      \frac{c_{n+1}}{c_n}=\frac{q^{n+1}}{(n+1)!}\cdot \frac{n!}{q^n}=\frac{q}{n+1}\to0^+<1
+	      \end{gather*}
+	      Quindi $c_n\to0^+$.
+	\item
+	      \begin{gather*}
+		      c_n=\frac{n!}{n^n}\\
+		      \frac{c_{n+1}}{c_n}=\frac{(n+1)!}{(n+1)^{n+1}}\cdot \frac{n^n}{n!}=\frac{(n+1)n!}{(n+1)(n+1)^n}\cdot \frac{n^n}{n!}=\\
+		      =\left(\frac{n}{n+1}\right)^n=\frac{1}{\left(1+\frac{1}{n}\right)^n}\to\frac{1}{e}<1
+	      \end{gather*}
+	      Quindi $c_n\to0^+$.
+	\item
+	      \[
+		      c_n=\frac{\log_q n}{n^\alpha}\qquad\text{con }q>1
+	      \]
+	      Il metodo del rapporto ci porta a dimostrare che $\frac{c_{n+1}}{c_n}\to1$, unico caso in cui non si può dedurre niente sul limite di $c_n$. Per altre vie si può dimostrare che $c_n\to0^+$.
+\end{itemize}

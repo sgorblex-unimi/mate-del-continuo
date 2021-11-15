@@ -1,0 +1,198 @@
+% TODO: cosa succede se l'argomento dei simboli è 0?
+Ai fini di semplificare e risolvere problemi nell'ambito dei limiti di successioni, è utile introdurre una nuova terminologia, sviluppata dal matematico tedesco Edmund Landau.
+
+\section{\texorpdfstring{$o(\cdot)$ (o piccolo)}{o piccolo}}
+Il primo simbolo è quello di $o(a_n)$ ($o$ piccolo di $a_n$), che viene definito come segue:
+\begin{defin}
+	\[
+		o(b_n)=\left\{a_n \mid \frac{a_n}{b_n}\to0\right\}
+	\]
+	Inoltre, per notazione:
+	\[
+		a_n=o(b_n)\iff a_n\in o(b_n)
+	\]
+\end{defin}
+Questo simbolo definisce una relazione, ma non un'uguaglianza. Questa relazione non gode infatti di due proprietà tipiche delle relazioni di equivalenza, la proprietà riflessiva e quella simmetrica (come si può dimostrare con semplici controesempi) mentre gode della proprietà transitiva:
+\begin{prop}[Transitiva]
+	\label{optrans}
+	\[
+		\forall a_n,b_n,c_n:
+		\begin{cases}
+			a_n=o(b_n) \\
+			b_n=o(c_n)
+		\end{cases}\Rightarrow a_n=o(c_n)
+	\]
+\end{prop}
+\begin{proof}
+	Per definizione, bisogna dimostrare che:
+	\[
+		\frac{a_n}{c_n}\to0
+	\]
+	Moltiplicando e dividendo per $b_n$:
+	\[
+		\frac{a_n}{b_n}\cdot \frac{b_n}{c_n}
+	\]
+	Per ipotesi entrambi i fattori tendono a $0$, quindi il limite del prodotto è $0$.
+\end{proof}
+
+\subsection{Proprietà e relazioni}
+Un "uguaglianza" tra due $o$ non è riflessiva né simmetrica. In particolare:
+\[
+	o(a_n)=o(b_n)
+\]
+significa che ogni elemento dell'insieme $o(a_n)$ appartiene all'insieme $o(b_n)$, ovvero che l'insieme $o(a_n)$ è contenuto nell'insieme $o(b_n)$:
+\[
+	o(a_n)\subseteq o(b_n)
+\]
+
+\subsubsection{Somma di un $o$ e una successione}
+Si introduce ora quello che si può considerare l'analogo per $o$ del primo principio di equivalenza delle equazioni.
+\begin{teor}
+	\[
+		o(a_n)=b_n+o(c_n)\iff o(a_n)-b_n=o(c_n)
+	\]
+\end{teor}
+\begin{proof}
+	Si nota che il secondo membro (della prima proposizione) è la somma di un elemento con un insieme, cioè l'insieme delle somme di $b_n$ con ciascun elemento $\delta_n$ dell'insieme $o(c_n)$:
+	\[
+		b_n+o(c_n) = \{b_n+\delta_n\mid\delta_n\in o(c_n)\}
+	\]
+	Quindi la relazione iniziale si traduce nel dire che se un elemento $\gamma_n$ appartiene a $o(a_n)$, esso appartiene anche all'insieme dei $b_n+\delta_n$ (per quanto detto nel paragrafo precedente), ovvero esiste un $\delta_n$ in $o(c_n)$ tale che $\gamma_n=b_n+\delta_n$, dove l'ultimo $=$ ha il significato ordinario (non essendo applicato a $o$):
+	\[
+		\gamma_n=o(a_n)\Rightarrow\gamma_n=b_n+o(c_n)\Rightarrow\exists\delta_n=o(c_n)\mid\gamma_n=b_n+\delta_n
+	\]
+	E ciò vale per ogni $\gamma_n$ appartenente a $o(a_n)$. Essendo l'ultima un'equazione "classica" e quindi simmetrica, si può applicare:
+	\[
+		\delta_n=\gamma_n-b_n
+	\]
+	Quindi se $\delta_n$ appartiene a $o(c_n)$, significa che
+	\[
+		\gamma_n=o(a_n)\Rightarrow\gamma_n-b_n=o(c_n)
+	\]
+	In virtù del fatto che la relazione vale per ogni $\gamma_n$ che appartenga a $o(a_n)$, si può utilizzare $o(a_n)$ per indicare ogni elemento che vi appartiene:
+	\[
+		o(a_n)-b_n=o(c_n)
+	\]
+	% TODO: spiegare meglio
+	Che tradotto usando la definizione significa anche
+	\[
+		\frac{\gamma_n}{a_n}\to0\Rightarrow\frac{\gamma_n-b_n}{c_n}\to0
+	\]
+	Analogo vale per l'implicazione inversa.
+\end{proof}
+
+\subsubsection{Prodotto di $o$ e una successione}
+Esiste anche un analogo del secondo principio di equivalenza delle equazioni:
+\[
+	o(a_n)=b_n\cdot o(c_n)\iff\frac{o(a_n)}{b_n}=o(c_n)
+\]
+
+
+\subsection{Operazioni}
+
+\subsubsection{Somma di $o(a_n)$ con se stesso}
+\begin{teor}
+	\[
+		o(a_n)+o(a_n)=o(a_n)
+	\]
+\end{teor}
+\begin{proof}
+	Questa espressione equivale a dire, per la definizione, che la somma di due successioni $\gamma_{1_n}$ e $\gamma_{2_n}$ che divise per $a_n$ tendono a zero, a sua volta, se divisa per $a_n$, tende a zero. In simboli:
+	\[
+		\begin{cases}
+			\dfrac{\gamma_{1_n}}{a_n}\to0 \\\\
+			\dfrac{\gamma_{2_n}}{a_n}\to0 \\
+		\end{cases}\Rightarrow\frac{\gamma_{1_n}+\gamma_{2_n}}{a_n}\to0\qquad\forall\gamma_{1_n},\gamma_{2_n}
+	\]
+	La dimostrazione è quasi immediata:
+	\[
+		\frac{\gamma_{1_n}+\gamma_{2_n}}{a_n}=\frac{\gamma_{1_n}}{a_n}+\frac{\gamma_{2_n}}{a_n}
+	\]
+	Poiché entrambi gli addendi tendono a $0$ per ipotesi, la somma tende a $0$, quindi $o(a_n)+o(a_n)=o(a_n)$.
+\end{proof}
+
+\subsubsection{Prodotto per una costante}
+Come è facile dimostrare, i seguenti insiemi sono uguali:
+\[
+	o(c\cdot a_n)\qquad c\cdot o(a_n)\qquad o(a_n)
+\]
+\begin{proof}
+	Si utilizza $o(a_n)$ per indicare ogni suo elemento.
+	\begin{description}
+		\item[$\bullet~ o(c\cdot a_n)=o(a_n)$] A partire dalla definizione:
+			\[
+				\frac{o(a_n)}{c\cdot a_n}\to 0\qquad\Rightarrow\qquad\frac{o(a_n)}{a_n}\cdot \frac{1}{c}\to0
+			\]
+			Nella seconda espressione, il secondo fattore è costante, quindi il primo tende a zero.
+		\item[$\bullet~ c\cdot o(a_n) = o(a_n)$]
+			\[
+				c\cdot \frac{o(a_n)}{a_n}\to0
+			\]
+			Il primo fattore è una costante e il secondo tende a zero per definizione: il limite è zero.
+		\item[$\bullet$] Per definizione, da $o(a_n)$:
+			\[
+				\frac{o(a_n)}{a_n}\to0
+			\]
+			Si può moltiplicare o dividere l'espressione per una costante, in quanto il limite rimane invariato. È possibile quindi svolgere un'operazione inversa rispetto alle due dimostrazioni precedenti e ottenere le espressioni che definiscono gli altri due insiemi.
+	\end{description}
+\end{proof}
+
+\subsubsection{Differenza}
+La differenza di due $o(a_n)$ non è altro che la somma del primo per il secondo moltiplicato per $-1$. Quindi, in virtù delle dimostrazioni precedenti:
+\[
+	o(a_n)-o(a_n)=o(a_n)+-1\cdot o(a_n)=o(a_n)+o(a_n)=o(a_n)
+\]
+
+\subsubsection{Prodotto per una successione}
+I seguenti insiemi sono uguali:
+\[
+	b_n\cdot o(a_n)\qquad o(a_n\cdot b_n)
+\]
+pur non essendo uguali a $o(a_n)$.
+\begin{proof} ~
+	\begin{itemize}
+		\item $b_n\cdot o(a_n)=o(a_n\cdot b_n)$:
+		      \[
+			      \frac{b_n\cdot o(a_n)}{a_n\cdot b_n}\to0\qquad\text{ovvero}\qquad\frac{o(a_n)}{a_n}
+		      \]
+		      Che tende a $0$ per definizione.
+		\item $o(a_n\cdot b_n)=b_n\cdot o(a_n)$:
+		      Utilizzando il "secondo principio":
+		      \[
+			      \frac{o(a_n\cdot b_n)}{b_n}=o(a_n)
+		      \]
+		      % TODO: ???
+		      Ovvero, tradotto in limiti:
+		      \[
+			      \frac{o(a_n\cdot b_n)}{b_n\cdot a_n}\to0
+		      \]
+		      che è vero per definizione.
+	\end{itemize}
+\end{proof}
+
+\subsubsection{$o(1)$ ($o$ piccolo di $1$)}
+$o(1)$ è uno strumento che può tornare utile alla semplificazione di calcoli e nelle dimostrazioni. Infatti:
+\begin{gather*}
+	o(1)=\{a_n\mid a_n\to0\}\\
+	o(a_n)\equiv o(a_n\cdot 1)\equiv a_n\cdot o(1)
+\end{gather*}
+Dove il simbolo $\equiv$ significa "equivale a"
+
+Ecco un esempio di implementazione di questa proprietà:
+\begin{examp}
+	Stabilire per quali valori di $\alpha$ vale $o(n^\alpha)=o(n \ln n)$. Traducendo l'espressione tramite definizione:
+	\[
+		\frac{o(n^\alpha)}{n\ln n}\to0
+	\]
+	Traducendo in espressioni equivalenti:
+	\[
+		\frac{o(n^\alpha)}{n\ln n}\equiv\frac{n^\alpha}{n\ln n}\cdot o(1)\equiv\frac{n^{\alpha-1}}{\ln n}\cdot o(1)
+	\]
+	Per $\alpha>1$ il primo fattore tende a $+\infty$, producendo una forma di indecisione, mentre per $a\leq1$ il primo fattore tende a $0^+$, per cui moltiplicato per $o(1)$ tende a $0$.
+\end{examp}
+
+\subsubsection{$o(\cdot)$ composti}
+Per la proprietà transitiva della relazione definita da $o$ (dimostrata come proprietà \vref{optrans}), vale la relazione:
+\[
+	o(o(a_n))=o(a_n)
+\]

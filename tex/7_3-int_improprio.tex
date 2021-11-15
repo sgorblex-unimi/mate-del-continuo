@@ -1,0 +1,110 @@
+\section{Integrali impropri}
+L'integrale improprio (o generalizzato) si pone il problema di calcolare aree sottese a curve di funzioni con discontinuità o per estremi che vanno all'infinito. Il problema si risolve semplicemente calcolando limiti di integrali conosciuti:
+\begin{defin}
+	Per integrali con estremi infiniti:
+	\begin{equation}
+		\int_a^{+\infty}f(x)~dx=\lim_{M\to+\infty}\int_a^M f(x)~dx
+	\end{equation}
+	Per funzioni $f(x)$ con discontinuità in $b$:
+	\begin{equation}
+		\int_a^b f(x)~dx=\lim_{\varepsilon\to b^-}\int_a^\varepsilon f(x)~dx
+	\end{equation}
+	Ovviamente valgono le analogie del caso (estremo inferiore a $-\infty$, discontinuità nell'estremo inferiore); inoltre se $f(x)$ ha discontinuità in un punto interno all'intervallo, è sufficiente dividere l'integrale in una somma di integrali che abbiano per estremo il punto di discontinuità (proprietà \vref{prop:intint}).
+\end{defin}
+Questa definizione è considerata una generalizzazione, infatti l'integrale definito è un caso particolare contemplato dalla definizione appena formulata: posto che $f(x)$ sia continua in $[a,b]$:
+\[
+	\lim_{\varepsilon\to b^-} \int_a^\varepsilon f(x)~dx
+\]
+è la funzione integrale di cui al teorema \ref{teor:fci} quindi è derivabile e in particolare continua in $[a,b]$: il suo limite per $x\to b$ è dunque uguale al suo valore in $b$:
+\[
+	=\int_a^b f(x)~dx
+\]
+Inoltre, le due possibilità della definizione sono in realtà equivalente, dal momento che dall'una si ottiene l'altra applicando una sostituzione (proprietà \ref{prop:intsost} nella versione dell'integrale definito).
+
+Il seguente è un esempio generalizzato e caratteristico:
+\begin{examp}
+	\[
+		\int_1^{+\infty}\frac{dx}{x^\alpha}
+	\]
+	Dividendo per casi:
+	\[
+		\int_1^{+\infty}\frac{dx}{x^\alpha}=
+		\begin{cases}
+			[\ln x]_1^{+\infty}=+\infty\qquad                             & \alpha=1    \\[1ex]
+			\left[\dfrac{x^{1-\alpha}}{1-\alpha}\right]_1^{+\infty}\qquad & \alpha\neq1
+		\end{cases}
+	\]
+	Il secondo caso si divide a sua volta in (il valore assoluto viene utilizzato solo per esplicitare il segno)
+	\[
+		\left[\dfrac{x^{1-\alpha}}{1-\alpha}\right]_1^{+\infty}=
+		\begin{cases}
+			\left[\dfrac{x^{\abs{1-\alpha}}}{\abs{1-\alpha}}\right]_1^{+\infty}=+\infty\quad                                                                                        & \alpha<1 \\[3ex]
+			\left[\dfrac{x^{-\abs{1-\alpha}}}{-\abs{1-\alpha}}\right]_1^{+\infty}=\left[\dfrac{1}{-\abs{1-\alpha}\cdot x^{\abs{1-\alpha}}}\right]_1^{+\infty}=\dfrac{1}{\alpha-1} ~ & \alpha>1
+		\end{cases}
+	\]
+	Quindi, in definitiva:
+	\[
+		\int_1^{+\infty}\frac{dx}{x^\alpha}=
+		\begin{cases}
+			+\infty\qquad            & \alpha\leq1 \\[1ex]
+			\dfrac{1}{\alpha-1}\quad & \alpha>1
+		\end{cases}
+	\]
+\end{examp}
+
+Analogo procedimento può essere applicato all'integrale improprio complementare rispetto alle $x$ non negative:
+\begin{examp}
+	\[
+		\int_0^1\frac{dx}{x^\alpha}=
+		\begin{cases}
+			[\ln x]_0^1=+\infty\qquad                             & \alpha=1    \\[1ex]
+			\left[\dfrac{x^{1-\alpha}}{1-\alpha}\right]_0^1\qquad & \alpha\neq1
+		\end{cases}
+	\]
+	Di cui
+	\[
+		\left[\dfrac{x^{1-\alpha}}{1-\alpha}\right]_0^1=
+		\begin{cases}
+			-\dfrac{1}{1-\alpha}\qquad & \alpha<1 \\[1ex]
+			+\infty\qquad              & \alpha>1
+		\end{cases}
+	\]
+	Ovvero:
+	\[
+		\int_0^1\frac{dx}{x^\alpha}=
+		\begin{cases}
+			-\dfrac{1}{1-\alpha}\qquad & \alpha<1    \\[1ex]
+			+\infty\qquad              & \alpha\geq1
+		\end{cases}
+	\]
+\end{examp}
+
+Si sottolinea che un integrale improprio, essendo definito da un limite può non esistere. Ad esempio:
+\begin{examp}
+	\[
+		\int_0^{+\infty}\cos x~dx
+	\]
+	In quanto non esiste il limite
+	\[
+		\lim_{M\to+\infty}\int_0^M\cos x~dx=\lim_{M\to+\infty}\sin M-\sin 0
+	\]
+\end{examp}
+In particolare la funzione $\cos x$ ha aree che si annullano periodicamente, per cui non ha senso calcolarne quella all'infinito.
+
+
+\subsection{Aree comprese tra funzioni}
+Con questi strumenti è possibile calcolare aree più complesse, come quelle comprese tra funzioni anche per intervalli illimitati.
+\begin{examp}
+	Calcolare l'area di
+	\[
+		A=\left\{(x,y)\in\R^2\mid\frac{1}{\sqrt{x+1}\leq y\leq \frac{1}{\sqrt{x}}}\right\}
+	\]
+	Il problema equivale a calcolare l'integrale
+	\begin{gather*}
+		f(x)=\frac{1}{\sqrt{x}}-\frac{1}{\sqrt{x+1}}\\
+		\int_0^{+\infty} f(x)~dx=\int_0^1 f(x)~dx+\int_1^{+\infty}\\
+		\int_0^1 \frac{1}{\sqrt{x}}-\frac{1}{\sqrt{x+1}}~dx=\lim_{\varepsilon\to0^+} [2\sqrt{x}-2\sqrt{x+1}]_\varepsilon^1 =\\[1ex] \lim_{\varepsilon\to0^+} 2(1-\sqrt2)-2(\sqrt\varepsilon-\sqrt{\varepsilon+1})=4-2\sqrt{2}\\
+		\int_1^{+\infty}\frac{1}{\sqrt{x}}-\frac{1}{\sqrt{x+1}}~dx = \lim_{M\to+\infty} [2\sqrt{x}-2\sqrt{x+1}]_1^M =\\[1ex]
+		\lim_{M\to+\infty} 2(\sqrt{M}-\sqrt{M+1})-2(1-\sqrt{2})=2\sqrt{2}-2
+	\end{gather*}
+\end{examp}

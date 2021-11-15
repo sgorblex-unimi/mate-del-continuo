@@ -1,0 +1,100 @@
+\section{Concetti di insiemistica}
+In questa sezione si applicano a $\R$ e ai suoi sottoinsiemi concetti algebrici generalizzabili a un'ampia classe di insiemi.
+
+\subsection{Maggioranti e minoranti}
+\begin{defin}
+	Posto $\emptyset\neq A\subset\R$ si dice insieme dei maggioranti di $A$ e si indica con $A^*$:
+	\[
+		A^*:=\{M\in\R\mid\forall a\in A\quad a\leq M\}
+	\]
+\end{defin}
+% TODO: grafico retta reali
+E, analogamente:
+\begin{defin}
+	Posto $\emptyset\neq A\subset\R$ si dice insieme dei minoranti di $A$ e si indica con $A_*$:
+	\[
+		A_*=:\{m\in\R\mid\forall a\in A\quad a\geq m\}
+	\]
+\end{defin}
+Si osserva che $M\in A^*\land M'\geq M\Rightarrow M'\in A^*$ (se un numero $M'$ è maggiore o uguale a un maggiorante $M$ esso stesso è un maggiorante). Cosa analoga avviene per i minoranti. Ciò significa che i maggioranti e i minoranti sono descritti da intervalli illimitati, i primi del tipo $[M,+\infty)$ e i secondi del tipo $(-\infty,m]$.
+
+Si ricorda che la negazione della proposizione che definisce i maggioranti (e allo stesso modo quella dei minoranti) è:
+\begin{propo}
+	\[
+		M\notin A^*\iff\exists a\in A\mid a>M
+	\]
+\end{propo}
+
+
+\subsection{Massimo e minimo}
+\begin{defin}
+	Si dice massimo di un insieme $\emptyset\neq A\subseteq\R$ e si indica con $\max A$:
+	\[
+		\max A=M\quad\Leftrightarrow\quad M\in A\land M\in A^*
+	\]
+\end{defin}
+E, analogamente:
+\begin{defin}
+	Si dice minimo di un insieme $\emptyset\neq A\subseteq\R$ e si indica con $\min A$:
+	\[
+		\min A=m\quad\Leftrightarrow\quad m\in A\land m\in A_*
+	\]
+\end{defin}
+
+Quando esiste, il massimo (così come il minimo) è unico:
+\begin{proof}
+	\begin{gather*}
+		M,M'\in A^*\cap A\\
+		\begin{cases}
+			M\in A \\
+			M'\in A^*
+		\end{cases}\Rightarrow M\leq M'\\
+		\begin{cases}
+			M'\in A \\
+			M\in A^*
+		\end{cases}\Rightarrow M'\leq M
+	\end{gather*}
+	Ciò è possibile se e solo se $M=M'$
+\end{proof}
+
+
+\subsection{Estremi}
+\begin{defin}
+	Si dice estremo superiore di un insieme $\emptyset\neq A\subseteq\R$ e si indica con $\sup A$:
+	\[
+		\sup A:=
+		\begin{cases}
+			\min A^*\qquad & \text{se }A^*\neq\emptyset \\
+			+\infty\qquad  & \text{se }A^*=\emptyset
+		\end{cases}
+	\]
+\end{defin} E,
+analogamente:
+\begin{defin}
+	Si dice estremo inferiore di un insieme $\emptyset\neq A\subseteq\R$ e si indica con $\inf A$:
+	\[
+		\inf A:=
+		\begin{cases}
+			\max A_*\qquad & \text{se  }A_*\neq\emptyset \\
+			-\infty\qquad  & \text{se }A_*=\emptyset
+		\end{cases}
+	\]
+\end{defin}
+Si osservi che per dimostrare che un numero $S'$ non è un maggiorante è sufficiente:
+\begin{gather*}
+	\sup A=:S\\ S'<S\Rightarrow S'\notin A^*\\
+	\text{ovvero, ponendo un $\varepsilon>0$ arbitrario:}\\
+	S' = S-\varepsilon\notin A^*
+\end{gather*}
+
+Per gli insiemi definiti da un intervallo che non contiene l'estremo superiore, ossia insiemi del tipo $[a,b)$ oppure $(a,b)$, il massimo non esiste (mentre non esiste il minimo di insiemi definiti da intervalli che non contengono l'estremo inferiore):
+\begin{proof}
+	\begin{gather*}
+		A=[a,b)\\
+		b\notin A\Rightarrow b\neq M\\
+		\text{pongo una variabile arbitraria } \varepsilon>0\\
+		b-\varepsilon\notin A^*\Leftarrow b-\frac{\varepsilon}{2}>b-\varepsilon\land b-\frac{\varepsilon}{2}\in A
+	\end{gather*}
+	Il che vale per ogni valore possibile di $\varepsilon$ e quindi implica l'impossibilità dell'esistenza di un massimo.
+\end{proof}
+Analoga, ovviamente, è la dimostrazione nel caso del minimo.

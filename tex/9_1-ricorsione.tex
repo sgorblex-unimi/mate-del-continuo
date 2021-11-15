@@ -1,0 +1,66 @@
+\section{Definizioni}
+Una successione numerica definita ricorsivamente è una successione definita tramite una regola induttiva, cioè un'espressione che esprime un termine in funzione di quello precedente, e un dato iniziale, cioè un termine espresso in maniera assoluta e da cui partono tutte le induzioni.
+\begin{examp}
+	\[
+		a=
+		\begin{cases}
+			a_{n+1}=2a_n+3 \quad \forall n \geq 0 \\
+			a_0=3
+		\end{cases}
+	\]
+	Applicando la regola induttiva al dato iniziale si ottiene il termine in 1, applicandola al termine in 1 si ottiene il termine in 2, et cetera:
+	\begin{gather*}
+		a_1=2a_0+3=2*3+3=9\\
+		a_2=2a_1+3=2*9+3=21\\
+		\dots
+	\end{gather*}
+\end{examp}
+Analizzare una successione ricorsiva significa chiedersi se essa si può esprimere in forma esplicita, cioè in una forma che dipenda solo da $n$ e non da un termine precedente, o quantomeno studiarne il comportamento asintotico. Nel caso dell'esempio è sufficiente esprimere in funzione del termine in $0$ i termini successivi a quello in $1$, per ricavarne il pattern:
+\begin{gather*}
+	a_2=2(2a_0+3)+3=2^2a_0+2*3+3\\
+	a_3=2^3a_0+2^2*3+2*3+3\\
+\end{gather*}
+Ne si ricava che la forma esplicita è
+\begin{gather*}
+	a_n=2^na_0+(2^{n-1}+2^{n-2}+\dots+2^0)3\\
+	\text{ovvero}\\
+	2^na_0+3\sum_{k=0}^{n-1} 2^k=2^na_0+3*\frac{2^n-1}{2-1}=2^na_0+3(2^n-1)=\\
+	=(2^{n+1}-1)3 \qquad \forall n \geq 0
+\end{gather*}
+La stessa ricorsività può avere profondità maggiori di $1$, se la regola induttiva contiene più di un termine precedente:
+\begin{examp}[successione di Fibonacci]
+	\[
+		f=
+		\begin{cases}
+			f_{n+2}=f_{n+1}+f_n \\
+			f_0=0               \\
+			f_1=1
+		\end{cases}
+	\]
+\end{examp}
+In questo caso non esiste una forma che esprima esplicitamente la successione ricorsiva.
+
+% TODO da rivedere
+\subsubsection{Interesse composto}
+I concetti della ricorsione vedono applicazioni non solo nell'informatica, ma ad esempio anche nell'economia:
+Il capitale di un conto a interesse composto all'anno $n$ è dato dalla formula:
+\[
+	C=
+	\begin{cases}
+		C_n=C_{n-1}+\alpha*C_{n-1} \\
+		C_0=c
+	\end{cases}
+\]
+dove $c$ è il capitale iniziale e $\alpha$ è il tasso di interesse. Si verifica che:
+\[
+	C_n=C(1+\alpha)^n \qquad \forall n\geq0
+\]
+\begin{proof}
+	Per induzione:
+	\begin{itemize}
+		\item $n=0$:
+		      \[ C_0=C(1+\alpha)^0=C \]
+		\item $n \Rightarrow n+1$:
+		      \[ C_{n+1}=C(1+\alpha)^{n+1}=C(1+\alpha)^n(1+\alpha)=C_n(1+\alpha) \]
+	\end{itemize}
+\end{proof}

@@ -1,0 +1,116 @@
+\section{Continuità}
+La nozione di continuità di una funzione in un punto viene definita come segue:
+\begin{defin}
+	\label{defin:continua}
+	Una funzione $f(x)$ si dice continua in un punto $x_0$ del suo dominio se
+	\[
+		\lim_{x\to x_0} f(x) = f(x_0)
+	\]
+	Una funzione continua in tutti i punti del suo dominio si dice semplicemente continua.
+\end{defin}
+Parafrasando, si può dire che se una funzione si comporta nei pressi di $x_0$ così come in $x_0$ stesso, allora essa è continua in quel punto. Chiaramente, il limite dev'essere finito, infatti una funzione non può assumere i valori $\pm\infty$.
+
+
+\subsection{Proprietà}
+Una proprietà straordinariamente utile nel calcolo dei limiti è quella che riguarda il cambio di variabili:
+\begin{prop}
+	\label{lim:var}
+	\[
+		\begin{cases}
+			\displaystyle\lim_{x\to x_0} g(x)=y_0 \\
+			\displaystyle\lim_{y\to y_0} f(y)=z_0 \\
+			g(x)\neq y_0
+		\end{cases}\Rightarrow
+		% TODO: chiarire per quali x valga la terza condizione
+		\lim_{x\to x_0} f(g(x))=z_0
+	\]
+\end{prop}
+\begin{proof}
+	Per la definizione di limite:
+	\begin{gather*}
+		\forall W\in I(y_0) ~\exists V\in I(x_0)\mid g(x)\in W\quad\forall x\in V\setminus\{x_0\}\\
+		\text{e, al contempo:}\\
+		\forall U\in I(z_0) ~\exists W\in I(y_0)\mid f(y)\in U\quad\forall y\in W\setminus\{y_0\}
+	\end{gather*}
+	Secondo la prima proposizione, ogni elemento di $V$ viene proiettato tramite $g(x)$ in $W$. Secondo la seconda proposizione, ogni elemento di $W$ viene proiettato tramite $f(x)$ in $U$. Poiché ogni elemento dell'intorno $V$ ha immagine tramite $f(g(x))$ in $U$, il limite dell'intera funzione è $z_0$, ovvero il centro dell'intorno $U$, per definizione. La terza condizione del teorema, inoltre, evita il possibile conflitto dovuto al fatto che il secondo limite non garantisce che $f(y_0)\in U$, per cui $x\in V$, una volta trasportato in $W$ tramite $f(x)$, dev'essere diverso da $y_0$. Questa condizione è sufficiente, ma non necessaria, infatti per le funzioni continue si può elidere.
+	% TODO: disegno con gli insiemi
+\end{proof}
+\begin{examp}
+	Un tipico utilizzo di questo teorema è quello di convertire i limiti per $x$ che tende a $0$ in limiti per $x$ che tende a $+\infty$ e viceversa:
+	\begin{gather*}
+		\lim_{x\to 0^-} e^{\frac{1}{x}}\\
+		\text{pongo }y(x)=\frac{1}{x}\\
+		\lim_{x\to 0^-} y(x)=\lim_{x\to 0^-} \frac{1}{x}=-\infty\\
+		\lim_{y\to -\infty} e^y=0^+
+	\end{gather*}
+\end{examp}
+
+
+\subsection{Continuità di funzioni notevoli}
+Tutte le funzioni elementari sono continue: trattiamone alcune.
+\begin{examp}
+	Verifichiamo la continuità nel punto $x=0$ di
+	\[
+		f(x)=\sqrt{x}
+	\]
+\end{examp}
+\begin{proof}
+	$f(0)=0$. Scegliamo ora un'intorno destro di $0$ (poiché la radice non è mai negativa), diciamo $[0,\varepsilon)$. La funzione deve ricadere in questo intorno per $x$ che appartengono a un intorno di $0$ (in questo caso si potrebbe considerare solo un intorno destro, in quanto la funzione radice non è definita per radicandi minori di $0$). Utilizzando il metodo descritto al paragrafo \ref{lim:metodo}:
+	\begin{gather*}
+		\abs{\sqrt{x}-\sqrt{0}}<\varepsilon\\
+		\sqrt{x}<\varepsilon\\
+		0\leq x<\varepsilon^2
+	\end{gather*}
+	L'intervallo ottenuto non è altro che l'intorno che si cercava, per cui la continuità è verificata.
+\end{proof}
+
+Dimostriamo ora un teorema utile a verificare la continuità della funzione $y=\abs{x}$:
+\begin{teor}
+	\label{disug:contrario}
+	\[
+		\abs{\abs{x}-\abs{x_0}}\leq\abs{x-x_0}\qquad\forall x\in\R
+	\]
+\end{teor}
+\begin{proof}
+	Per disuguaglianza triangolare:
+	\[
+		\abs{a+b}\leq\abs{a}+\abs{b}
+	\]
+	quindi, se rispettivamente $a=x_0$ o $a=x$ e $b=\pm(x-x_0)$:
+	\begin{gather*}
+		\begin{cases}
+			\abs{x}=\abs{x_0+(x-x_0)}\leq\abs{x_0}+\abs{x-x_0} \\
+			\abs{x_0}=\abs{x+(x_0-x)}\leq\abs{x}+\abs{x_0-x}
+		\end{cases}\\
+		\text{Ovvero (elidendo il termine centrale):}\\
+		\begin{cases}
+			\abs{x}-\abs{x_0}\leq\abs{x-x_0} \\
+			\abs{x_0}-\abs{x}\leq\abs{x_0-x} \\
+		\end{cases}
+	\end{gather*}
+	Notando che i due secondi membri sono uguali e i due primi membri sono opposti, poiché $a<\varepsilon\land a>-\varepsilon\Rightarrow\abs{a}<\varepsilon$:
+	\[
+		\abs{\abs{x}-\abs{x_0}}\leq\abs{x-x_0}
+	\]
+\end{proof}
+
+Come preannunciato, questo teorema si utilizza per dimostrare la continuità nel generico $x_0$ (cioè nell'intero dominio) della funzione $y=\abs{x}$:
+\begin{examp}
+	\[
+		f(x)=\abs{x}
+	\]
+	Dimostrare la continuità nel generico $x_0$ significa dimostrare che
+	\[
+		\lim_{x\to x_0}\abs{x}=\abs{x_0}
+	\]
+	Utilizzando il metodo di rappresentazione della definizione di limite tramite valore assoluto:
+	\[
+		\abs{\abs{x}-\abs{x_0}}\leq\varepsilon\qquad\forall\varepsilon>0
+	\]
+	Per il teorema \ref{disug:contrario} appena dimostrato:
+	\[
+		\abs{\abs{x}-\abs{x_0}}\leq\abs{x-x_0}
+	\]
+	% TODO: spiegare meglio
+	Ovvero $x_0-\varepsilon<x<x_0+\varepsilon$, l'intorno di $x$ che si cercava.
+\end{examp}

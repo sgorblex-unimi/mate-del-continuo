@@ -1,0 +1,183 @@
+\section{L'integrale definito}
+L'integrale definito nasce come strumento utile a calcolare aree: in particolare quelle sottese a curve definite tramite funzioni.
+
+\subsection{Principio di esaustione}
+Il principio di esaustione consiste nel dividere una superficie di cui calcolare l'area in aree più semplici da calcolare e la cui somma stima l'area originaria. Il metodo più semplice è quello di dividere l'area sottesa alla curva di $f(x)$ nell'intervallo $[a,b]$ in $n$ rettangoli. Ognuno di questi rettangoli ha base $\frac{b-a}{n}$ (intervalli $\left[a+k*\frac{(b-a)}{n}, a+(k+1)*\frac{(b-a)}{n}\right]$). Per l'altezza si sceglie l'estremo della base che approssima per eccesso, $C_k$, o quello che approssima per difetto, $c_k$, e ne si valuta la funzione in tale punto:
+\[
+	C_k,c_k\in\left\{\frac{kx}{n}, \frac{(k+1)(b-a)}{n}\right\}\mid C_k\neq c_k \land f(C_k)\geq f(c_k)
+\]
+% TODO: grafico approssimazione per eccesso e per difetto (immagine divisa in due)
+Per calcolare l'area sottesa alla curva è necessario che questa approssimazione diventi infinitamente più precisa. Si applica quindi lo strumento del limite alla somma delle aree dei rettangoli, facendo tendere il numero di rettangoli all'infinito e quindi la loro base a $0$. Si può dimostrare che il risultato finale non dipende dall'approssimazone scelta per l'altezza.
+\begin{defin}
+	% TODO: la definizione andrebbe resa indipendente dal contesto (C)
+	Si dice integrale definito da $a$ a $b$ di $f(x)$ in $dx$:
+	\[
+		\int_a^b f(x)~dx:=\lim_{n\to+\infty}\sum_{k=0}^n f(C_k)\frac{a-b}{n}=\lim_{n\to+\infty}\sum_{k=0}^n f(c_k)\frac{a-b}{n}
+	\]
+\end{defin}
+Il metodo di esaustione può essere applicato a funzioni
+\begin{itemize}
+	\item continue
+	\item con un numero finito di discontinuità
+	\item monotone
+\end{itemize}
+Ad esempio, la funzione di Dirichlet $1_{\Q}(x)$, così definita:
+\[
+	1_{\Q}(x)=
+	\begin{cases}
+		1\qquad & x\in\Q    \\
+		0\qquad & x\notin\Q
+	\end{cases}
+\]
+ha infinite discontinuità per ogni intervallo ed è pertanto impossibile applicare l'esaustione.
+
+\subsection{Proprietà}
+Per convenzione:
+\begin{prop}
+	Posto $a<b$
+	\[
+		\int_b^a f(x)~dx=-\int_a^b f(x)~dx
+	\]
+\end{prop}
+Da un punto di vista geometrico, le basi dei rettangoli dell'esaustione vengono considerate come distanze negative.
+\begin{prop}
+	\[
+		\int_a^a f(x)~dx=0
+	\]
+\end{prop}
+\begin{proof}
+	\[
+		\int_a^a f(x)~dx=-\int_a^a f(x)~dx\Rightarrow \int_a^a f(x)~dx=0
+	\]
+\end{proof}
+\begin{prop}
+	\label{prop:intint}
+	\[
+		\int_a^c f(x)~dx=\int_a^b f(x)~dx+\int_b^c f(x)~dx
+	\]
+\end{prop}
+A prescindere dall'ordine di $a,b,c$.
+\begin{prop} \label{int:somma}
+	\[
+		\int_a^b [f(x)+g(x)]~dx=\int_a^b f(x)~dx+\int_a^b g(x)~dx
+	\]
+\end{prop}
+% TODO: aggiungere dimostrazione
+La dimostrazione deriva dalla definizione, applicando le proprietà associative del limite, della sommatoria e della somma di funzioni.
+\begin{prop}[Linearità nella funzione integranda]
+	\label{int:linearita}
+	\[
+		\int_a^b c*f(x)~dx=c\int_a^b f(x)~dx
+	\]
+\end{prop}
+\begin{proof}
+	Dimostrazione per $c\in\N$, estendibile a $c\in\R$:
+	\[
+		c\int_a^b f(x)~dx=\sum_{k=1}^c \int_a^b f(x)~dx=\int_a^b c*f(x)~dx
+	\]
+	Per la proprietà \ref{int:somma}.
+\end{proof}
+
+Un concetto fondamentale su cui si basano i prossimi teoremi è quello di funzione integrale:
+\begin{defin}
+	Si definisce funzione integrale di $f$ in $[a,b]$ la funzione
+	\[
+		\int_0^x f(t)~dt
+	\]
+	con $x\in[a,b]$.
+\end{defin}
+
+
+\subsection{Teoremi sugli integrali}
+% TODO: grafico
+\begin{teor}[della media integrale]
+	\label{teor:mediaint}
+	Data una funzione $f:[a,b]\to\R$ continua nel suo dominio:
+	\[
+		\exists c\in[a,b]\mid f(c)=\frac{1}{b-a}\int_a^b f(x)~dx
+	\]
+\end{teor}
+\begin{proof}
+	Per il teorema di Weierstrass, essendo la funzione continua in $[a,b]$:
+	\[
+		\exists x_m,x_M\in[a,b]\mid f(x_m)\leq f(x)\leq f(x_M)\quad\forall x\in[a,b]
+	\]
+	L'area sottesa al grafico della funzione è compresa tra quelle dei rettangoli che hanno per base l'intero intervallo $[a,b]$ e per altezze i valori massimo e minimo della funzione:
+	\[
+		(b-a)f(x_m)\leq \int_a^b f(x)~dx \leq (b-a)f(x_M)
+	\]
+	Dividendo per $(b-a)$:
+	\[
+		f(x_m)\leq \frac{1}{b-a}\int_a^b f(x)~dx \leq f(x_M)
+	\]
+	Applicando il teorema dei valori intermedi (teorema degli zeri esteso) all'intervallo $[x_m,x_M]$:
+	\[
+		\exists c\in[x_m,x_M]\mid f(c)=\frac{1}{b-a}\int_a^b f(x)~dx
+	\]
+	Poiché $[x_m,x_M]\subseteq[a,b]$, la tesi è dimostrata.
+\end{proof}
+\begin{teor}[fondamentale del calcolo integrale]
+	\label{teor:fci}
+	Data una funzione $f:[a,b]\to\R$ continua nel suo dominio e una funzione $F$ così definita:
+	\[
+		F(x):=\int_a^x f(t)~dt\quad[a,b]\to\R
+	\]
+	Allora:
+	\[
+		F'(x)=f(x)\qquad\forall x\in[a,b]
+	\]
+\end{teor}
+\begin{proof}
+	La derivata di $F$ è, per definizione
+	\[
+		\lim_{h\to0}\frac{F(x+h)-F(x)}{h}=
+	\]
+	Il numeratore non è altro che l'area sottesa a $f(x)$ tra $x$ e $x+h$, ovvero $\int_x^{x+h}f(x)~dx$. Il limite è quindi equivalente a
+	\[
+		=\lim_{h\to0} \frac{1}{h}\int_x^{x+h}f(t)~dt=
+	\]
+	Per il teorema \ref{teor:mediaint} della media integrale, esiste $c\in[x,x+h]$ dipendente da $h$ per cui
+	\[
+		=\lim_{h\to0} f(c_h)=
+	\]
+	Poiché $h\to0$, per il teorema del confronto $c_h\to x$, quindi, poiché $f$ è continua\footnote{Per $c\to x$ si ha $f(c)\to f(x)$}:
+	\[
+		=f(x)
+	\]
+\end{proof}
+\begin{defin}
+	Si dice primitiva di una funzione $f$ in un intervallo $I$ una funzione $F$ derivabile in $I$ tale che:
+	\[
+		F'(x)=f(x)\qquad\forall x\in I
+	\]
+\end{defin}
+\begin{corol}[formula fondamentale del calcolo integrale]
+	\label{teor:ffci}
+	Date due funzioni $f,G:[a,b]\to\R$, con $f$ continua e $G$ derivabile nell'intervallo, se $G$ è una primitiva di $f$, allora
+	\[
+		\int_a^b f(x)~dx=G(b)-G(a)
+	\]
+	Questa differenza viene anche espressa con
+	\[
+		[G(x)]_a^b
+	\]
+\end{corol}
+\begin{proof}
+	Si definisce $F(x)=\int_a^x f(t)~dt$. Per il teorema \ref{teor:fci} fondamentale:
+	\[
+		F'(x)=f(x)=G'(x)\qquad\forall x\in[a,b]
+	\]
+	Quindi le due funzioni sono primitive di $f(x)$. Poiché vale $(F-G)'(x)=F'(x)-G'(x)=f(x)-f(x)=0$, per quanto visto al paragrafo \vref{der:monotone}, una funzione continua in un intervallo e con derivata costantemente nulla è costante. Quindi:
+	\[
+		F(x)-G(x)=c\Rightarrow F(x)=G(x)-c
+	\]
+	Poiché questo procedimento prescinde dalla definizione delle primitive, si può affermare che
+	\begin{propo} \label{propo:primitive}
+		Le primitive di una funzione differiscono solamente di una costante additiva $c$.
+	\end{propo}
+	In questo contesto, in particolare, ciò implica che:
+	\[
+		\int_a^b f(x)dx=F(b)-F(a)=G(b)-c-G(a)+c=G(b)-G(a)
+	\]
+	L'integrale definito da $a$ a $b$ di $f(x)$ in $dx$ è quindi uguale a una primitiva di $f$ valutata in $b$ meno la stessa primitiva valutata in $a$.
+\end{proof}
