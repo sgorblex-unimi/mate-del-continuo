@@ -45,3 +45,15 @@
 \pdfminorversion=7
 
 \usepackage[hidelinks]{hyperref}
+
+\newenvironment{dedication}{
+	\clearpage
+	\thispagestyle{empty}
+	\vspace*{\stretch{1}}
+	\itshape
+	\raggedleft
+}{
+	\par
+	\vspace{\stretch{3}}
+	\clearpage
+}
