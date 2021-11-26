@@ -27,13 +27,14 @@
 	Con $a_n\in\R\forall n\land x\in\R$
 \end{defin}
 Per studiare il comportamento di una serie di potenze è innanzitutto utile fare un'osservazione:
-\[
-	A(0)=\sum_{n=0}^{+\infty} a_n*0^n=
-	\begin{cases}
+\begin{gather*}
+	A(0)=\sum_{n=0}^{+\infty} a_n\cdot0^n \\
+	\text{dove}\\
+	a_n\cdot0^n = \begin{cases}
 		a_0\quad & n=0    \\
 		0 \quad  & n\neq0
-	\end{cases}\Rightarrow A(0)\to a_0
-\]
+	\end{cases}\quad\Rightarrow\quad A(0)\to a_0
+\end{gather*}
 In questo caso si sceglie $0^0=1$ per convenzione.
 
 È notevole altresì sottolineare che la serie geometrica è un caso particolare di serie di potenze, con $a_n=1$ costante.
@@ -88,7 +89,7 @@ Un polinomio può essere scritto tramite una serie di potenze, per esempio:
 		c*\sum_{n=0}^{+\infty} a_nx^n=\sum_{n=0}^{+\infty}ca_nx^n
 	\end{equation}
 \end{defin}
-L'operazione ha come elemento neutro la serie nulla e come inverso la serie opposta. Inoltre, per $A=B=1$, se la prima serie ha raggio di convergenza $R_A$ e la seconda $R_B$, ci si aspetta che il raggio di convergenza della loro combinazione lineare sia non inferiore a $\text{min}\{R_A,R_B\}$, e che in caso di convergenza la somma della combinazione sia uguale alla somma delle somme delle due serie. Entrambi questi risultati vengono chiaramente influenzati (ma in modo coerente) se i coefficienti sono diversi da $1$.
+L'operazione ha come elemento neutro la serie nulla e come inverso la serie opposta. Inoltre, per $A=B=1$, se la prima serie ha raggio di convergenza $R_A$ e la seconda $R_B$, ci si aspetta che il raggio di convergenza della loro combinazione lineare sia non inferiore a $\min\{R_A,R_B\}$, e che in caso di convergenza la somma della combinazione sia uguale alla somma delle somme delle due serie. Entrambi questi risultati vengono chiaramente influenzati (ma in modo coerente) se i coefficienti sono diversi da $1$.
 
 \begin{examp}
 	Calcolare il raggio di convergenza di
@@ -183,7 +184,7 @@ Dove il primo membro è la derivata $m$-esima della somma divisa per $m!$.
 
 
 \subsection{Prodotto di Cauchy}
-Il prodotto di Cauchy (o di convoluzione) si pone lo scopo di definire il prodotto di due serie.
+Il prodotto di Cauchy (o di convoluzione) si pone lo scopo di definire il prodotto di due serie di potenze.
 \[
 	\left(\sum_{n=0}^{+\infty} a_nx^n\right)\left(\sum_{n=0}^{+\infty}b_nx^n\right)=\sum_{n=0}^{+\infty}\left(\sum_{k=0}^na_kb_{n-k}\right)x^n
 \]
@@ -207,7 +208,7 @@ Vale inoltre il seguente teorema
 		\end{cases}\Rightarrow
 		\sum_{n=0}^{+\infty}\left(\sum_{k=0}^na_kb_{n-k}\right)x^n=A(x)B(x)
 	\]
-	con raggio $\abs{x}<\text{min}\{R_A,R_B\}$
+	con raggio $R=\min\{R_A,R_B\}$
 \end{teor}
 \begin{examp}
 	\[
@@ -318,5 +319,5 @@ Una serie di Taylor di centro $0$ si dice anche serie di McLaurin. Le serie di T
 	      \begin{equation}
 		      (1+x)^\alpha=\sum_{n=0}^{+\infty}\binom{\alpha}{n} x^n\qquad\forall \abs{x}<1
 	      \end{equation}
-	% TODO: aggiungere seno e coseno
+	      % TODO: aggiungere seno e coseno
 \end{itemize}

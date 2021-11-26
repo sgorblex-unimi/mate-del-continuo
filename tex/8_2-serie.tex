@@ -27,7 +27,7 @@ Il calcolo delle serie (somme infinite) si pone il problema di calcolare espress
 \end{gather}
 A questo scopo, si definisce la somma di una serie
 \begin{defin}[Somma di una serie]
-	Si definisce somma di una serie infinita il limite della somma parziale, per indice massimo che tende all'infinito:
+	Si definisce somma di una serie infinita il limite della somma parziale per indice massimo che tende all'infinito:
 	\[
 		\sum_{k=0}^{+\infty} a_k:=\lim_{n\to+\infty}\sum_{k=0}^n a_k
 	\]
@@ -94,11 +94,11 @@ Si può generalizzare dicendo che
 	0,1\overline{27}=0,127272727\dots=\\
 	=\frac{1}{10}+\frac{27}{1000}+\frac{27}{10^5}+\frac{27}{10^7}+\dots=\\
 	=\frac{1}{10}+\frac{27}{10^3}\left(1+\frac{1}{10^2}+\frac{1}{10^4}+\frac{1}{10^6}+\dots\right)=\\
-	=\frac{1}{10}+\frac{27}{10^3}\sum_{k=0}^{+\infty}\left(\frac{1}{10^2}\right)^k=\frac{1}{10}+\frac{27}{10^3}\left(\frac{1}{1-10^2}\right)=\frac{1}{10}+\frac{27}{10^3}*\frac{10}{99}
+	=\frac{1}{10}+\frac{27}{10^3}\sum_{k=0}^{+\infty}\left(\frac{1}{10^2}\right)^k=\frac{1}{10}+\frac{27}{10^3}\left(\frac{1}{1-10^{-2}}\right)=\frac{1}{10}+\frac{27}{10^3}\cdot\frac{100}{99}
 \end{gather*}
 
 
-\subsection{Criterio del confronto integrale}
+\subsection{Criterio del confronto integrale} \label{confint}
 Il criterio del confronto integrale mira a stimare il comporamento di una serie tramite l'integrale di una funzione. Si consideri la seguente serie, chiamata serie armonica:
 \[
 	\sum_{k=1}^{+\infty}\frac{1}{k}
@@ -106,7 +106,7 @@ Il criterio del confronto integrale mira a stimare il comporamento di una serie 
 Si consideri la funzione $y=\frac{1}{x}$, generalizzazione reale della successione della serie. Dal momento che l'obiettivo della procedura è quello di calcolare la somma tramite un'approssimazione integrale, si costruiscono delle aree uguali a $\frac{1}{k}$. Si faccia riferimento alla figura \ref{fig:intk}, in cui due aree di questo tipo, una approssimata per eccesso e una per difetto, sono costruite prendendo rettangoli di base unitaria e altezza $f(k)=\frac{1}{k}$.
 \begin{figure}[ht]
 	\centering
-	\includegraphics[width=0.7\textwidth]{grafici/intk}
+	\includegraphics[width=0.8\textwidth]{grafici/intk}
 	\caption{Approssimazione tramite integrale della somma della serie $\frac{1}{k}$.}
 	\label{fig:intk}
 \end{figure}
@@ -114,7 +114,7 @@ Da questa approssimazione si verifica che
 \[
 	\int_k^{k+1} \frac{dx}{x}\leq \frac{1}{k}\leq \int_{k-1}^k \frac{dx}{x}
 \]
-Estendendo l'approssimazione alla somma parziale:
+Estendendo l'approssimazione alla somma parziale (la stima vale per ogni $k$ in quanto la successione è monotona):
 \[
 	\sum_{k=1}^n \int_k^{k+1} \frac{dx}{x}\leq \sum_{k=1}^n \frac{1}{k}\leq \sum_{k=1}^n \int_{k-1}^k \frac{dx}{x}
 \]
@@ -126,7 +126,7 @@ Dalla prima disequazione si deduce che la somma parziale diverge, infatti:
 \[
 	\int_1^{n+1}\frac{dx}{x}=[\ln x]_1^{n+1}=\ln (n+1)\to+\infty
 \]
-Tuttavia, così com'è scritta la seconta disequazione non porta a nulla, dal momento che l'integrale improprio
+Al contrario, la seconda disequazione non porta a nulla, dal momento che l'integrale improprio
 \[
 	\int_0^n\frac{dx}{x}=+\infty
 \]
@@ -139,7 +139,7 @@ Ovviamente, poiché come già dimostrato la somma parziale diverge anche la sua 
 \[
 	1+\int_1^n\frac{dx}{x}=1+[\ln x]_1^n=1+\ln n
 \]
-Tuttavia, questo implica un'informazione ben più utile: poiché entrambi i valori di stima sono astintotici a $\ln n$, anche la somma parziale lo è:
+Tuttavia, da questo ragionamento si deduce un'informazione ben più utile: poiché entrambi i valori di stima sono astintotici a $\ln n$, per il teorema del confronto anche la somma parziale lo è:
 \[
 	\begin{cases}
 		\ln(n+1)\sim \ln n \\
@@ -156,7 +156,7 @@ Tuttavia, questo implica un'informazione ben più utile: poiché entrambi i valo
 	\]
 	La successione può essere espressa tramite una somma:
 	\[
-		\ln(n!)=\sum_{k=1}^n \ln k=\sum_{k=1}^n \ln k
+		\ln(n!)=\sum_{k=1}^n \ln k=\sum_{k=2}^n \ln k
 	\]
 	Questa somma può essere stimata tramite integrali della funzione $f(x)=\ln x$:
 	\begin{gather*}
@@ -164,7 +164,7 @@ Tuttavia, questo implica un'informazione ben più utile: poiché entrambi i valo
 		\text{passando alle somme con $k=2$:}\\
 		\int_1^n \ln x ~dx\leq \ln(n!) \leq \int_2^{n+1} \ln x ~dx
 	\end{gather*}
-	La primitiva di $f(x)$ è
+	L'integrale indefinito di $f(x)$ è
 	\[
 		\int \ln x ~dx=x\ln x -\int x ~d(\ln x)=x\ln x -\int dx=x\ln x -x +c
 	\]
@@ -182,7 +182,7 @@ Tuttavia, questo implica un'informazione ben più utile: poiché entrambi i valo
 	\]
 	Stimando tramite integrali ($f(x)=\frac{1}{k}$):
 	\begin{gather*}
-		\int_l^{k+1}\frac{dx}{x}\leq \frac{1}{k}\leq \int_{k-1}^k \frac{dx}{x}\\
+		\int_k^{k+1}\frac{dx}{x}\leq \frac{1}{k}\leq \int_{k-1}^k \frac{dx}{x}\\
 		\int_n^{2n+1}\frac{dx}x \leq \sum_{n}^{2n} \frac{1}{k} \leq \int_{n-1}^{2n} \frac{dx}{x}\\
 		\ln(2n+1)-\ln n \leq c_n \leq \ln(2n) -\ln(n-1)\\
 		\ln\left(\frac{2n+1}{n}\right) \leq c_n \leq \ln\left(\frac{2n}{n-1}\right)
@@ -191,20 +191,22 @@ Tuttavia, questo implica un'informazione ben più utile: poiché entrambi i valo
 \end{examp}
 
 \begin{examp}
+	% TODO: grafico (rettangoli stime)
 	Studiare il comportamento di
 	\[
 		\sum_{k=1}^{+\infty} ke^{-k}
 	\]
-	La serie si può stimare tramite integrali, tuttavia la funzione $f(x)=xe^{-x}$ non è elementare. Studiando la derivata $f'(x)=e^{-x}(1-x)$ si trova un unico massimo assoluto in $x=1$, dopo il quale la funzione decresce. Poiché per la stima integrale è necessaria una funzione monotona, si sceglie di partire da $k=2$, in modo che i rettangoli di base unitaria (si veda la figura \ref{fig:intk} riguardante però un'altra funzione non si estendano per $x<1$. Dal momento che la somma ha valori finiti per $k<2$ (uno), è possibile aggiungere tali valori "manualmente" dopo la stima. Per $k\geq2$ si ottiene:
+	La serie si può stimare tramite integrali, tuttavia la funzione $f(x)=xe^{-x}$ non è elementare. Studiando la derivata $f'(x)=e^{-x}(1-x)$ si trova un unico massimo assoluto in $x=1$, dopo il quale la funzione decresce. Poiché per la stima integrale è necessaria una funzione monotona, si sceglie di partire da $k=2$, in modo che i rettangoli di base unitaria non si estendano per $x<1$. Dal momento che la somma ha valori finiti per $k<2$ (uno), è possibile aggiungere tali valori "manualmente" dopo la stima. Per $k\geq2$ si ottiene:
 	\begin{gather*}
-		\int_k^{k+1} f(x)~dx \leq ke^{-k} \leq int_{k-1}^k f(x)~dx\\
+		\int_k^{k+1} f(x)~dx \leq ke^{-k} \leq \int_{k-1}^k f(x)~dx\\
 		\int_2^{n+1} f(x)~dx \leq \sum_{k=2}^n ke^{-k} \leq \int_1^n f(x)~dx
 	\end{gather*}
-	L'integrale di $f(x)$ è
+	L'integrale indefinito di $f(x)$ è
 	\[
 		\int xe^{-x}~dx=-\int x~d(e^{-x})=-xe^{-x}+\int e^{-x}~dx=-xe^{-x}-e^{-x}+c
 	\]
 	Tornando a $k\geq1$ e aggiungendo il valore della somma per $k=1$, ovvero $\frac{1}{e}$:
+	% TODO: aggiungere passaggi intermedi e verificare la correttezza
 	\[
 		\frac{1}{e}+\frac{3}{e^2} \leq \sum_{k=2}^n ke^{-k} \leq \frac{3}{e}
 	\]
@@ -212,7 +214,7 @@ Tuttavia, questo implica un'informazione ben più utile: poiché entrambi i valo
 	\[
 		\int_{n+1}^{+\infty} f(x)~dx \leq \sum_{k=2}^{+\infty} ke^{-k} \leq \int_n^{+\infty} f(x)~dx
 	\]
-	Svolgendo gli integrali impropri si ottiene:
+	Calcolando gli integrali impropri si ottiene:
 	\[
 		(n+2)e^{-(n+1)} \leq \sum_{k=2}^{+\infty} ke^{-k} \leq (n+1)e^{-n}
 	\]
@@ -237,16 +239,17 @@ Tuttavia, questo implica un'informazione ben più utile: poiché entrambi i valo
 	\[
 		\sum_{k=0}^n a_k-\sum_{k=0}^{n-1} a_k=a_n
 	\]
-	Le due somme non sono altro che successioni $S_n$ e $S_{n-1}$. Se per ipotesi $S_n\to S\in\R$, allora, per la proprietà delle successioni \vref{suc:trasl}, vale $S_{n-1}\to S$. La differenza di queste, cioè $a_n$, tende quindi a $0$.
+	Le due somme non sono altro che successioni $S_n$ e $S_{n-1}$. Se per ipotesi $S_n\to S\in\R$, allora, per le proprietà dei limiti di successioni (\vref{suc:trasl}), vale $S_{n-1}\to S$. La differenza di queste, cioè $a_n$, tende quindi a $0$.
 \end{proof}
 
+% TODO: formalizzare meglio, con enunciati e dimostrazioni
 È naturale chiedersi se le proprietà applicate alle somme finite valgano anche per le serie infinite. La prima che è utile discutere è quella delle somme telescopiche (paragrafo \ref{sum:tele}). È possibile infatti applicare la proprietà alle somme parziali:
 \[
 	\sum_{k=1}^n a_k=\sum_{k=1}^n(b_k-b_{k+1})=b_1-b_{n+1}\to b_1-b_\infty
 \]
 Il limite della somma parziale, pertanto, esiste se
 \[
-	\exists \lim_{n\to+\infty} b_k := b_\infty
+	\exists \lim_{n\to+\infty} b_k =: b_\infty
 \]
 
 Un'altra proprietà di cui ha senso questionare la validità è
@@ -279,6 +282,7 @@ A patto che i due limiti non siano infiniti discordi, nel qual caso si otterrebb
 	\[
 		A=\sum_{n=0}^{+\infty} a_n, B=\sum_{n=0}^{+\infty} b_n
 	\]
+	TODO: definire carattere
 	hanno lo stesso carattere e la stessa velocità di convergenza/divergenza.
 \end{teor}
 \begin{proof}
@@ -295,23 +299,27 @@ A patto che i due limiti non siano infiniti discordi, nel qual caso si otterrebb
 		A_n=(A_{\nu-1}-B_{\nu-1})+B_n
 	\]
 	Ovvero, $A_n$ e $B_n$ differiscono di una costante $c_\nu$ dipendente solo da $\nu$. Questo significa che
+	% TODO: manca l'ipotesi di regolarità
 	\[
 		\lim_{n\to+\infty} A_n=c_\nu+\lim_{n\to+\infty} B_n
 	\]
 	Quindi:
 	\begin{gather}
-		A_n\to+\infty\Rightarrow B_n\to+\infty\land A_n\sim B_n\\
-		A_n\to A\in\R\Rightarrow B_n\to B\in\R\land A_n\sim B_n
+		A_n\to+\infty\Leftrightarrow B_n\to+\infty\land A_n\sim B_n\\
+		A_n\to A\in\R\Leftrightarrow B_n\to B\in\R\land A_n\sim B_n
 	\end{gather}
-	E viceversa. Per quanto riguarda i resti, nel caso di convergenza:
+	Per quanto riguarda i resti, nel caso di convergenza:
 	\[
 		A-A_n=\sum_{k=n+1}^{+\infty} a_k=\sum_{k=n+1}^{+\infty} b_k=B-B_n
 	\]
 	Scelto $n\geq\nu$.
 \end{proof}
-Una conseguenza di questo teorema è che somme di serie di stesse successioni ma diversi indici minimi hanno lo stesso comportamento.
 
-\subsection{Serie a termini definitivamente positivi}
+\begin{corol}
+	Somme di serie di stesse successioni ma diversi indici minimi hanno lo stesso comportamento.
+\end{corol}
+
+\subsection{Serie a termini definitivamente non negativi}
 \begin{teor}
 	\label{ser:defpos}
 	Se $a_k\geq0$ definitivamente, allora
@@ -331,7 +339,7 @@ Una conseguenza di questo teorema è che somme di serie di stesse successioni ma
 \subsection{Criterio del confronto}
 \begin{teor}[del confronto per le serie]
 	\label{ser:confr}
-	Date due successioni $a_k$ e $b_k$ a termini definitivamente positivi tali che $a_k\leq b_k$ definitivamente, se la serie che ha per termini le immagini di $b_k$ converge allora la serie che ha per termini le immagini di $a_k$ converge; se la seconda diverge allora la prima diverge. In simboli:
+	Date due successioni $a_k$ e $b_k$ a termini definitivamente non negativi tali che $a_k\leq b_k$ definitivamente, se la serie che ha per termini le immagini di $b_k$ converge allora la serie che ha per termini le immagini di $a_k$ converge; se la seconda diverge allora la prima diverge. In simboli:
 	\begin{gather*}
 		\exists\nu\mid 0\leq a_k\leq b_k \quad\forall k\geq\nu\\
 		\sum_{k=0}^{+\infty} a_k \text{ diverge}\quad\Rightarrow\quad \sum_{k=0}^{+\infty} b_k \text{ diverge}\\
@@ -345,7 +353,7 @@ Una conseguenza di questo teorema è che somme di serie di stesse successioni ma
 	\]
 	Se $\tilde A_n$ diverge si ha definitivamente
 	\[
-		M<\tilde A_n<\tilde B_n\qquad\forall M
+		M<\tilde A_n\leq\tilde B_n\qquad\forall M
 	\]
 	quindi $\tilde B_n$ è regolare e diverge. Essendo a termini definitivamente positivi, $\tilde A_n$ è regolare (teorema \ref{ser:defpos}). Se $\tilde B_n$ converge allora è limitata, quindi:
 	\[
@@ -361,6 +369,7 @@ Una conseguenza di questo teorema è che somme di serie di stesse successioni ma
 	\end{equation}
 
 	Poiché definitivamente vale
+	% TODO: incorretto, sistemare
 	\[
 		A_n=\sum_{k=0}^n a_k=\tilde A_n=\sum_{k=\nu}^n a_k\land B_n=\sum_{k=0}^n b_k=\tilde B_n=\sum_{k=\nu}^n b_k
 	\]
@@ -370,7 +379,7 @@ Una conseguenza di questo teorema è che somme di serie di stesse successioni ma
 	\label{ser:confrasin}
 	Date le serie degli $a_n$ e dei $b_n$ tali che $a_n,b_n\geq0$ definitivamente, vale
 	\[
-		a_n\sim b_n\quad\Rightarrow\quad \sum_{k=0}^n a_n=\Theta\sum_{k=0}^n b_n
+		a_n\sim b_n\quad\Rightarrow\quad \sum_{k=0}^n a_n=\Theta\left(\sum_{k=0}^n b_n \right)
 	\]
 	E le serie hanno, ovviamente, lo stesso carattere.
 \end{corol}
@@ -392,7 +401,7 @@ Una conseguenza di questo teorema è che somme di serie di stesse successioni ma
 		1+2k\left(1-1-\frac{1}{2k}+\frac{1}{8k^2}+o\left(\frac{1}{k^2}\right)\right)=\\
 		=1-1+\frac{1}{4k}+o\left(\frac{1}{k}\right)\sim\frac{1}{4k}=\Theta\left(\frac{1}{k}\right)
 	\end{gather*}
-	La serie diverge come $\ln n$ (serie armonica).
+	Come visto al paragrafo \ref{confint}, la serie (serie armonica) diverge come $\ln n$.
 \end{examp}
 
 \begin{examp}
@@ -409,7 +418,7 @@ Una conseguenza di questo teorema è che somme di serie di stesse successioni ma
 	\[
 		A_n=\Omega\left(\sum_{k=0}^n \frac{1}{k}\right)=\Omega(\ln n) \quad\land\quad A_n=O\left(\sum_{k=0}^n 1\right)=O(n)\\
 	\]
-	Volendo migliorare questa stima, si può notare che la seconda equazione della \ref{eq:serex1} vale anche per $k^\varepsilon$, $\forall\varepsilon>0$, da cui:
+	Volendo migliorare questa stima, si può notare che la seconda equazione della (\ref{eq:serex1}) vale anche per $k^\varepsilon$, $\forall\varepsilon>0$, da cui:
 	\[
 		A_n=\Omega(\ln n)\cap O(n^\varepsilon)
 	\]
@@ -435,7 +444,7 @@ Una conseguenza di questo teorema è che somme di serie di stesse successioni ma
 	\[
 		-\abs{a_n}\leq a_n\leq \abs{a_n}
 	\]
-	Aggiungendo $a_n$ a tutti i membri
+	Sommando $\abs{a_n}$ a tutti i membri
 	\begin{gather*}
 		\abs{a_n}-\abs{a_n}\leq a_n+\abs{a_n}\leq \abs{a_n}+\abs{a_n}\\
 		0\leq a_n+\abs{a_n}\leq 2\abs{a_n}
@@ -473,7 +482,7 @@ Una conseguenza di questo teorema è che somme di serie di stesse successioni ma
 		\item Nel caso di $0\leq L<1$ è possibile scegliere un $q<1$. La serie dei $q^k$ sarà quindi una serie geometrica di ragione minore di $1$, pertanto converge. Per il teorema \ref{ser:confr} del confronto la serie degli $a_k$ converge;
 		\item Nel caso di $L>1$ si ha $a_k>1$ definitivamente. Poiché la serie degli $a_k$ è regolare (essendo a termini definitivamente positivi) ma non soddisfa la condizione necessaria di convergenza (teorema \ref{teor:necconv}), la serie diverge.
 	\end{itemize}
-	In aggiunta alle conclusioni è possibile dire, per il teorema del confronto applicato alle serie della \ref{eq:radiceserie}, che
+	In aggiunta alle conclusioni è possibile dire, per il teorema del confronto applicato alle serie della (\ref{eq:radiceserie}), che
 	\begin{itemize}
 		\item Se la serie degli $a_k$ diverge:
 		      \begin{gather*}
@@ -482,6 +491,7 @@ Una conseguenza di questo teorema è che somme di serie di stesse successioni ma
 			      \sum^n a_k=\Omega(p^n)\cap O(q^n) \qquad \forall(p<L<q)
 		      \end{gather*}
 		\item Se la serie degli $a_k$ converge, essendo
+		      % TODO: verificare
 		      \[
 			      R_n=S-\sum^n a_k=\Theta\left(\sum^n a_k\right)
 		      \]
@@ -498,17 +508,17 @@ Una conseguenza di questo teorema è che somme di serie di stesse successioni ma
 	\]
 	Essendo la successione divergente, anche la serie lo è. Ai fini di studiare l'andamento, si applica il criterio del rapporto:
 	\[
-		\frac{b_{k+1}}{b_k}=\frac{2^{k+1}}{\sqrt{k+1}}*\frac{\sqrt k}{2^k}\to 2<1
+		\frac{b_{k+1}}{b_k}=\frac{2^{k+1}}{\sqrt{k+1}}\cdot\frac{\sqrt k}{2^k}\to 2>1
 	\]
 	Da cui
 	\[
-		\sum_{k=0}^n b_k=\Omega(p^n)\cap O(q^n)
+		\sum_{k=0}^n b_k=\Omega(p^n)\cap O(q^n)\qquad \forall p<2<q
 	\]
 	Inoltre
 	\[
-		\frac{2^k}{\sqrt k}\leq 2^n\quad\Rightarrow\quad \sum_{k=0}^n b_k=\Omega(p^n)\cap O(2^n)
+		\frac{2^k}{\sqrt k}\leq 2^n\quad\text{definitivamente}\quad\Rightarrow\quad \sum_{k=0}^n b_k=\Omega(p^n)\cap O(2^n)
 	\]
-	Dal momento che, per il teorema \ref{ser:confrasin}, la somma parziale degli $a_k$ è $\Theta$ della somma parziale dei $b_k$, vi vale la stessa relazione, infatti:
+	Dal momento che, per il corollario \ref{ser:confrasin}, la somma parziale degli $a_k$ è $\Theta$ della somma parziale dei $b_k$, vi vale la stessa relazione, infatti:
 	\[
 		\sum_{k=0}^n a_k = \Theta\left(\sum_{k=1}^n\right)=
 		\begin{cases}

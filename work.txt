@@ -1,6 +1,7 @@
 The LPPL requires that distributions of the Work contain all the files of the Work.
 This work consists of the following files (one per line):
 
+TODO.txt
 work.txt
 mate-del-continuo.tex
 mdc-impostazioni.sty

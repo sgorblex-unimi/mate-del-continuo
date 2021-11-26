@@ -12,7 +12,7 @@ Puoi compilare gli appunti dal sorgente usando tool come pdflatex. Avrai ovviame
 
 
 ## Contribuzione
-Le contribuzioni esterne vengono accettate tramite pull request. Se vuoi contribuire, un ottimo punto da cui partire sono i TODO, contrassegnati proprio con "TODO" nei vari file `.tex`.
+Le contribuzioni esterne vengono accettate tramite pull request. Se vuoi contribuire, un ottimo punto da cui partire è il file `TODO.txt`, e in aggiunta i commenti contrassegnati con "TODO" nei vari file `.tex`.
 
 
 ## Licenza

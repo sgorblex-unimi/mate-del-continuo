@@ -1,0 +1,131 @@
+TODO
+mate-del-continuo by Alessandro Clerici Lorenzini aka Sgorblex
+github.com/sgorblex-unimi/mate-del-continuo
+
++ vedi commenti nei sorgenti (alcuni coincidono con alcuni di quelli elencati sotto)
+
+
+
+
+NOTE VARIE
+- se si vuole effettuare eventuali refactoring, basarsi, se ne si ha accesso, sul programma dell'insegnamento del prof Tarallo aggiungere tabelle riassuntive
+- aggiungere indice analitico
+- aggiungere appendici di approfondimento (vedi sotto)
+- bibliografia per le parti non prese da lezione
+- revisionare ipotesi dei teoremi che includono intervalli: intervalli aperti o chiusi?
+- togliere i rientri dei capoversi quando sono brutti
+- adottare un'unica convenzione efficace per i label
+- aggiungere textbf e emph quando necessari
+- scegliere una convenzione da adottare per la numerazione (o no) delle equazioni
+- aggiungere esempi e decidere se separarli dal resto (probabilmente no). Si potrebbe anche aggiungere un'appendice degli esempi in cui mettere ulteriori esempi rispetto a quelli già inclusi nei capitoli
+- sistemare lo stile delle reference (magari tipo: "teorema 3.4 (pagina x)")
+- sistemare l'ancora dei teoremi (ad esempio i lemmi sono super specifici) nella relativa dichiarazione
+- cercare di citare i teoremi per nome oltre a usare le reference (cercare \ref e \vref e sistemarli)
+
+
+
+
+NOTE SUI CAPITOLI
+
+CAP. 1
+- fratti semplici: manca il caso di molteplicità maggiori di 1 per i fattori di secondo grado (eventualmente metterla come approfondimento dal momento che produce, ad esempio, integrali difficilissimi)
+- spiegare l'equivalenza tra 1/z e l'altro reciproco (vedi Soardi)
+- sistemare moltiplicazioni, divisioni e potenze (De Moivre) in forma trigonometrica
+- includere un riferimento alla formula di Eulero (appendice)
+
+CAP. 3
+- citare i risultati per le forme di non indecisione (ad esempio a/0 o a/inf)
+- vedi nota * cap. 4
+- definire meglio limiti uguali a l+ o l- e per x che tende a x_0+ e x_0-
+- inserire nell'indice criterio del rapporto e della radice, o accertarsi comunque che sia presente ad esempio nell'indice analitico
+
+CAP. 4 
+- due concetti fondamentali sui simboli di Landau vanno fatti capire: la gerarchia degli infiniti (paragone con "maggiore o uguale" & co.) e il concetto di errore e di come in alcuni contesti si possano sostituire simboli senza "perdere precisione"
+- * fare chiarezza sulla questione di intorno e se questo contenga il centro. Se non lo contiene, non è necessario escluderlo nelle definizioni di limite (altrimenti viceversa). Controllare anche intorni destro e sinistro e le rispettive definizioni (aggiungerle formalmente se necessario): potrebbero non contenere il centro nonostante l'intorno circolare lo contenga.
+
+CAP. 5
+- parte mancante sui teoremi fondamentali
+- inserire o qui o negli appendici il teorema dei valori intermedi (Darboux?)
+- come costruire un grafico probabile senza derivate
+
+CAP. 6
+- descrivere il percorso tra i teoremi fondamentali e il fatto che siano uno la generalizzazione dell'altro (non tutti)
+- grafico probabile con derivate
+- tabella degli sviluppi notevoli, con forma di sommatoria e forma "intuitiva" (quella con \dots)
+
+CAP. 8
+- scoprire quando le sommatorie hanno bisogno di parentesizzazione formale e agire di conseguenza nel capitolo
+
+CAP. 9
+- è praticamente inesistente.
+
+
+
+
+NOTE SUGLI APPENDICI
+- possibile appendice esempi / ulteriori esempi
+- decidere se fondere dimostrazioni extra e controesempi
+
+
+APPENDICE Ya - dimostrazioni extra
+
+[capitoli 1-2]
+
+CAP. 3
+- criterio del rapporto e uguaglianza dei limiti dei criteri
+
+CAP. 4
+- simil secondo principio per Landau
+- la maggior parte delle dimostrazioni sui simboli grandi di Landau sono trattate solo per un simbolo. Eventualmente vedere le altre
+- alcune dimostrazioni sui simboli grandi non sono neanche trattate (ad esempio vedi "analogamente" nella parte su O grande)
+
+CAP. 6
+- dimostrazione effettiva del teorema di Taylor
+
+CAP. 7
+- uguaglianza dei metodi di esaustione (vedi Soardi)
+- linearità nella funzione integranda per c in R
+
+CAP. 8
+- condizione necessaria di convergenza di una serie: la dimostrazione non regge molto. Per esempio, successioni con andamento diverso tendenti a +inf possono avere differenza non tendente a zero. Sistemare la dimostrazione
+- prodotto di Cauchy per indici iniziali diversi da 0 (eventualmente anche diversi tra loro, ma questo potrebbe essere un approfondimento)
+- praticamente qualunque teorema nel capitolo
+
+
+APPENDICE Yb - controesempi significativi
+
+CAP. 4
+- l'o piccolo non è riflessivo o simmetrico
+- teorema sull'asintotico e il logaritmo - necessità della condizione extra
+- i logaritmi di basi diverse sono Theta tra loro
+
+
+APPENDICE X - approfondimenti
+NOTA: se chi vuole contribuire ha accesso alle dispense del prof Tarallo, quelle sono un'ottima fonte di approfondimento. Purtroppo non possiedo licenza di pubblicarle per chi non le ha.
+
+CAP. ?
+- criteri analoghi a rapporto/radice per i limiti in R
+
+CAP. 1
+- ogni equazione di terzo grado può essere ricondotta a un'equazione depressa
+- l'insieme dei complessi è un campo
+- l'insieme dei complessi non è ordinato
+
+CAP. 6
+- dimostrazione De l'Hopital (altri casi) - decidere se qui o nell'appendice dimostrazioni
+
+CAP. 7
+- ulteriori metodi di esaustione
+
+CAP. 8
+- formula di Eulero
+- e non razionale
+
+
+
+
+FONTI
+Si fa riferimento alle seguenti fonti (si è liberi di aggiungerne altre):
+- programma dell'insegnamento così come tenuto dal professor Tarallo (fino all'A.A. 2019/20)
+- dispense del professor Tarallo
+- Paolo Maurizio Soardi, Analisi Matematica, Città Studi Edizioni
